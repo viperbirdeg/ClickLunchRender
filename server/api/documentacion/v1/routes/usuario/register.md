@@ -8,15 +8,13 @@
 ### >> Valores de entrada << ###
 ->  Dentro de esta ruta se busca obtener tres datos principales mediante un objeto.
 
-    ´´´
     {
         "email" : "varchar",
         "name" : "varchar",
         "password" : "varchar"
     }
-    ´´´
 
-    Estos tres elementos deberian ser pasados a travez de una expresion regular (regex) 
+->  Estos tres elementos deberian ser pasados a travez de una expresion regular (regex) 
     que define a cada una con una forma especifica ["Revisar regex.md para mas informacion"].
 
 ### >> Proceso << ###
@@ -28,8 +26,7 @@
 
 ### >> Valores de salida << ###
 ->  Esta ruta nos mostrara unos valores de salida en un estado '200 OK'.
-    
-    ´´´
+
     {
         "message": {
             "nombre": "varchar",
@@ -39,9 +36,8 @@
             "rol": "varchar"
         }   
     }
-    ´´´
     
-    La clave que retorna se denomina 'message' ya sea que haya un error o no, retornara 
+->  La clave que retorna se denomina 'message' ya sea que haya un error o no, retornara 
     esta; los elementos que contiene en un caso '200 OK' seran el nombre que se introdujo;
     el saldo, que por defecto se generara un saldo 0 para todos los usuarios; el correo que 
     se introdujo; un token ya con el hash realizado; y finalmente un rol, que por defecto 
@@ -52,7 +48,6 @@
     a la insercion, por lo tango tiene dos tipos de respuesta, las respuestas relacionadas
     a la insercion y las respuestas relacionadas a la busqueda.
     
-    ´´´
     <-Relacionadas a la insercion->
         {
             estado : 409
@@ -89,6 +84,3 @@
         Significado: Los datos se intentaron buscar, sin embargo, no se ha podido por problemas de
             conexion o de la base de datos.
         Accion: Revisar conexiones con la base de datos y que esta se encuentre en operacion.
-        
-    ´´´
-    
