@@ -5,17 +5,13 @@ function App() {
 
   useEffect(() => {
     fetch('https://clicklunchrender.onrender.com/api/usuario/usersData', {
-      method: 'GET',
-      mode: 'no-cors'
+      method: 'GET'
     })
       .then((response) => {
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
-        }
         return response.json();
       })
-      .then((data) => {
-        setData(data);
+      .then((datos) => {
+        setData(datos.message.rows);
       })
       .catch((error) => {
         console.error('Error fetching data:', error);
@@ -24,7 +20,7 @@ function App() {
 
   return (
     <div>
-      {!data ? 'Loading...' : <pre>{JSON.stringify(data, null, 2)}</pre>}
+      {!data ? 'Loading...' : <pre>{JSON.stringify(data, null,2)}</pre>}
     </div>
   );
 }
