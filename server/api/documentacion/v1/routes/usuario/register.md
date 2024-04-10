@@ -6,12 +6,14 @@
     dentro de la base de datos.
 
 ### >> Valores de entrada << ###
-->  Dentro de esta ruta se busca obtener tres datos principales mediante un objeto: 
+->  Dentro de esta ruta se busca obtener tres datos principales mediante un objeto.
+
     {
         "email" : "varchar",
         "name" : "varchar",
         "password" : "varchar"
     }
+
     estos tres elementos deberian ser pasados a travez de una expresion regular (regex) 
     que define a cada una con una forma especifica ["Revisar regex.md para mas informacion"].
 
@@ -23,7 +25,8 @@
     finalizar regresando estos datos y una respuesta de tipo '200 OK'.
 
 ### >> Valores de salida << ###
-->  Esta ruta nos mostrara unos valores de salida en un estado '200 OK':
+->  Esta ruta nos mostrara unos valores de salida en un estado '200 OK'.
+
     {
         "message": {
             "nombre": "varchar",
@@ -33,6 +36,7 @@
             "rol": "varchar"
         }   
     }
+
     La clave que retorna se denomina 'message' ya sea que haya un error o no, retornara 
     esta; los elementos que contiene en un caso '200 OK' seran el nombre que se introdujo;
     el saldo, que por defecto se generara un saldo 0 para todos los usuarios; el correo que 

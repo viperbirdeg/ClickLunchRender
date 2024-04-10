@@ -4,7 +4,7 @@
   "description": "project made in 'Cecyt 9' in grade 6IV8 2024-2 ",
   "main": "index.js",
   "scripts": {
-    "build": "npm install && cd client && npm install && npm run build", 
+    "build": "npm install && cd client && npm install && npm run build",
     "dev": "nodemon server/index.js",
     "start": "node server/index.js"
   },
