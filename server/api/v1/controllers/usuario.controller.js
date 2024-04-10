@@ -26,7 +26,16 @@ const postNewUser = async (req, res) => {
     );
     if (validacionResult.rowCount > 0) {
       return res.status(409).json({
-        message: 'Usuarios ya registrado',
+        message: 'Correo ya registrado',
+      });
+    }
+    const validacionUsuario = await client.query(
+      `SELECT * FROM clicklunch."UsuarioInfo" WHERE nombre = $1`,
+      [username]
+    );
+    if (validacionUsuario.rowCount > 0) {
+      return res.status(409).json({
+        message: 'Nombre de usuario ya registrado',
       });
     }
 
