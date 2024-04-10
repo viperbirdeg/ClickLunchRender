@@ -3,6 +3,7 @@ const express = require('express');
 const morgan = require('morgan');
 const session = require('express-session');
 const path = require('path');
+const cors = require('cors');
 
 //Routers
 const app = express();
@@ -14,6 +15,8 @@ const usuarioRouter = require('./api/v1/routes/usuario.js');
 app.use(morgan("dev"));
 /**- Utilizar formato .JSON- */
 app.use(express.json());
+/**- Utilizar cors for fetchs- */
+app.use(cors());
 /**- Enviar cliente estatico- */
 app.use(express.static(path.resolve(__dirname, '../client/build')));
 /**- Usar sesiones- */
