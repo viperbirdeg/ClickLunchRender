@@ -56,7 +56,7 @@ const postNewUser = async (req, res) => {
     //Devolver datos
     if (userResult.rowCount > 0) {
       const response = await datosUsuario(email);
-      return res.status(response.estado).json({ message : response.message });
+      return res.status(response.estado).json({ message: response.message });
     }
     res.status(404).json({
       message: 'Hubo problemas encontrando el usuario',
@@ -107,6 +107,7 @@ const postLogin = async (req, res) => {
     const datos = validacionResult.rows[0];
     if (await bcrypt.compare(data.password, datos.token)) {
       //Generar la sesion
+      req.session.idUsuario = datos.id;
       req.session.email = datos.email;
       req.session.token = data.password;
       req.session.rol = datos.rol;
@@ -304,6 +305,58 @@ const datosUsuario = async email => {
   }
 };
 
+//Eliminar un usuario cambiando su estado a false
+const deleteOneUsuario = async (req, res) => {
+  //Crear cliente de db
+  const client = await pool.connect();
+
+  try {
+    //Iniciar transaccion
+    await client.query('BEGIN');
+
+    /**
+     * {
+     * email:""
+     * }
+     */
+    //Obtener informacion
+    const data = await req.body;
+    const email = data.email;
+
+    //Volver invisible en la base de datos
+    const deleteResult = await client.query(
+      `UPDATE clicklunch."Usuario" SET estado = false WHERE email = $1`,
+      [email]
+    );
+
+    //Terminar transaccion
+    await client.query('COMMIT');
+
+    //Devolver basado en el resultado
+    if (deleteResult.rowCount > 0) {
+      return {
+        message: 'Usuario eliminado de forma correcta',
+        estado: 200,
+      };
+    } else {
+      return {
+        message: 'Usuario no encontrado',
+        estado: 404,
+      };
+    }
+  } catch (error) {
+    //Revertir insercion debido a error
+    await client.query('ROLLBACK');
+    return {
+      message: 'Ocurrio un error eliminando al usuario',
+      estado: 500,
+    };
+  } finally {
+    //Liberar la db
+    client.release();
+  }
+}
+
 
 //Exportaciones
-module.exports = { postNewUser, postLogin, postLogout, updateOneUser, getAllUsers, getOneUser, authOneUser };
+module.exports = { postNewUser, postLogin, postLogout, updateOneUser, getAllUsers, getOneUser, authOneUser, deleteOneUsuario };

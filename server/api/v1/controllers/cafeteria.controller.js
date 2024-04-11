@@ -1,6 +1,6 @@
 const { pool } = require('../database/db.js');
 
-const addNewCafeteria = async () => {
+const addNewCafeteria = async (req, res) => {
 
   //Conexion con la bd
   const client = await pool.connect();
@@ -83,20 +83,134 @@ const addNewCafeteria = async () => {
   }
 }
 
-const getAllCafeterias = () => {
+const getAllCafeterias = async (req, res) => {
 
+  //Conexion con la bd
+  const client = await pool.connect();
+
+  //Intentar busqueda
+  try {
+
+    //Busqueda en la bd
+    const vistaResult = await client.query('SELECT * FROM clicklunch."Cafeterias_vw"');
+
+    //Retorno de datos
+    return res.status(200).json({ message: vistaResult.rows });
+
+  } catch (error) {
+    //Manejo de errores 
+    return res.status(500).json('Ocurrio un error inesperado en el servidor');
+
+  } finally {
+    //Liberar la bd
+    client.release();
+  }
 }
 
-const getOneCafeteria = () => {
+const getOneCafeteria = async (req, res) => {
+  /**
+   * Formato data
+   * {
+   *  email:""
+   * } 
+   */
+  //Obtener identificador
+  const email = req.body.email;
 
+  //Buscar los datos 
+  const cafeteriaDatos = await datosUsuario(email);
+
+  //Retornar datos
+  return res.status(cafeteriaDatos.estado).json({
+    message: userDatos.message
+  });
 }
 
-const deleteOneCafeteria = () => {
+const deleteOneCafeteria = async (req, res) => {
+  //Crear cliente de db
+  const client = await pool.connect();
 
+  try {
+    //Iniciar transaccion
+    await client.query('BEGIN');
+
+    /**
+     * {
+     * email:""
+     * }
+     */
+    //Obtener informacion
+    const data = await req.body;
+    const email = data.email;
+    const datos = await (datosCafeteria(email)).nombre;
+    //Volver invisible en la base de datos
+    const deleteResult = await client.query(
+      `UPDATE clicklunch."Usuario" SET estado = false WHERE email = $1`,
+      [email]
+    );
+    const delCafeteriaResult = await client.query(
+      `UPDATE clicklunch."Cafeteria" SET estado = false WHERE nombre = $1`,
+      [datos]
+    );
+
+    //Terminar transaccion
+    await client.query('COMMIT');
+
+    //Devolver basado en el resultado
+    if (deleteResult.rowCount > 0 && delCafeteriaResult.rowCount > 0) {
+      return {
+        message: 'Cafeteria eliminada de forma correcta',
+        estado: 200,
+      };
+    } else {
+      return {
+        message: 'Cafeteria no encontrado',
+        estado: 404,
+      };
+    }
+  } catch (error) {
+    //Revertir insercion debido a error
+    await client.query('ROLLBACK');
+    return {
+      message: 'Ocurrio un error eliminando la cafeteria',
+      estado: 500,
+    };
+  } finally {
+    //Liberar la db
+    client.release();
+  }
 }
 
-const getAlimentosCafeteria = () => {
+const getAlimentosCafeteria = async (req, res) => {
+  const client = await pool.connect();
 
+  try {
+    const email = req.session.email;
+    const id = await datosCafeteria(email);
+
+    const alimentosResult = await client.query(
+      `SELECT * FROM clicklunch."Alimentos" WHERE id_cafeteria = $1`,
+      [id]
+    );
+
+    if (alimentosResult.rowCount > 0) {
+      return res.status(200).json({
+        message: alimentosResult.rows
+      });
+    }
+    return res.status(404).json({
+      message: 'Esta cafeteria no ha registrado alimentos'
+    });
+  } catch (error) {
+    //Manejar errores
+    return res.status(500).json({
+      message: 'Ocurrio un error inesperado en el servidor',
+      error: error
+    });
+  } finally {
+    //Liberar db
+    client.release();
+  }
 }
 
 const datosCafeteria = async email => {

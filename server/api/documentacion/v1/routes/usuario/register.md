@@ -29,6 +29,7 @@
 
     {
         "message": {
+            "id":integer,
             "nombre": "varchar",
             "saldo": 0,
             "email": "varchar",
