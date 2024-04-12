@@ -84,6 +84,7 @@ const postLogin = async (req, res) => {
   try {
     //Obtener data
     const data = await req.body;
+    console.log(data);
     /*
     data = {
       email = "";
@@ -246,7 +247,8 @@ const authOneUser = async (req, res) => {
     if (await bcrypt.compare(req.session.token, userDatos.token)) {
       if (req.session.email === userDatos.email) {
         return res.status(200).json({
-          username: req.session.email,
+          idUsuario: req.session.idUsuario,
+          email: req.session.email,
           token: req.session.token,
           rol: req.session.rol
         });

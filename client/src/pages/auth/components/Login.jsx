@@ -22,7 +22,7 @@ const Login = () => {
   }
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if(!credentials.email || !credentials.password){
+    /*if(!credentials.email || !credentials.password){
       return alert('Todos los campos son obligatorios');
     }
     if(!esCorreoElectronico(credentials.email)){
@@ -30,21 +30,25 @@ const Login = () => {
     }
     if(!esContrasenaValida(credentials.password)){
       return alert('La contraseña es invalida');
-    }
-    if(captcha || true ){
+    }*/
+    if(/*captcha || */true ){
       try {
         axios({
           method:'post',
-          url:'http://localhost:3002/usuario/login',
+          url:'http://localhost:3002/api/usuario/login',
           data: {credentials}
         }).then((res)=>{
           if(res.status === 200){
             navigation('/User');
           }else{
+            console.log('ERROR LA PTM');
             return alert(res.message);
           }
+        }).catch((error)=>{
+          return navigation('/');
         });
       } catch (error) {
+        console.log('ERROR LA PTM');
        return alert(error);
       }
     } else {
