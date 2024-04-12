@@ -33,7 +33,8 @@ app.use(session({
 }));
 
 //?Ruta de "apoyo" {Eliminar para produccion final}
-app.get("/api", (req, res) => {
+
+    app.get("/api", (req, res) => {
     res.json({ message: "Servidor Activo!" });
 });
 
