@@ -1,7 +1,7 @@
 const { pool } = require('../database/db.js');
 const bcrypt = require('bcrypt');
 
-//Usado para mandar registros
+//?Usado para mandar registros
 const postNewUser = async (req, res) => {
 
   //Conexion con la bd
@@ -75,7 +75,7 @@ const postNewUser = async (req, res) => {
   }
 };
 
-//Usado para inicios de sesion
+//?Usado para inicios de sesion
 const postLogin = async (req, res) => {
   //Conexion con la bd
   const client = await pool.connect();
@@ -130,7 +130,7 @@ const postLogin = async (req, res) => {
   }
 };
 
-//Usado para eliminar sesion
+//?Usado para eliminar sesion
 const postLogout = (req, res) => {
 
   req.session.destroy(() => {
@@ -191,7 +191,7 @@ const updateOneUser = async (req, res) => {
   }
 };
 
-//Usado para obtener todos los usuarios
+//?Usado para obtener todos los usuarios
 const getAllUsers = async (req, res) => {
   //Conexion con la bd
   const client = await pool.connect();
@@ -216,7 +216,7 @@ const getAllUsers = async (req, res) => {
 
 };
 
-//Usado para obtener un usuario a partir de un identificador
+//?Usado para obtener un usuario a partir de un identificador
 const getOneUser = async (req, res) => {
 
   /*
@@ -237,7 +237,7 @@ const getOneUser = async (req, res) => {
   });
 };
 
-//Verificaciones
+//?Verificaciones
 const authOneUser = async (req, res) => {
 
   try {
@@ -265,47 +265,7 @@ const authOneUser = async (req, res) => {
 
 }
 
-//Funcion interna de obtencion de usuarios
-const datosUsuario = async email => {
-  //Conexion con la bd
-  const client = await pool.connect();
-
-  //Intentar busqueda
-  try {
-
-    //Busqueda en db
-    const vistaResult = await client.query(
-      `SELECT * FROM clicklunch."UsuarioInfo" WHERE "email" = ($1)`,
-      [email]
-    );
-    if (vistaResult.rowCount > 0) {
-      //Retorno de datos
-      const userDatos = vistaResult.rows[0];
-      return {
-        estado: 200,
-        message: userDatos,
-      };
-    }
-    //Retorno error
-    return {
-      estado: 404,
-      message: `No se ha encontrado el usuario`,
-    };
-
-  } catch (error) {
-    //Manejo de errores
-    return {
-      estado: 500,
-      message: 'Ocurrio un error inesperado en el servidor',
-    };
-
-  } finally {
-    //Liberar la bd 
-    client.release();
-  }
-};
-
-//Eliminar un usuario cambiando su estado a false
+//?Eliminar un usuario cambiando su estado a false
 const deleteOneUsuario = async (req, res) => {
   //Crear cliente de db
   const client = await pool.connect();
@@ -356,6 +316,46 @@ const deleteOneUsuario = async (req, res) => {
     client.release();
   }
 }
+
+//?Funcion interna de obtencion de usuarios
+const datosUsuario = async email => {
+  //Conexion con la bd
+  const client = await pool.connect();
+
+  //Intentar busqueda
+  try {
+
+    //Busqueda en db
+    const vistaResult = await client.query(
+      `SELECT * FROM clicklunch."UsuarioInfo" WHERE "email" = ($1)`,
+      [email]
+    );
+    if (vistaResult.rowCount > 0) {
+      //Retorno de datos
+      const userDatos = vistaResult.rows[0];
+      return {
+        estado: 200,
+        message: userDatos,
+      };
+    }
+    //Retorno error
+    return {
+      estado: 404,
+      message: `No se ha encontrado el usuario`,
+    };
+
+  } catch (error) {
+    //Manejo de errores
+    return {
+      estado: 500,
+      message: 'Ocurrio un error inesperado en el servidor',
+    };
+
+  } finally {
+    //Liberar la bd 
+    client.release();
+  }
+};
 
 
 //Exportaciones
