@@ -1,27 +1,27 @@
 import React from "react";
 import { Route, Routes } from "react-router";
-
 import { Home, Notes, User } from "../pages/home/components/NavBarHome";
 import UserLayout from "../pages/user/UserLayout";
 import AdminLayout from "../pages/admin/AdminLayout";
 import HomeLayout from "../pages/home/HomeLayout";
-
-import logo from "../logo.svg";
+import logo from "../imagenes/logo-removebg-preview.png";
 import AuthLayout from "../pages/auth/AuthLayout";
 import Register from "../pages/auth/components/Register";
 import Login from "../pages/auth/components/Login";
+import axios from "axios";
 
 const Router = () => {
-  
   const [data, setData] = React.useState(null);
 
   React.useEffect(() => {
-    fetch("/api")
-      .then((res) => {
-        res.json();
-      })
+    axios
+      .get("https://clicklunchrender.onrender.com/api")
+      .then((res) => res.json())
       .then((datos) => {
-        setData(datos);
+        setData(datos.message);
+      })
+      .catch((err) => {
+        setData(err);
       });
   }, []);
 
@@ -33,9 +33,9 @@ const Router = () => {
         element={
           <header className="App-header">
             <img src={logo} className="App-logo" alt="logo" />
-            <p>
-              <h1>{!data ? "Loading..." : data.message}</h1>
-            </p>
+            <div>
+              <p>{!data ? "Loading..." : JSON.stringify(data, null, 2)}</p>
+            </div>
           </header>
         }
       />
