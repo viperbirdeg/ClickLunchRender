@@ -35,7 +35,7 @@ app.use(session({
 //?Ruta de "apoyo" {Eliminar para produccion final}
 
     app.get("/api", (req, res) => {
-    res.json({ message: "Servidor Activo!" });
+    res.json({ message: "La ptm el servidor no jala" });
 });
 
 //?Rutas de api

@@ -84,7 +84,6 @@ const postLogin = async (req, res) => {
   try {
     //Obtener data
     const data = await req.body;
-    console.log(data);
     /*
     data = {
       email = "";
@@ -112,6 +111,7 @@ const postLogin = async (req, res) => {
       req.session.email = datos.email;
       req.session.token = data.password;
       req.session.rol = datos.rol;
+      console.log(req.session);
       return res.status(200).json({
         message: 'Ingreso correcto',
       });

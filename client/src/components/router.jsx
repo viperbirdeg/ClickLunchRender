@@ -11,14 +11,13 @@ import Login from "../pages/auth/components/Login";
 import axios from "axios";
 
 const Router = () => {
-  const [data, setData] = React.useState(null);
+  const [data, setData] = React.useState([]);
 
   React.useEffect(() => {
     axios
       .get("https://clicklunchrender.onrender.com/api")
-      .then((res) => res.json())
-      .then((datos) => {
-        setData(datos.message);
+      .then((res) => {
+        setData(res.data.message);
       })
       .catch((err) => {
         setData(err);
@@ -33,8 +32,8 @@ const Router = () => {
         element={
           <header className="App-header">
             <img src={logo} className="App-logo" alt="logo" />
-            <div>
-              <p>{!data ? "Loading..." : JSON.stringify(data, null, 2)}</p>
+            <div className="">
+              {!data ? "Loading..." : <pre>{JSON.stringify(data, null, 2)}</pre>}
             </div>
           </header>
         }

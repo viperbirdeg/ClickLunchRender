@@ -10,7 +10,7 @@ const UserData = () => {
   React.useEffect(() => {
     axios({
       method: "get",
-      url: "api/usuario/getAuthUser",
+      url: "https://clicklunchrender.onrender.com/api/usuario/authUser",
     }).then((response) => {
     if (response.status === 200 /*&& response.rol === "Cliente"*/) {
         setUserData(response.data);
@@ -24,7 +24,7 @@ const UserData = () => {
     <div className="Data-Container">
       <h1>User Data:</h1>
       <section className="Data">
-        {!userData ? "Loading data..." : userData}
+        {!userData ? "Loading data..." : JSON.stringify(userData)}
       </section>
     </div>
   );

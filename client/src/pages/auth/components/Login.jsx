@@ -35,20 +35,21 @@ const Login = () => {
       try {
         axios({
           method:'post',
-          url:'http://localhost:3002/api/usuario/login',
-          data: {credentials}
+          url:'https://clicklunchrender.onrender.com/api/usuario/login',
+          data: {
+            email: credentials.email,
+            password: credentials.password
+          }
         }).then((res)=>{
           if(res.status === 200){
             navigation('/User');
           }else{
-            console.log('ERROR LA PTM');
             return alert(res.message);
           }
         }).catch((error)=>{
           return navigation('/');
         });
       } catch (error) {
-        console.log('ERROR LA PTM');
        return alert(error);
       }
     } else {
