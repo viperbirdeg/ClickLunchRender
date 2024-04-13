@@ -2,16 +2,16 @@ import axios from "axios";
 import React from "react";
 import { useNavigate } from "react-router-dom";
 
+const baseUrl = "http://localhost:3002"
+
 const UserData = () => {
   const [userData, setUserData] = React.useState(null);
 
   const navigation = useNavigate();
 
   React.useEffect(() => {
-    axios({
-      method: "get",
-      url: "https://clicklunchrender.onrender.com/api/usuario/authUser",
-    }).then((response) => {
+    axios.get(`${baseUrl}/api/usuario/authUser`)
+    .then((response) => {
     if (response.status === 200 /*&& response.rol === "Cliente"*/) {
         setUserData(response.data);
       }

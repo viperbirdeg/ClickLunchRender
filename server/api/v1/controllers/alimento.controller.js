@@ -1,4 +1,4 @@
-const { pool } = require('../database/db.js');
+const { pool } = require("../database/db.js");
 
 const addNewAlimento = async (req, res) => {
   const client = await pool.connect();
@@ -25,7 +25,7 @@ const addNewAlimento = async (req, res) => {
     const cafId = req.session.idUsuario;
 
     //*Iniciar transacción
-    await client.query('BEGIN');
+    await client.query("BEGIN");
 
     const dataResult = await client.query(
       `INSERT INTO clicklunch."Alimento"(nombre,descripcion,tiempo_preparacion,costo,disponibilidad,id_cafeteria) VALUES ($1,$2,$3,$4,$5,$6)`,
@@ -33,23 +33,25 @@ const addNewAlimento = async (req, res) => {
     );
 
     //*Terminar transacción
-    await client.query('COMMIT');
+    await client.query("COMMIT");
 
     //*Devolver datos
     if (dataResult.rowCount > 0) {
       const response = await datosAlimento(dataResult.rows[0].id);
       return res.status(response.estado).json({ message: response.message });
     }
-    res.status(500).json({ message: 'No se ha podido agregar el almento' });
+    res.status(500).json({ message: "No se ha podido agregar el almento" });
   } catch (error) {
     //*Manejar errores cancelando operacion
-    await client.query('ROLLBACK');
-    return res.status(500).json({ message: 'No se ha podido agregar el almento' });
+    await client.query("ROLLBACK");
+    return res
+      .status(500)
+      .json({ message: "No se ha podido agregar el almento" });
   } finally {
     //*Liberar la bd
     client.release();
   }
-}
+};
 
 const getAllAlimentos = async (req, res) => {
   //*Conexion con la bd
@@ -64,26 +66,25 @@ const getAllAlimentos = async (req, res) => {
       //*Retorno de datos
       return {
         estado: 200,
-        message: vistaResult.rows
-      }
+        message: vistaResult.rows,
+      };
     }
     //!Retorno de error
     return {
       estado: 404,
-      message: 'No se ha podido obtener los alimentos'
-    }
+      message: "No se ha podido obtener los alimentos",
+    };
   } catch (error) {
     //!Manejo de errores
     return {
       estado: 500,
-      message: 'Ocurrio un error inesperado en el servidor'
-    }
+      message: "Ocurrio un error inesperado en el servidor",
+    };
   } finally {
     //todo: Liberar la bd
     client.release();
   }
-
-}
+};
 const deleteOneAlimento = async (req, res) => {
   //*Conexion con la bd
   const client = await pool.connect();
@@ -92,7 +93,7 @@ const deleteOneAlimento = async (req, res) => {
     /**
      * ?{
      * ?  id = integer
-     * ?}  
+     * ?}
      */
     const id = req.body.id;
     //*Busqueda en la bd
@@ -104,27 +105,26 @@ const deleteOneAlimento = async (req, res) => {
       //*Retorno de datos
       return {
         estado: 200,
-        message: 'Se ha eliminado el alimento'
-      }
+        message: "Se ha eliminado el alimento",
+      };
     }
     //!Retorno de error
     return {
       estado: 404,
-      message: 'No se ha podido eliminar el alimento'
-    }
+      message: "No se ha podido eliminar el alimento",
+    };
   } catch (error) {
     //!Manejo de errores
     return {
       estado: 500,
-      message: 'Ocurrio un error inesperado en el servidor'
-    }
+      message: "Ocurrio un error inesperado en el servidor",
+    };
   } finally {
     //todo: Liberar la bd
     client.release();
   }
-}
+};
 const updateOneAlimento = async (req, res) => {
-
   //*Conexion con la bd
   const client = await pool.connect();
 
@@ -142,33 +142,39 @@ const updateOneAlimento = async (req, res) => {
     const data = req.body;
 
     const foodResult = await client.query(
-      `UPDATE FROM clicklunch."Alimentos" SET (nombre = $1, descripcion = $2, costo = $3, tiempopreparacion = $4) WHERE id = $5`
-      , [data.nombre, data.descripcion, data.costo, data.tiempopreparacion, data.id]
+      `UPDATE FROM clicklunch."Alimentos" SET (nombre = $1, descripcion = $2, costo = $3, tiempopreparacion = $4) WHERE id = $5`,
+      [
+        data.nombre,
+        data.descripcion,
+        data.costo,
+        data.tiempopreparacion,
+        data.id,
+      ]
     );
 
     if (foodResult.rowCount > 0) {
       //*Retorno de datos
       return {
         estado: 200,
-        message: 'Se ha actualizado el alimento'
-      }
+        message: "Se ha actualizado el alimento",
+      };
     }
     //!Retorno de error
     return {
       estado: 404,
-      message: 'No se ha encontrado el alimento a actualizar'
-    }
+      message: "No se ha encontrado el alimento a actualizar",
+    };
   } catch (err) {
     //!Manejo de errores
     return {
       estado: 500,
-      message: 'Ocurrio un error inesperado en el servidor'
-    }
+      message: "Ocurrio un error inesperado en el servidor",
+    };
   } finally {
     //todo: Liberar la bd
     client.release();
   }
-}
+};
 //!Alerta la siguiente funcion se encuentra en fase de construccion
 const getAllComentarios = async (req, res) => {
   //*Conexion con la bd
@@ -179,18 +185,34 @@ const getAllComentarios = async (req, res) => {
     const idAlimento = req.body.id;
 
     const comentsResult = await client.query(
-      `SELECT * FROM clicklunch."`
+      `SELECT * FROM clicklunch."Comentarios_vw" WHERE id_alimento = '$1'`,
+      [idAlimento]
     );
 
+    if (comentsResult.rowCount > 0) {
+      return {
+        estado: 200,
+        message: comentsResult.rows,
+      };
+    }
+    //!Retorno de error
+    return {
+      estado: 404,
+      message: "No se ha podido obtener los comentarios",
+    };
   } catch (error) {
-    
-  } finally{
+    //!Manejo de errores
+    return {
+      estado: 500,
+      message: "Ocurrio un error inesperado en el servidor",
+    };
+  } finally {
     //todo: Liberar la bd
     client.release();
   }
-}
+};
 
-const datosAlimento = async id => {
+const datosAlimento = async (id) => {
   //*Conexion con la db
   const client = await pool.connect();
 
@@ -204,24 +226,30 @@ const datosAlimento = async id => {
       //*Retorno de datos
       return {
         estado: 200,
-        message: vistaResult.rows[0]
-      }
+        message: vistaResult.rows[0],
+      };
     }
     //!Retorno de error
     return {
       estado: 404,
-      message: 'No se ha podido obtener el alimento'
-    }
+      message: "No se ha podido obtener el alimento",
+    };
   } catch (error) {
     //!Manejo de errores
     return {
       estado: 500,
-      message: 'Ocurrio un error inesperado en el servidor'
-    }
+      message: "Ocurrio un error inesperado en el servidor",
+    };
   } finally {
     //todo: Liberar la bd
     client.release();
   }
-}
+};
 
-module.exports = { addNewAlimento, getAllAlimentos, deleteOneAlimento, updateOneAlimento, getAllComentarios }
+module.exports = {
+  addNewAlimento,
+  getAllAlimentos,
+  deleteOneAlimento,
+  updateOneAlimento,
+  getAllComentarios,
+};

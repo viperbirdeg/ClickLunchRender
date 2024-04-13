@@ -1,14 +1,13 @@
-const { pool } = require('../database/db.js');
+const { pool } = require("../database/db.js");
 
 const addNewCafeteria = async (req, res) => {
-
   //Conexion con la bd
   const client = await pool.connect();
 
   //Intentar insercion
   try {
     //Iniciar operacion
-    await client.query('BEGIN');
+    await client.query("BEGIN");
 
     const data = await req.body;
     //Obtener data
@@ -31,7 +30,7 @@ const addNewCafeteria = async (req, res) => {
     );
     if (validacionResult.rowCount > 0) {
       return res.status(409).json({
-        message: 'Correo ya registrado'
+        message: "Correo ya registrado",
       });
     }
     const validacionUsuario = await client.query(
@@ -40,7 +39,7 @@ const addNewCafeteria = async (req, res) => {
     );
     if (validacionUsuario.rowCount > 0) {
       return res.status(409).json({
-        message: 'Nombre de usuario ya registrado',
+        message: "Nombre de usuario ya registrado",
       });
     }
 
@@ -60,7 +59,7 @@ const addNewCafeteria = async (req, res) => {
     );
 
     //Terminar y confirmar operacion
-    await client.query('COMMIT');
+    await client.query("COMMIT");
 
     //Devolver datos
     if (cafeteriaResult.rowCount > 0) {
@@ -68,63 +67,60 @@ const addNewCafeteria = async (req, res) => {
       return res.status(response.estado).json({ message: response.message });
     }
     return res.status(404).json({
-      message: 'Hubo problemas encontrando la cafeteria'
+      message: "Hubo problemas encontrando la cafeteria",
     });
-
   } catch (error) {
     //Manejar errores cancelando operacion
-    await client.query('ROLLBACK');
+    await client.query("ROLLBACK");
     return res.status(500).json({
-      message: 'Hubo problema registrando la cafeteria'
+      message: "Hubo problema registrando la cafeteria",
     });
   } finally {
     //Liberar la bd
     client.release();
   }
-}
+};
 
 const getAllCafeterias = async (req, res) => {
-
   //Conexion con la bd
   const client = await pool.connect();
 
   //Intentar busqueda
   try {
-
     //Busqueda en la bd
-    const vistaResult = await client.query('SELECT * FROM clicklunch."Cafeterias_vw"');
+    const vistaResult = await client.query(
+      'SELECT * FROM clicklunch."Cafeterias_vw"'
+    );
 
     //Retorno de datos
     return res.status(200).json({ message: vistaResult.rows });
-
   } catch (error) {
-    //Manejo de errores 
-    return res.status(500).json('Ocurrio un error inesperado en el servidor');
-
+    //Manejo de errores
+    return res.status(500).json("Ocurrio un error inesperado en el servidor");
   } finally {
     //Liberar la bd
     client.release();
   }
-}
+};
 
 const getOneCafeteria = async (req, res) => {
   /**
    * Formato data
    * {
    *  email:""
-   * } 
+   * }
    */
   //Obtener identificador
   const email = req.body.email;
 
-  //Buscar los datos 
+  //Buscar los datos
   const cafeteriaDatos = await datosUsuario(email);
 
   //Retornar datos
   return res.status(cafeteriaDatos.estado).json({
-    message: userDatos.message
+    message: userDatos.message,
   });
-}
+};
 
 const deleteOneCafeteria = async (req, res) => {
   //Crear cliente de db
@@ -132,7 +128,7 @@ const deleteOneCafeteria = async (req, res) => {
 
   try {
     //Iniciar transaccion
-    await client.query('BEGIN');
+    await client.query("BEGIN");
 
     /**
      * {
@@ -142,7 +138,7 @@ const deleteOneCafeteria = async (req, res) => {
     //Obtener informacion
     const data = await req.body;
     const email = data.email;
-    const datos = await (datosCafeteria(email)).nombre;
+    const datos = await datosCafeteria(email).nombre;
     //Volver invisible en la base de datos
     const deleteResult = await client.query(
       `UPDATE clicklunch."Usuario" SET estado = false WHERE email = $1`,
@@ -154,32 +150,32 @@ const deleteOneCafeteria = async (req, res) => {
     );
 
     //Terminar transaccion
-    await client.query('COMMIT');
+    await client.query("COMMIT");
 
     //Devolver basado en el resultado
     if (deleteResult.rowCount > 0 && delCafeteriaResult.rowCount > 0) {
       return {
-        message: 'Cafeteria eliminada de forma correcta',
+        message: "Cafeteria eliminada de forma correcta",
         estado: 200,
       };
     } else {
       return {
-        message: 'Cafeteria no encontrado',
+        message: "Cafeteria no encontrado",
         estado: 404,
       };
     }
   } catch (error) {
     //Revertir insercion debido a error
-    await client.query('ROLLBACK');
+    await client.query("ROLLBACK");
     return {
-      message: 'Ocurrio un error eliminando la cafeteria',
+      message: "Ocurrio un error eliminando la cafeteria",
       estado: 500,
     };
   } finally {
     //Liberar la db
     client.release();
   }
-}
+};
 
 const getAlimentosCafeteria = async (req, res) => {
   const client = await pool.connect();
@@ -195,31 +191,30 @@ const getAlimentosCafeteria = async (req, res) => {
 
     if (alimentosResult.rowCount > 0) {
       return res.status(200).json({
-        message: alimentosResult.rows
+        message: alimentosResult.rows,
       });
     }
     return res.status(404).json({
-      message: 'Esta cafeteria no ha registrado alimentos'
+      message: "Esta cafeteria no ha registrado alimentos",
     });
   } catch (error) {
     //Manejar errores
     return res.status(500).json({
-      message: 'Ocurrio un error inesperado en el servidor',
-      error: error
+      message: "Ocurrio un error inesperado en el servidor",
+      error: error,
     });
   } finally {
     //Liberar db
     client.release();
   }
-}
+};
 
-const datosCafeteria = async email => {
+const datosCafeteria = async (email) => {
   //Conexion con la bd
   const client = await pool.connect();
 
   //Intentar busqueda
   try {
-
     //Busqueda en la bd
     const vistaResult = await client.query(
       `SELECT * FROM clicklunch."Cafeterias_vw" WHERE "email" = ($1)`,
@@ -242,13 +237,18 @@ const datosCafeteria = async email => {
     //Manejo de errores
     return {
       estado: 500,
-      message: 'Ocurrio un error inesperado en el servidor',
+      message: "Ocurrio un error inesperado en el servidor",
     };
-
   } finally {
-    //Liberar la bd 
+    //Liberar la bd
     client.release();
   }
-}
+};
 
-module.exports = { addNewCafeteria, getAllCafeterias, getOneCafeteria, deleteOneCafeteria, getAlimentosCafeteria }
+module.exports = {
+  addNewCafeteria,
+  getAllCafeterias,
+  getOneCafeteria,
+  deleteOneCafeteria,
+  getAlimentosCafeteria,
+};

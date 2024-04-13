@@ -112,6 +112,7 @@ const postLogin = async (req, res) => {
       req.session.token = data.password;
       req.session.rol = datos.rol;
       console.log(req.session);
+      req.session.save();
       return res.status(200).json({
         message: 'Ingreso correcto',
       });
@@ -241,10 +242,15 @@ const getOneUser = async (req, res) => {
 //?Verificaciones
 const authOneUser = async (req, res) => {
 
+  console.log('session:' , req.session);
+
   try {
-    const email = req.body.email;
+    const email = req.session.email;
+    console.log(email);
     const userDatos = (await datosUsuario(email)).message;
+    console.log(userDatos);
     if (await bcrypt.compare(req.session.token, userDatos.token)) {
+      console.log('entrando');
       if (req.session.email === userDatos.email) {
         return res.status(200).json({
           idUsuario: req.session.idUsuario,

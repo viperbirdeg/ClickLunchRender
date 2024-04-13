@@ -5,6 +5,8 @@ import axios from 'axios';
 import { ReCAPTCHA } from 'react-google-recaptcha';
 import logo from '../../../imagenes/logo-removebg-preview.png'
 
+const baseUrl = 'http://localhost:3002';
+
 const Login = () => {
   const [credentials, setCreadentials] = useState({
     email:'',
@@ -35,7 +37,7 @@ const Login = () => {
       try {
         axios({
           method:'post',
-          url:'https://clicklunchrender.onrender.com/api/usuario/login',
+          url:`${baseUrl}/api/usuario/login`,
           data: {
             email: credentials.email,
             password: credentials.password

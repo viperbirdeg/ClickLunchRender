@@ -11,6 +11,8 @@ const pedidoRouter = require('./api/v1/routes/pedido.js');
 const usuarioRouter = require('./api/v1/routes/usuario.js');
 const alimentoRouter = require('./api/v1/routes/alimento.js');
 const cafeteriaRouter = require('./api/v1/routes/cafeteria.js');
+const bodyParser = require('body-parser');
+const cookieParser = require('cookie-parser');
 
 //?Middlewares
 //* Mostar las solicitudes y respuestas
@@ -19,15 +21,19 @@ app.use(morgan("dev"));
 app.use(express.json());
 //* Utilizar cors for fetchs
 app.use(cors());
+//*Utiliar body parser
+app.use(bodyParser.json());
 //* Enviar cliente estatico
 app.use(express.static(path.resolve(__dirname, '../client/build')));
+//*Usar cookieParser
+ app.use(cookieParser());
 //* Usar sesiones
 app.use(session({
     secret: 'amasemetiootropejelagarto',
-    resave: true,
-    saveUninitialized: true,
+    resave: false,
+    saveUninitialized: false,
     cookie: {
-        //!secure: false,//Pedir SSL
+        secure: false,//Pedir SSL
         httpOnly: true,
     }
 }));
