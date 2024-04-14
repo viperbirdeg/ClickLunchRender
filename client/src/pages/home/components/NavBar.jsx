@@ -1,23 +1,47 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 
+//* className={({ isActive }) => (isActive ? "active-link" : undefined)}
+
 const NavBar = () => {
   return (
     <nav className="home-navbar">
+      <NavLink to='/' className="home-logotipo">CLICK LUNCH</NavLink>
       <ul>
         <li>
-          <NavLink
-            to=""
-            className={({ isActive }) => (isActive ? "active-link" : undefined)}
-          >
+          <NavLink to="" activeClassName="active">
             Home
           </NavLink>
         </li>
         <li>
-          <a href="/register">Register</a>
+          <NavLink to="aboutUs" activeClassName="active">
+            Acerda de nosotros
+          </NavLink>
         </li>
         <li>
-          <a href="/login">Login</a>
+          <NavLink to="contact" activeClassName="active">
+            Contacto
+          </NavLink>
+        </li>
+      </ul>
+      <ul>
+        <li>
+          <NavLink
+            to="#"
+            activeClassName="active"
+            className="home-login-button"
+          >
+            Login
+          </NavLink>
+        </li>
+        <li>
+          <NavLink
+            to="#"
+            activeClassName="active"
+            className="home-register-button"
+          >
+            Registrarse
+          </NavLink>
         </li>
       </ul>
     </nav>

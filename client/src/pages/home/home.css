@@ -1,20 +1,111 @@
+/*?CSS TO ALL*/
+
 *{
   margin:0;
   padding: 0;
 }
 
+/*?CSS RELATED TO HOME LAYOUT*/
+
 .home-layout-container{
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  min-height: 100vh;
-  background-color: #ffffff;
+  height: 100vh;
+  width: 100vw;
+  background-color: #FFFFE0;
+  overflow-x: hidden;
 }
+
+/*?CSS RELATED TO NAVBAR COMPONENT*/
+
+.home-navbar{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  height: 10%;
+  position: relative;
+  background-color: FFFFE0;
+  border : 1px solid #888888;
+  left: 0;
+  top: 0;
+  right: 0;
+}
+
+.home-navbar ul, .home-navbar {
+  border: #888888 1px solid;
+  margin: 2%;
+  padding-left:2%;
+  padding-right: 2%;
+}
+
+.home-logotipo{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 20% ;
+  height: 100%;
+  font-size: 200%;
+  font-weight: bold;
+  color:#000000;
+}
+
+.home-login-button{
+
+}
+
+.home-register-button{
+
+}
+
+a{
+  color:red;
+}
+
+.active{
+  color:purple;
+}
+
+/*?CSS RELATED TO ABOUT US COMPONENT*/
+
+/*?CSS RELATED TO CONTACTS COMPONENT*/
+
+/*?CSS RELATED TO HOME COMPONENT*/
 
 .home-container{
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  min-height: auto ;
+  height: auto;
+}
+
+.home-text{
+  display: flex;
+  padding-left: 5%;
+  padding-right: 5%;
+  padding-top: 2%;
+  padding-bottom: 2%;
+  font-size: 20px;
+}
+
+/*?RELATED TO FOOTER COMPONENT*/
+
+.footer-container{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: max-content;
+  width: 100%;
+  background-color: lightgray;
+
+  position: relative;
+  left: 0;
+  bottom: 0;
+  color: black;
+  text-align: center;
 }

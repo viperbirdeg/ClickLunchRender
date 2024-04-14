@@ -17,8 +17,8 @@ const Router = () => {
     <Routes>
       <Route path="/" element={<HomeLayout />}>
         <Route index path="" element={<Inicio />} />
-        <Route path="notes" element={<AboutUs />} />
-        <Route path="user" element={<Contacts />} />
+        <Route path="aboutUs" element={<AboutUs />} />
+        <Route path="contact" element={<Contacts />} />
       </Route>
       <Route path="*" element={<h1>404 Not Found</h1>} />
     </Routes>
