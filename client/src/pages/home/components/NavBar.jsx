@@ -24,7 +24,7 @@ const NavBar = () => {
           </NavLink>
         </li>
       </ul>
-      <ul>
+      <ul className="home-buttons-container">
         <li>
           <NavLink
             to="#"

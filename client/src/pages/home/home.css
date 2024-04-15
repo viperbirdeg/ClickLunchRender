@@ -1,13 +1,14 @@
 /*?CSS TO ALL*/
 
-*{
-  margin:0;
+* {
+  margin: 0;
   padding: 0;
+  box-sizing: border-box; 
 }
 
 /*?CSS RELATED TO HOME LAYOUT*/
 
-.home-layout-container{
+.home-layout-container {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -19,53 +20,73 @@
 
 /*?CSS RELATED TO NAVBAR COMPONENT*/
 
-.home-navbar{
+.home-navbar {
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
   width: 100%;
-  height: 10%;
-  position: relative;
+  height: auto;
+  position: sticky;
   background-color: FFFFE0;
-  border : 1px solid #888888;
+  border: 1px solid #888888;
   left: 0;
   top: 0;
   right: 0;
 }
 
-.home-navbar ul, .home-navbar {
-  border: #888888 1px solid;
-  margin: 2%;
-  padding-left:2%;
+.home-navbar ul, .home-navbar .home-logotipo {
+  margin: 0;
+  padding-left: 2%;
   padding-right: 2%;
+  height: 100%;
 }
 
-.home-logotipo{
+.home-logotipo {
   display: flex;
   align-items: center;
   justify-content: center;
-  min-width: 20% ;
+  min-width: 20%;
   height: 100%;
   font-size: 200%;
   font-weight: bold;
-  color:#000000;
+  color: #000000;
 }
 
-.home-login-button{
+.home-buttons-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  width: 20%;
+  height: 10%;
+  border: 1px solid #000000;
+  margin-left:auto;
+}
+
+.home-buttons-container a {
+  position: relative;
+  right: 0;
+  border: 1px solid #000000;
+  padding-left: 20%;
+  padding-right: 20%;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  border-radius: 10px;
+  background-color: ;
 
 }
 
-.home-register-button{
+.home-login-button {}
 
+.home-register-button {}
+
+a {
+  color: red;
 }
 
-a{
-  color:red;
-}
-
-.active{
-  color:purple;
+.active {
+  color: purple;
 }
 
 /*?CSS RELATED TO ABOUT US COMPONENT*/
@@ -74,16 +95,16 @@ a{
 
 /*?CSS RELATED TO HOME COMPONENT*/
 
-.home-container{
+.home-container {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  min-height: auto ;
+  min-height: auto;
   height: auto;
 }
 
-.home-text{
+.home-text {
   display: flex;
   padding-left: 5%;
   padding-right: 5%;
@@ -94,7 +115,7 @@ a{
 
 /*?RELATED TO FOOTER COMPONENT*/
 
-.footer-container{
+.footer-container {
   display: flex;
   flex-direction: column;
   align-items: center;
