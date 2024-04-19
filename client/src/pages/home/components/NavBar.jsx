@@ -9,17 +9,17 @@ const NavBar = () => {
       <NavLink to='/' className="home-logotipo">CLICK LUNCH</NavLink>
       <ul>
         <li>
-          <NavLink to="" activeClassName="active">
+          <NavLink to="/" activeClassName="active">
             Home
           </NavLink>
         </li>
         <li>
-          <NavLink to="aboutUs" activeClassName="active">
+          <NavLink to="/aboutUs" activeClassName="active">
             Acerda de nosotros
           </NavLink>
         </li>
         <li>
-          <NavLink to="contact" activeClassName="active">
+          <NavLink to="/contact" activeClassName="active">
             Contacto
           </NavLink>
         </li>
@@ -27,7 +27,7 @@ const NavBar = () => {
       <ul className="home-buttons-container">
         <li>
           <NavLink
-            to="#"
+            to="/auth"
             activeClassName="active"
             className="home-login-button"
           >
@@ -36,7 +36,7 @@ const NavBar = () => {
         </li>
         <li>
           <NavLink
-            to="#"
+            to="/auth/register"
             activeClassName="active"
             className="home-register-button"
           >

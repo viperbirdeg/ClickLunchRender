@@ -1,0 +1,85 @@
+/** All elements */
+
+*{
+
+}
+
+/** Related to auth layout */
+
+.auth-container{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100vh;
+  width: 100vw;
+  overflow-x:hidden;
+  background-color: #ffffff;
+}
+
+/** Related to Login component*/
+
+.login-container{
+
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+  height: 100%;
+  width: 100%;
+  overflow-x:hidden;
+  background-color: #ffffff;
+}
+
+.IDK{
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #ffffff;
+
+}
+
+.login-text{
+
+}
+
+.login-logo-img{
+}
+
+.login-error{}
+
+
+/*! Start related to login form */
+.login-form{
+
+}
+
+.login-form-input-container{
+
+}
+
+.login-form-input-email{
+
+}
+
+.login-form-input-password{
+
+}
+
+.login-button-submit{
+
+}
+
+.login-submit{
+
+}
+
+/*! End related to login form*/
+
+.register-link{
+
+}
+
+/** Related to register component*/

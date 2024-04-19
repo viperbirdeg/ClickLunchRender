@@ -7,6 +7,9 @@ import HomeLayout from "../pages/home/HomeLayout.jsx";
 import Inicio from "../pages/home/components/Inicio.jsx";
 import AboutUs from './../pages/home/components/AboutUs';
 import Contacts from './../pages/home/components/Contacts';
+import AuthLayout from './../pages/auth/AuthLayout';
+import Login from './../pages/auth/components/Login';
+import Register from './../pages/auth/components/Register';
 
 //?Client components
 
@@ -19,6 +22,11 @@ const Router = () => {
         <Route index path="" element={<Inicio />} />
         <Route path="aboutUs" element={<AboutUs />} />
         <Route path="contact" element={<Contacts />} />
+
+      </Route>
+      <Route path="/auth" element={<AuthLayout />}>
+        <Route index path="" element={<Login />}/>
+        <Route path="register" element={<Register />} />
       </Route>
       <Route path="*" element={<h1>404 Not Found</h1>} />
     </Routes>
