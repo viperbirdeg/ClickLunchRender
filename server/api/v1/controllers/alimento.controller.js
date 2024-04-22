@@ -5,24 +5,13 @@ const addNewAlimento = async (req, res) => {
 
   try {
     const data = req.body;
-
-    /**
-     *? {
-     *? idCafeteria : req.session.idUsuario,
-     *? nombre : "",
-     *? descripcion: "",
-     *? tiempopreparacion : integer, //Expresa los minutos que tarda
-     *? costo: integer,
-     *? disponibilidad:integer,
-     *? }
-     */
     //*Obtener informacion
     const nombre = data.nombre;
     const descripcion = data.descripcion;
     const tiempopreparacion = data.tiempopreparacion;
     const costo = data.costo;
     const disponibilidad = data.disponibilidad;
-    const cafId = req.session.idUsuario;
+    const cafId = req.session.idUsuario || 1;
 
     //*Iniciar transacción
     await client.query("BEGIN");
@@ -40,13 +29,13 @@ const addNewAlimento = async (req, res) => {
       const response = await datosAlimento(dataResult.rows[0].id);
       return res.status(response.estado).json({ message: response.message });
     }
-    res.status(500).json({ message: "No se ha podido agregar el almento" });
+    res.status(400).json({ message: "No se ha podido agregar el almento" });
   } catch (error) {
     //*Manejar errores cancelando operacion
     await client.query("ROLLBACK");
     return res
       .status(500)
-      .json({ message: "No se ha podido agregar el almento" });
+      .json({ message: "No se ha podido agregar el almento", error: error });
   } finally {
     //*Liberar la bd
     client.release();
@@ -60,26 +49,25 @@ const getAllAlimentos = async (req, res) => {
   try {
     //*Busqueda en la bd
     const vistaResult = await client.query(
-      `SELECT * FROM clicklunch."Alimento"`
+      `SELECT * FROM clicklunch."Alimentos_vw"`
     );
     if (vistaResult.rowCount > 0) {
       //*Retorno de datos
-      return {
+      return res.status(200).json({
         estado: 200,
         message: vistaResult.rows,
-      };
+      });
     }
     //!Retorno de error
-    return {
-      estado: 404,
-      message: "No se ha podido obtener los alimentos",
-    };
+    return res
+      .status(404)
+      .json({ message: "No se ha podido obtener los alimentos" });
   } catch (error) {
     //!Manejo de errores
-    return {
-      estado: 500,
+    return res.status(500).json({
       message: "Ocurrio un error inesperado en el servidor",
-    };
+      error: error,
+    });
   } finally {
     //todo: Liberar la bd
     client.release();
@@ -103,22 +91,18 @@ const deleteOneAlimento = async (req, res) => {
     );
     if (vistaResult.rowCount > 0) {
       //*Retorno de datos
-      return {
-        estado: 200,
-        message: "Se ha eliminado el alimento",
-      };
+      return res.status(200).json({ message: "Se ha eliminado el alimento" });
     }
     //!Retorno de error
-    return {
-      estado: 404,
-      message: "No se ha podido eliminar el alimento",
-    };
+    return res
+      .status(404)
+      .json({ message: "No se ha podido eliminar el alimento" });
   } catch (error) {
     //!Manejo de errores
-    return {
-      estado: 500,
+    return res.status(500).json({
       message: "Ocurrio un error inesperado en el servidor",
-    };
+      error: error,
+    });
   } finally {
     //todo: Liberar la bd
     client.release();
@@ -154,22 +138,18 @@ const updateOneAlimento = async (req, res) => {
 
     if (foodResult.rowCount > 0) {
       //*Retorno de datos
-      return {
-        estado: 200,
-        message: "Se ha actualizado el alimento",
-      };
+      return res.status(200).json({ message: "Se ha actualizado el alimento" });
     }
     //!Retorno de error
-    return {
-      estado: 404,
-      message: "No se ha encontrado el alimento a actualizar",
-    };
+    return res
+      .status(404)
+      .json({ message: "No se ha encontrado el alimento a actualizar" });
   } catch (err) {
     //!Manejo de errores
-    return {
-      estado: 500,
+    return res.status(500).json({
       message: "Ocurrio un error inesperado en el servidor",
-    };
+      error: err,
+    });
   } finally {
     //todo: Liberar la bd
     client.release();
@@ -190,22 +170,18 @@ const getAllComentarios = async (req, res) => {
     );
 
     if (comentsResult.rowCount > 0) {
-      return {
-        estado: 200,
-        message: comentsResult.rows,
-      };
+      return res.status(200).json({ message: comentsResult.rows });
     }
     //!Retorno de error
-    return {
-      estado: 404,
-      message: "No se ha podido obtener los comentarios",
-    };
+    return res
+      .status(404)
+      .json({ message: "No se ha podido obtener los comentarios" });
   } catch (error) {
     //!Manejo de errores
-    return {
-      estado: 500,
+    return res.status(500).json({
       message: "Ocurrio un error inesperado en el servidor",
-    };
+      error: error,
+    });
   } finally {
     //todo: Liberar la bd
     client.release();

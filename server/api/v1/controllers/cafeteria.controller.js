@@ -1,4 +1,5 @@
 const { pool } = require("../database/db.js");
+const bcrypt = require('bcrypt');
 
 const addNewCafeteria = async (req, res) => {
   //Conexion con la bd
@@ -11,13 +12,6 @@ const addNewCafeteria = async (req, res) => {
 
     const data = await req.body;
     //Obtener data
-    /**
-     * {
-     *  email : "",
-     *  name : "",
-     *  password :""
-     * }
-     */
     const email = data.email;
     const cafeteriaName = data.name;
     const hashedPassword = await bcrypt.hash(data.password, 12);
@@ -50,12 +44,12 @@ const addNewCafeteria = async (req, res) => {
     );
     const idPassword = passwordResult.rows[0].id;
     const userResult = await client.query(
-      `INSERT INTO clicklunch."Usuario"(nombre, email, id_token, rol) VALUES ($1,$2,$3,$4)`,
-      [username, email, idPassword, rol]
+      `INSERT INTO clicklunch."Usuario"(nombre, email, id_token, id_rol) VALUES ($1,$2,$3,$4)`,
+      [cafeteriaName, email, idPassword, rol]
     );
     const cafeteriaResult = await client.query(
       `INSERT INTO clicklunch."Cafeteria"(nombre) VALUES ($1)`,
-      [username]
+      [cafeteriaName]
     );
 
     //Terminar y confirmar operacion
@@ -74,6 +68,7 @@ const addNewCafeteria = async (req, res) => {
     await client.query("ROLLBACK");
     return res.status(500).json({
       message: "Hubo problema registrando la cafeteria",
+      error : error.message
     });
   } finally {
     //Liberar la bd
@@ -130,11 +125,6 @@ const deleteOneCafeteria = async (req, res) => {
     //Iniciar transaccion
     await client.query("BEGIN");
 
-    /**
-     * {
-     * email:""
-     * }
-     */
     //Obtener informacion
     const data = await req.body;
     const email = data.email;
@@ -154,23 +144,16 @@ const deleteOneCafeteria = async (req, res) => {
 
     //Devolver basado en el resultado
     if (deleteResult.rowCount > 0 && delCafeteriaResult.rowCount > 0) {
-      return {
-        message: "Cafeteria eliminada de forma correcta",
-        estado: 200,
-      };
+      return res.status(200).json({message : 'Cafeteria eliminada de forma correcta'});
     } else {
-      return {
-        message: "Cafeteria no encontrado",
-        estado: 404,
-      };
+      return res.status(404).json({message : 'Cafeteria no encontrada'});
     }
   } catch (error) {
     //Revertir insercion debido a error
     await client.query("ROLLBACK");
-    return {
+    return res.status(500).json({
       message: "Ocurrio un error eliminando la cafeteria",
-      estado: 500,
-    };
+    });
   } finally {
     //Liberar la db
     client.release();
@@ -208,6 +191,16 @@ const getAlimentosCafeteria = async (req, res) => {
     client.release();
   }
 };
+
+const getPedidosCafeteria = async (req,res) => {
+  /*
+  !const client = await pool.connect();
+  !try {
+  !  const email = req.session.email;
+  !  const id = await datosCafeteria(email);
+  !}
+  */
+}
 
 const datosCafeteria = async (email) => {
   //Conexion con la bd

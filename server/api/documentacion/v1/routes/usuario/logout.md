@@ -1,19 +1,29 @@
-# Ruta de usuario logout #
+# Ruta de 'usuario log out' #
+
 ## Ruta relativa './api/usuario/logout' ##
 
-### >> Objetivo << ### 
--> La ruta logout tiene como objetivo cerrar la sesión de un usuario autenticado en el sistema.
+## Tipo de peticion 'POST'
 
-### >> Valores de entrada << ###
+### >>> Objetivo <<< ### 
 
-### >> Proceso << ###
--> La ruta simplemente destruye la sesión actual del usuario, lo que equivale a cerrar la sesión.
+-> Esta ruta tiene como objetivo eliminar la session creada para evitar que se almacene en un dispositivo indeseado.
 
-### >> Valores de salida << ###
--> La ruta devuelve un mensaje indicando que la sesión se ha cerrado correctamente.
+### >>> Valores de entrada <<< ###
 
-json
-Copy code
-{
-    "message": "Sesión finalizada de manera correcta"
-}
+-> No requiere valores de entrada
+
+### >>> Proceso <<<
+
+-> La session se obtiene y se destruye
+
+### >>> Valores de salida <<<
+
+-> Siempre regresa un estado '200 OK' con un objeto.
+
+  {
+    message : 'Sesion finalizada de manera correcta'
+  }
+
+### >>> Respuesta de error <<<
+
+-> No hay respuestas de error, en caso de presentarse alguna comunique inmediatamente al desarrollador

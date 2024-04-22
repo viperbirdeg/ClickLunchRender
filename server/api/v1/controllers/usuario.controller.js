@@ -1,16 +1,15 @@
-const { pool } = require('../database/db.js');
-const bcrypt = require('bcrypt');
+const { pool } = require("../database/db.js");
+const bcrypt = require("bcrypt");
 
 //?Usado para mandar registros
 const postNewUser = async (req, res) => {
-
   //Conexion con la bd
   const client = await pool.connect();
 
   //Intentar insercion
   try {
-    //Iniciar operacion 
-    await client.query('BEGIN');
+    //Iniciar operacion
+    await client.query("BEGIN");
 
     //obtener data
     const data = await req.body;
@@ -26,7 +25,7 @@ const postNewUser = async (req, res) => {
     );
     if (validacionResult.rowCount > 0) {
       return res.status(409).json({
-        message: 'Correo ya registrado',
+        message: "Correo ya registrado",
       });
     }
     const validacionUsuario = await client.query(
@@ -35,7 +34,7 @@ const postNewUser = async (req, res) => {
     );
     if (validacionUsuario.rowCount > 0) {
       return res.status(409).json({
-        message: 'Nombre de usuario ya registrado',
+        message: "Nombre de usuario ya registrado",
       });
     }
 
@@ -50,25 +49,24 @@ const postNewUser = async (req, res) => {
       [username, email, idPassword]
     );
 
-    //Terminar y confirmar operacion  
-    await client.query('COMMIT');
+    //Terminar y confirmar operacion
+    await client.query("COMMIT");
 
     //Devolver datos
     if (userResult.rowCount > 0) {
       const response = await datosUsuario(email);
-      return res.status(response.estado).json({ message: response.message });
+      return res.status(response.estado).json({ message: response });
     }
     res.status(404).json({
-      message: 'Hubo problemas encontrando el usuario',
+      message: "Hubo problemas encontrando el usuario",
     });
-
   } catch (error) {
     //Manejar errores cancelando operacion
-    await client.query('ROLLBACK');
+    await client.query("ROLLBACK");
     return res.status(500).json({
-      message: 'Hubo problema registrando al usuario',
+      message: "Hubo problema registrando al usuario",
+      error: error,
     });
-
   } finally {
     //Liberar la bd
     client.release();
@@ -99,7 +97,7 @@ const postLogin = async (req, res) => {
     );
     if (validacionResult.rowCount == 0) {
       return res.status(404).json({
-        message: 'Usuarios no registrado',
+        message: "Usuarios no registrado",
       });
     }
 
@@ -114,18 +112,16 @@ const postLogin = async (req, res) => {
       console.log(req.session);
       req.session.save();
       return res.status(200).json({
-        message: 'Ingreso correcto',
+        message: "Ingreso correcto",
       });
     }
-    return res.status(401).json({ message: 'Contraseña incorrecta' });
-
+    return res.status(401).json({ message: "Contraseña incorrecta" });
   } catch (error) {
     //Manejar errores
     return res.status(500).json({
-      message: 'Ocurrio un error inesperado en login',
-      error: error
+      message: "Ocurrio un error inesperado en login",
+      error: error,
     });
-
   } finally {
     //Liberar la bd
     client.release();
@@ -134,38 +130,29 @@ const postLogin = async (req, res) => {
 
 //?Usado para eliminar sesion
 const postLogout = (req, res) => {
-
   req.session.destroy(() => {
-    return res.status(200).json({ message: 'Sesion finalizada de manera correcta' });
+    return res
+      .status(200)
+      .json({ message: "Sesion finalizada de manera correcta" });
   });
-
 };
 
 const updateOneUser = async (req, res) => {
-
   //Conexion con la bd
   const client = await pool.connect();
 
   //Intentar insercion
   try {
-    //Iniciar operacion 
-    await client.query('BEGIN');
+    //Iniciar operacion
+    await client.query("BEGIN");
 
     //obtener data
     const data = await req.body;
-    /*
-    Formato data
-    data = {
-      email : "",
-      name : "",
-      password : ""
-    }
-    */
     const email = data.email;
     const username = data.name;
     const newToken = await bcrypt.hash(data.password, 12);
 
-    //Cambio de contraseña    
+    //Cambio de contraseña
     const id = await client.query(
       `SELECT (idtoken) FROM clicklunch."Usuarios" WHERE email = $1`,
       [email]
@@ -173,19 +160,21 @@ const updateOneUser = async (req, res) => {
 
     const validacionResult = await client.query(
       `UPDATE clicklunch."Token" set token = $1 WHERE id = $2`,
-      [newToken, (id.rows[0].idtoken)]
+      [newToken, id.rows[0].idtoken]
     );
 
-    //Terminar y confirmar operacion  
-    await client.query('COMMIT');
+    //Terminar y confirmar operacion
+    await client.query("COMMIT");
 
-    return res.status(200).json({ message: 'Cambio realizado de manera correcta' });
-
+    return res
+      .status(200)
+      .json({ message: "Cambio realizado de manera correcta" });
   } catch (error) {
     //Manejar errores cancelando operacion
-    await client.query('ROLLBACK');
+    await client.query("ROLLBACK");
     return res.status(500).json({
-      message: 'Hubo problema registrando al usuario',
+      message: "Hubo problema registrando al usuario",
+      error: error,
     });
   } finally {
     //Liberar la bd
@@ -200,33 +189,27 @@ const getAllUsers = async (req, res) => {
 
   //Intentar busqueda
   try {
-
     //Busqueda en db
-    const vistaResult = await client.query(`SELECT * FROM clicklunch."UsuarioInfo"`);
+    const vistaResult = await client.query(
+      `SELECT * FROM clicklunch."UsuarioInfo"`
+    );
 
     //Retorno de datos
     return res.status(200).json({ message: vistaResult });
-
   } catch (error) {
     //Manejo de errores
-    return res.status(500).json('Ocurrio un error inesperado en el servidor');
-
+    return res.status(500).json({
+      message: "Ocurrio un error inesperado en el servidor",
+      error: error,
+    });
   } finally {
-    //Liberar la bd 
+    //Liberar la bd
     client.release();
   }
-
 };
 
 //?Usado para obtener un usuario a partir de un identificador
 const getOneUser = async (req, res) => {
-
-  /*
-    Formato data
-    {
-      email :''
-    }
-  */
   //Obtener identificador
   const email = req.body.email;
 
@@ -241,37 +224,34 @@ const getOneUser = async (req, res) => {
 
 //?Verificaciones
 const authOneUser = async (req, res) => {
-
-  console.log('session:' , req.session);
+  console.log("session:", req.session);
 
   try {
     const email = req.session.email;
-    console.log(email);
     const userDatos = (await datosUsuario(email)).message;
-    console.log(userDatos);
     if (await bcrypt.compare(req.session.token, userDatos.token)) {
-      console.log('entrando');
+      console.log("entrando");
       if (req.session.email === userDatos.email) {
         return res.status(200).json({
           idUsuario: req.session.idUsuario,
           email: req.session.email,
           token: req.session.token,
-          rol: req.session.rol
+          rol: req.session.rol,
         });
       }
     }
     return res.status(401).json({
-      message: 'Error on data',
-      rol: 999
+      message: "Error on data",
+      rol: 999,
     });
-  } catch {
+  } catch (error) {
     return res.status(500).json({
-      message: 'Error on server',
-      rol: 999
+      message: "Error on server",
+      rol: 999,
+      error: error,
     });
   }
-
-}
+};
 
 //?Eliminar un usuario cambiando su estado a false
 const deleteOneUsuario = async (req, res) => {
@@ -280,13 +260,8 @@ const deleteOneUsuario = async (req, res) => {
 
   try {
     //Iniciar transaccion
-    await client.query('BEGIN');
+    await client.query("BEGIN");
 
-    /**
-     * {
-     * email:""
-     * }
-     */
     //Obtener informacion
     const data = await req.body;
     const email = data.email;
@@ -298,41 +273,38 @@ const deleteOneUsuario = async (req, res) => {
     );
 
     //Terminar transaccion
-    await client.query('COMMIT');
+    await client.query("COMMIT");
 
     //Devolver basado en el resultado
     if (deleteResult.rowCount > 0) {
-      return {
-        message: 'Usuario eliminado de forma correcta',
-        estado: 200,
-      };
+      return res.status(200).json({
+        message: "Usuario eliminado de forma correcta",
+      });
     } else {
-      return {
-        message: 'Usuario no encontrado',
-        estado: 404,
-      };
+      return res.status(404).json({
+        message: "Usuario no encontrado",
+      });
     }
   } catch (error) {
     //Revertir insercion debido a error
-    await client.query('ROLLBACK');
-    return {
-      message: 'Ocurrio un error eliminando al usuario',
-      estado: 500,
-    };
+    await client.query("ROLLBACK");
+    return res.status(500).json({
+      message: "Hubo problema eliminando al usuario",
+      error: error,
+    });
   } finally {
     //Liberar la db
     client.release();
   }
-}
+};
 
 //?Funcion interna de obtencion de usuarios
-const datosUsuario = async email => {
+const datosUsuario = async (email) => {
   //Conexion con la bd
   const client = await pool.connect();
 
   //Intentar busqueda
   try {
-
     //Busqueda en db
     const vistaResult = await client.query(
       `SELECT * FROM clicklunch."UsuarioInfo" WHERE "email" = ($1)`,
@@ -351,20 +323,27 @@ const datosUsuario = async email => {
       estado: 404,
       message: `No se ha encontrado el usuario`,
     };
-
   } catch (error) {
     //Manejo de errores
     return {
       estado: 500,
-      message: 'Ocurrio un error inesperado en el servidor',
+      message: "Ocurrio un error inesperado en el servidor",
+      error: error,
     };
-
   } finally {
-    //Liberar la bd 
+    //Liberar la bd
     client.release();
   }
 };
 
-
 //Exportaciones
-module.exports = { postNewUser, postLogin, postLogout, updateOneUser, getAllUsers, getOneUser, authOneUser, deleteOneUsuario };
+module.exports = {
+  postNewUser,
+  postLogin,
+  postLogout,
+  updateOneUser,
+  getAllUsers,
+  getOneUser,
+  authOneUser,
+  deleteOneUsuario,
+};

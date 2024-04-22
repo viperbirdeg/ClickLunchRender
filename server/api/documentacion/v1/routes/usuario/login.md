@@ -2,6 +2,8 @@
 
 ## Ruta relativa './api/usuario/login'
 
+## Tipo de peticion 'POST'
+
 ### >> Objetivo <<
 
 -> La ruta login es una ruta que tiene como proposito establecer en la session variables para el inicio automatico y para evitar problemas con los datos.

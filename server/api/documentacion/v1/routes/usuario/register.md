@@ -1,5 +1,6 @@
 # Ruta de usuario register #
 ## Ruta relativa './api/usuario/register' ##
+## Tipo de peticion 'POST'
 
 ###  >> Objetivo << ####
 ->  La ruta register es una ruta que tiene como proposito registrar a un usuario nuevo 
