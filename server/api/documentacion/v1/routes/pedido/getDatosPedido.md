@@ -24,10 +24,14 @@
 
 ### >>> Valores de salida <<<
 
--> En los valores '200 OK' de esta ruta se retorna un objeto json
+-> En los valores '200 OK' de esta ruta se retorna un objeto json.
 
 {
-  
+  nombre: 'varchar'
+  email: 'varchar'
+  fecha_pedido: "AAAA-MM-DD"
+  hora : "HH:MM:SS"
+  id : id
 }
 
 -> 
@@ -35,8 +39,8 @@
 ### >>> Respuesta de error <<<
 
 {
-estado : 
-message : ''
+estado : 404
+message : 'No se encontraron datos'
 }
-Significado:
-Acción:
+Significado: No existen pedidos registrados con ese identificador.
+Acción: Revisar integridad de los datos, en caso de persistencia, contactar con el desarrollador o gestor de la base de datos.

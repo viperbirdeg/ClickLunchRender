@@ -34,14 +34,7 @@ const getElementosPedido = async (req, res) => {
   const client = await pool.connect();
 
   try {
-    /**
-     * !Datos
-     * ?{
-     * ? idpedido : integer
-     * ?}
-     */
-
-    idPedido = req.body.idpedido;
+    idPedido = req.body.idPedido;
 
     const dataPedido = await client.query(
       'SELECT * FROM clicklunch."Alimentos_Pedido_vw" WHERE id_pedido = $1',
