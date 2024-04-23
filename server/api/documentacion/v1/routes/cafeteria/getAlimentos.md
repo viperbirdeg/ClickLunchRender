@@ -1,6 +1,6 @@
 # Ruta de 'obtener alimentos'
 
-## Ruta relativa './api/alimento/getAllCafeterias'
+## Ruta relativa './api/alimento/getAlimentosCafeteria'
 
 ## Tipo de peticion 'GET'
 
@@ -10,10 +10,10 @@
 
 ### >>> Valores de entrada <<<
 
--> Esta ruta no tiene valores de entrada
+-> Esta ruta tiene de valores de entrada un email.
 
 {
-
+  "email" : "varchar"
 }
 
 ->
@@ -27,19 +27,37 @@
 -> En los valores '200 OK' de esta ruta se retorna un arreglo de objetos json con la estructura siguiente.
 
 {
-"id": 3,
-"nombre": "Cafeteria de arsenio01",
-"email": "Cafeteriadearsenio01@gmail.com",
-"rol": "Cafeteria",
-"token": "$2b$12$l8rE9FbpBuYh1Tiseq01G.JpgWURdMqwUqw2.oNfk5GoqnQBrRc3."
+id : id,
+nombre : 'varchar',
+descripcion : 'varchar',
+tiempo_preparacion : integer,
+costo : integer,
+disponibilidad : integer,
+estado : boolean,
+id_cafeteria : id 
 }
 ->
 
 ### >>> Respuesta de error <<<
 
 {
-estado :
-message : ''
+estado : 404
+message : ' No se ha encontrado la cafeteria'
 }
-Significado:
-Acción:
+Significado: El email no existe dentro de la base de datos.
+Acción: Revisar la integridad de los datos, en caso de persistencia, comunicarse con el desarrollador o el gestor de la base de datos.
+
+{
+estado: 500 
+message: 'Ocurrio un error inesperado en el servidor'
+}
+Significado: El servidor no pudo realizar la peticion de consulta a la base de datos.
+Accion: Revisar la integridad del servidor, en caso de persistencia, comunicarse con el desarrollador o gestor de la base de datos.
+
+{
+estado: 404 
+message: 'Esta cafeteria no ha registrado alimentos'
+}
+Significado: La cafeteria no tieene registrados aliementos.
+Accion: Revisar la integridad de los datos, en caso de persistencia, comunicarse con el desarrollador o gestor de la base de datos.
+
