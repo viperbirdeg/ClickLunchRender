@@ -1,3 +1,4 @@
+const { SignJWT, jwtVerify } = require("jose");
 const { pool } = require("../database/db.js");
 const bcrypt = require("bcrypt");
 
@@ -81,13 +82,9 @@ const postLogin = async (req, res) => {
   //Intentar proceso
   try {
     //Obtener data
-    const data = await req.body;
-    /*
-    data = {
-      email = "";
-      password = "";
-    }
-    */
+
+    const data = await req.body.data;
+
     const email = data.email;
 
     //Validar existencia
@@ -105,22 +102,32 @@ const postLogin = async (req, res) => {
     const datos = validacionResult.rows[0];
     if (await bcrypt.compare(data.password, datos.token)) {
       //Generar la sesion
-      req.session.idUsuario = datos.id;
-      req.session.email = datos.email;
-      req.session.token = data.password;
-      req.session.rol = datos.rol;
-      console.log(req.session);
-      req.session.save();
-      return res.status(200).json({
-        message: "Ingreso correcto",
-      });
+
+      try {
+        const information = { id: datos.id, rol: datos.rol };
+        const jwtConstructor = new SignJWT(information);
+        const encoder = new TextEncoder();
+        const jwt = await jwtConstructor
+          .setProtectedHeader({ alg: "HS256", typ: "JWT" })
+          .setIssuedAt()
+          .setExpirationTime("1h")
+          .sign(encoder.encode(process.env.JWT_PRIVATE_KEY));
+
+        return res.status(200).json({
+          token: jwt,
+          id: datos.id,
+          rol: datos.rol,
+        });
+      } catch (err) {
+        return res.sendStatus(401).json({ message: err.message });
+      }
     }
     return res.status(401).json({ message: "Contraseña incorrecta" });
   } catch (error) {
     //Manejar errores
     return res.status(500).json({
       message: "Ocurrio un error inesperado en login",
-      error: error,
+      error: error.message,
     });
   } finally {
     //Liberar la bd
@@ -130,11 +137,8 @@ const postLogin = async (req, res) => {
 
 //?Usado para eliminar sesion
 const postLogout = (req, res) => {
-  req.session.destroy(() => {
-    return res
-      .status(200)
-      .json({ message: "Sesion finalizada de manera correcta" });
-  });
+  res.clearCookie("token");
+  res.end();
 };
 
 const updateOneUser = async (req, res) => {
@@ -154,7 +158,7 @@ const updateOneUser = async (req, res) => {
 
     //Cambio de contraseña
     const id = await client.query(
-      `SELECT (idtoken) FROM clicklunch."Usuarios" WHERE email = $1`,
+      `SELECT (id_token) FROM clicklunch."Usuarios" WHERE email = $1`,
       [email]
     );
 
@@ -210,11 +214,21 @@ const getAllUsers = async (req, res) => {
 
 //?Usado para obtener un usuario a partir de un identificador
 const getOneUser = async (req, res) => {
+  const { cookies } = req;
+
+  if (!cookies.token) return res.sendStatus(401);
+  const encoder = new TextEncoder();
+  const { payload } = await jwtVerify(
+    cookies.token,
+    encoder.encode(JWT_PRIVATE_KEY)
+  );
+  console.log(JSON.stringify(payload));
+
   //Obtener identificador
-  const email = req.body.email;
+  const id = req.query.id;
 
   //Buscar sus datos
-  const userDatos = await datosUsuario(email);
+  const userDatos = await datosUsuario(id);
 
   //Retornar datos
   return res.status(userDatos.estado).json({
@@ -224,32 +238,27 @@ const getOneUser = async (req, res) => {
 
 //?Verificaciones
 const authOneUser = async (req, res) => {
-  console.log("session:", req.session);
-
+  const { authorization } = req.headers;
+  
+  if (!authorization) return res.sendStatus(401);
+  console.log('Errorsin');
   try {
-    const email = req.session.email;
-    const userDatos = (await datosUsuario(email)).message;
-    if (await bcrypt.compare(req.session.token, userDatos.token)) {
-      console.log("entrando");
-      if (req.session.email === userDatos.email) {
-        return res.status(200).json({
-          idUsuario: req.session.idUsuario,
-          email: req.session.email,
-          token: req.session.token,
-          rol: req.session.rol,
-        });
-      }
-    }
-    return res.status(401).json({
-      message: "Error on data",
-      rol: 999,
-    });
-  } catch (error) {
-    return res.status(500).json({
-      message: "Error on server",
-      rol: 999,
-      error: error,
-    });
+    const encoder = new TextEncoder();
+    console.log(authorization); 
+    const { payload } = await jwtVerify(
+      authorization,
+      encoder.encode(process.env.JWT_PRIVATE_KEY)
+    );
+    console.log(payload);
+
+    const user = await datosUsuario(payload.id);
+
+    console.log(user); 
+    if (!user.message.id) return res.sendStatus(401);
+
+    return res.status(200).json(user);
+  } catch (err) {
+    return res.status(401).json({message: 'error', error: err.message});
   }
 };
 
@@ -299,7 +308,7 @@ const deleteOneUsuario = async (req, res) => {
 };
 
 //?Funcion interna de obtencion de usuarios
-const datosUsuario = async (email) => {
+const datosUsuario = async (id) => {
   //Conexion con la bd
   const client = await pool.connect();
 
@@ -307,8 +316,8 @@ const datosUsuario = async (email) => {
   try {
     //Busqueda en db
     const vistaResult = await client.query(
-      `SELECT * FROM clicklunch."UsuarioInfo" WHERE "email" = ($1)`,
-      [email]
+      `SELECT * FROM clicklunch."UsuarioInfo" WHERE "id" = ($1)`,
+      [id]
     );
     if (vistaResult.rowCount > 0) {
       //Retorno de datos

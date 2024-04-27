@@ -7,8 +7,8 @@ import {
 import axios from "axios";
 import { ReCAPTCHA } from "react-google-recaptcha";
 import logo from "../../../imagenes/logo-removebg-preview.png";
+import { baseUrl } from "../../../other/extras.js";
 
-const baseUrl = "http://localhost:3002";
 
 const Login = () => {
   const [credentials, setCreadentials] = useState({
@@ -27,7 +27,7 @@ const Login = () => {
   };
   const handleSubmit = async (e) => {
     e.preventDefault();
-    /*if(!credentials.email || !credentials.password){
+    if(!credentials.email || !credentials.password){
       return alert('Todos los campos son obligatorios');
     }
     if(!esCorreoElectronico(credentials.email)){
@@ -35,29 +35,29 @@ const Login = () => {
     }
     if(!esContrasenaValida(credentials.password)){
       return alert('La contraseña es invalida');
-    }*/
+    }
     if (/*captcha || */ true) {
       try {
-        axios({
-          method: "post",
-          url: `${baseUrl}/api/usuario/login`,
+        axios.post(`${baseUrl}/api/usuario/login`,{
           data: {
             email: credentials.email,
-            password: credentials.password,
-          },
-        })
-          .then((res) => {
-            if (res.status === 200) {
-              navigation("/User");
-            } else {
-              return alert(res.message);
-            }
-          })
-          .catch((error) => {
-            return navigation("/");
-          });
+            password: credentials.password
+          }
+        }).then((res)=>{
+          if(res.status === 200){
+            console.log(res.data.id);
+            window.localStorage.setItem("id",res.data.id)
+            window.localStorage.setItem("rol",res.data.rol)
+            window.localStorage.setItem("token",res.data.token)
+            navigation("/client");
+          } else {
+            return setError('Invalid login');
+          }
+        }).catch((error) => {
+          return setError('Invalid login');
+        });
       } catch (error) {
-        return alert(error);
+        return setError('Invalid login');
       }
     } else {
       return alert("Ingresa el captcha");
@@ -72,7 +72,7 @@ const Login = () => {
       <div className="IDK">
         <span className="login-text">Iniciar sesión</span>
         <form className="login-form" onSubmit={handleSubmit}>
-          {error && <div className="login-error">{error}</div>}
+          {error && <div className="login-error">{error.message}</div>}
           <div className="login-form-input-container">
             <input
               type="email"

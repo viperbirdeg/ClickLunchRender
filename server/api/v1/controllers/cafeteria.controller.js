@@ -48,7 +48,7 @@ const addNewCafeteria = async (req, res) => {
       [cafeteriaName, email, idPassword, rol]
     );
     const cafeteriaResult = await client.query(
-      `INSERT INTO clicklunch."Cafeteria"(nombre) VALUES ($1)`,
+      `INSERT INTO clicklunch."Cafeteria"(nombre) VALUES ($1) RETURNING id`,
       [cafeteriaName]
     );
 
@@ -57,7 +57,7 @@ const addNewCafeteria = async (req, res) => {
 
     //Devolver datos
     if (cafeteriaResult.rowCount > 0) {
-      const response = await datosCafeteria(email);
+      const response = await datosCafeteria(cafeteriaResult.rows[0].id);
       return res.status(response.estado).json({ message: response.message });
     }
     return res.status(404).json({
@@ -106,10 +106,10 @@ const getOneCafeteria = async (req, res) => {
    * }
    */
   //Obtener identificador
-  const email = req.body.email;
+  const id = req.body.id;
 
   //Buscar los datos
-  const cafeteriaDatos = await datosUsuario(email);
+  const cafeteriaDatos = await datosCafeteria(id);
 
   //Retornar datos
   return res.status(cafeteriaDatos.estado).json({
@@ -164,11 +164,11 @@ const getAlimentosCafeteria = async (req, res) => {
   const client = await pool.connect();
 
   try {
-    const email = req.session.email;
-    const id = await datosCafeteria(email);
-
+    const id = req.query.id;
+    console.log();
+    console.log(id);
     const alimentosResult = await client.query(
-      `SELECT * FROM clicklunch."Alimentos" WHERE id_cafeteria = $1`,
+      `SELECT * FROM clicklunch."Alimentos_vw" WHERE id_cafeteria = $1`,
       [id]
     );
 
@@ -202,7 +202,7 @@ const getPedidosCafeteria = async (req,res) => {
   */
 }
 
-const datosCafeteria = async (email) => {
+const datosCafeteria = async (id) => {
   //Conexion con la bd
   const client = await pool.connect();
 
@@ -210,8 +210,8 @@ const datosCafeteria = async (email) => {
   try {
     //Busqueda en la bd
     const vistaResult = await client.query(
-      `SELECT * FROM clicklunch."Cafeterias_vw" WHERE "email" = ($1)`,
-      [email]
+      `SELECT * FROM clicklunch."Cafeterias_vw" WHERE "id" = ($1)`,
+      [id]
     );
     if (vistaResult.rowCount > 0) {
       //Retorno de datos

@@ -1,6 +1,6 @@
 # Ruta de 'obtener alimentos'
 
-## Ruta relativa './api/alimento/getAlimentosCafeteria'
+## Ruta relativa './api/cafeteria/getAlimentosCafeteria'
 
 ## Tipo de peticion 'GET'
 
