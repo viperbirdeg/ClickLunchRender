@@ -1,4 +1,5 @@
 const { pool } = require("../database/db.js");
+const datosAlimento = require('../controllers/alimento.controller.js');
 
 const getDatosPedido = async (req, res) => {
   const client = await pool.connect();
@@ -76,17 +77,29 @@ const addNewPedido = async (req, res) => {
      * ? nadaa
      * ! alimentos
      * ? idAlimentos : {lista de id's}
-     * ? }
+     * ? }wd
      * */
 
     await client.query("BEGIN");
-
     const hora = now.toTimeString().split(" ")[0];
     const fecha = now.toISOString().split("T")[0];
 
-    const idsAlimentos = req.body.idAlimentos;
+    const idsAlimentos = req.body.data.cart;
+    console.log(idsAlimentos);
 
-    const idUsuario = req.session.idUsuario;
+    const results = await datosAlimento(idsAlimentos[0]);
+
+    console.log(results);
+
+    for(let i = 0; i < idsAlimentos.length; i++){
+      const result = await datosAliemento(idsAlimentos[i]);
+      console.log(result);
+      if(results.rows[0].id_cafeteria != result.rows[0].id_cafeteria){
+        return res
+         .status(400)
+         .json({ message: "No se pueden agregar dos alimentos de diferente cafeteria" });
+      }
+    }
 
     const encabezadoResult = await client.query(
       'INSERT INTO clicklunch."Encabezado"(fecha_pedido, hora) VALUES ($1, $2) RETURNING id',

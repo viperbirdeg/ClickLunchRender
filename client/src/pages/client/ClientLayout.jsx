@@ -19,8 +19,10 @@ const ClientLayout = () => {
       }
     }).then((res)=>{
       setData(res.data.message);
+      if(res.data.message.rol !== 'Cliente'){
+        navigation("/");
+      };
     }).catch((error)=>{
-      console.log(error.message);
       navigation('/');
     });
   },[navigation]);

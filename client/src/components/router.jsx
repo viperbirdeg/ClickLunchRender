@@ -14,6 +14,7 @@ import ClientLayout from "../pages/client/ClientLayout.jsx";
 import HomeClient from "../pages/client/components/HomeClient.jsx";
 import Producto from "../pages/client/components/Product.jsx";
 import Productos from "../pages/client/components/Productos.jsx";
+import Cart from "../pages/client/components/Cart.jsx";
 
 //?Client components
 
@@ -35,6 +36,7 @@ const Router = () => {
         <Route path="" element={<HomeClient/>}/>
         <Route path="products/:id" element={<Productos/>}/>
         <Route path="product/:id" element={<Producto/>}/>
+        <Route path="cart" element={<Cart/>}/>
       </Route>
       <Route path="*" element={<h1>404 Not Found</h1>} />
     </Routes>

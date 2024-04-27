@@ -1,7 +1,7 @@
 import axios from "axios";
 import React from "react";
 import { useParams } from "react-router-dom";
-import { addToCart, baseUrl } from "../../../other/extras";
+import { baseUrl, getCart } from "../../../other/extras";
 
 const Producto = () => {
   const props = useParams();
@@ -23,11 +23,6 @@ const Producto = () => {
         setError(error.message);
       });
   }, [props]);
-
-  const getCart = () => {
-    const cart = window.localStorage.getItem("cart");
-    return cart ? JSON.parse(cart) : [];
-  };
 
   const handleChange = (e) => {
     e.preventDefault();
