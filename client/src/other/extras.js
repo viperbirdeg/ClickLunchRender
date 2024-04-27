@@ -1,6 +1,6 @@
-const dotenv = require('dotenv').config;
+require('dotenv').config();
 
-const baseUrl = process.env.BASE_URL || "http://localhost:3002";
+const baseUrl = process.env.BASE_URL;
 
 const getCart = () => {
   const cart = window.localStorage.getItem("cart");
