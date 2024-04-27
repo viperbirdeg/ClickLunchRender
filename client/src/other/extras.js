@@ -1,6 +1,5 @@
-require('dotenv').config();
 
-const baseUrl = process.env.BASE_URL;
+const baseUrl = 'https://clicklunchrender.onrender.com';
 
 const getCart = () => {
   const cart = window.localStorage.getItem("cart");
