@@ -9,9 +9,8 @@ import { ReCAPTCHA } from "react-google-recaptcha";
 import logo from "../../../imagenes/logo-removebg-preview.png";
 import { baseUrl } from "../../../other/extras.js";
 
-
 const Login = () => {
-  const [credentials, setCreadentials] = useState({
+  const [credentials, setCredentials] = useState({
     email: "",
     password: "",
   });
@@ -20,44 +19,47 @@ const Login = () => {
   const navigation = useNavigate();
 
   const handleChange = (e) => {
-    setCreadentials({
+    setCredentials({
       ...credentials,
       [e.target.name]: e.target.value,
     });
   };
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if(!credentials.email || !credentials.password){
-      return alert('Todos los campos son obligatorios');
+    if (!credentials.email || !credentials.password) {
+      return alert("Todos los campos son obligatorios");
     }
-    if(!esCorreoElectronico(credentials.email)){
-      return alert('El correo electronico es invalido');
+    if (!esCorreoElectronico(credentials.email)) {
+      return alert("El correo electronico es invalido");
     }
-    if(!esContrasenaValida(credentials.password)){
-      return alert('La contraseña es invalida');
+    if (!esContrasenaValida(credentials.password)) {
+      return alert("La contraseña es invalida");
     }
     if (/*captcha || */ true) {
       try {
-        axios.post(`${baseUrl}/api/usuario/login`,{
-          data: {
-            email: credentials.email,
-            password: credentials.password
-          }
-        }).then((res)=>{
-          if(res.status === 200){
-            console.log(res.data.id);
-            window.localStorage.setItem("id",res.data.id)
-            window.localStorage.setItem("rol",res.data.rol)
-            window.localStorage.setItem("token",res.data.token)
-            navigation("/client");
-          } else {
-            return setError('Invalid login');
-          }
-        }).catch((error) => {
-          return setError('Invalid login');
-        });
+        axios
+          .post(`${baseUrl}/api/usuario/login`, {
+            data: {
+              email: credentials.email,
+              password: credentials.password,
+            },
+          })
+          .then((res) => {
+            if (res.status === 200) {
+              console.log(res.data.id);
+              window.localStorage.setItem("id", res.data.id);
+              window.localStorage.setItem("rol", res.data.rol);
+              window.localStorage.setItem("token", res.data.token);
+              navigation("/client");
+            } else {
+              return setError("Invalid login");
+            }
+          })
+          .catch((error) => {
+            return setError("Invalid login");
+          });
       } catch (error) {
-        return setError('Invalid login');
+        return setError("Invalid login");
       }
     } else {
       return alert("Ingresa el captcha");

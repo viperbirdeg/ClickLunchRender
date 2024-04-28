@@ -11,6 +11,8 @@ const NavBar = () => {
     window.localStorage.removeItem('id');
     window.localStorage.removeItem('cart');
     window.location.reload();
+
+    return
   }
 
   return (
@@ -21,5 +23,4 @@ const NavBar = () => {
     </div>
   );
 };
-
-export default NavBar;
+export default NavBar

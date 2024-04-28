@@ -10,7 +10,7 @@ const addNewCafeteria = async (req, res) => {
     //Iniciar operacion
     await client.query("BEGIN");
 
-    const data = await req.body;
+    const data = await req.body.data;
     //Obtener data
     const email = data.email;
     const cafeteriaName = data.name;

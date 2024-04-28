@@ -15,6 +15,8 @@ import HomeClient from "../pages/client/components/HomeClient.jsx";
 import Producto from "../pages/client/components/Product.jsx";
 import Productos from "../pages/client/components/Productos.jsx";
 import Cart from "../pages/client/components/Cart.jsx";
+import CafeLayout from "../pages/cafe/CafeLayout.jsx";
+import HomeCafe from "../pages/cafe/components/HomeCafe.jsx";
 
 //?Client components
 
@@ -32,11 +34,14 @@ const Router = () => {
         <Route index path="" element={<Login />}/>
         <Route path="register" element={<Register />} />
       </Route>
-      <Route path="/client" Component= {ClientLayout} /*element={<ClientLayout/>}*/>
-        <Route path="" element={<HomeClient/>}/>
+      <Route path="/client" element={<ClientLayout/>} >
+        <Route index path="" element={<HomeClient/>}/>
         <Route path="products/:id" element={<Productos/>}/>
         <Route path="product/:id" element={<Producto/>}/>
         <Route path="cart" element={<Cart/>}/>
+      </Route>
+      <Route path="/cafe" element={<CafeLayout/>}>
+        <Route index path="" element={<HomeCafe/>} />
       </Route>
       <Route path="*" element={<h1>404 Not Found</h1>} />
     </Routes>

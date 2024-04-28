@@ -13,7 +13,8 @@ const postNewUser = async (req, res) => {
     await client.query("BEGIN");
 
     //obtener data
-    const data = await req.body;
+    const data = await req.body.data;
+console.log(data)
 
     const email = data.email;
     const username = data.name;
@@ -46,7 +47,7 @@ const postNewUser = async (req, res) => {
     );
     const idPassword = passwordResult.rows[0].id;
     const userResult = await client.query(
-      `INSERT INTO clicklunch."Usuario"(nombre, email, id_token) VALUES ($1,$2,$3)`,
+      `INSERT INTO clicklunch."Usuario"(nombre, email, id_token) VALUES ($1,$2,$3) RETURNING id`,
       [username, email, idPassword]
     );
 
@@ -55,7 +56,7 @@ const postNewUser = async (req, res) => {
 
     //Devolver datos
     if (userResult.rowCount > 0) {
-      const response = await datosUsuario(email);
+      const response = await datosUsuario(userResult.rows[0].id);
       return res.status(response.estado).json({ message: response });
     }
     res.status(404).json({
