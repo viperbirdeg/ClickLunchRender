@@ -1,9 +1,11 @@
 /*?CSS TO ALL*/
+@import url("https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto+Mono:ital,wght@0,100..700;1,100..700&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap");
+
 
 * {
   margin: 0;
   padding: 0;
-  box-sizing: border-box; 
+  box-sizing: border-box;
 }
 
 /*?CSS RELATED TO HOME LAYOUT*/
@@ -12,9 +14,10 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: space-between;
   height: 100vh;
   width: 100vw;
-  background-color: #FFFFFF;
+  background-color: #ffffff;
   overflow-x: hidden;
 }
 
@@ -26,24 +29,27 @@
   align-items: center;
   justify-content: space-between;
   width: 100%;
-  height: auto;
+  height: 10%;
   position: sticky;
-  background-color: #FFFFE0;
-  border: 1px solid #888888;
+  background-color: #ffffff;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.3);
   left: 0;
   top: 0;
   right: 0;
+  font-family: "Poppins", sans-serif;
 }
 
-.home-navbar {
-
-}
-
-.home-navbar ul, .home-navbar .home-logotipo {
+.home-navbar ul,
+.home-navbar .home-logotipo {
   margin: 0;
-  padding-left: 2%;
-  padding-right: 2%;
   height: 100%;
+}
+
+.home-logo {
+  height: 100%;
+  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.4);
 }
 
 .home-logotipo {
@@ -55,43 +61,65 @@
   font-size: 200%;
   font-weight: bold;
   color: #000000;
+  font-family: "Lexend", sans-serif;
 }
 
 .home-buttons-container {
   display: flex;
-  flex-direction: row;
   align-items: center;
-  justify-content: space-between;
-  width: 20%;
-  height: 10%;
+  justify-content: space-evenly;
+  width: 40%;
+  height: 100%;
   border: 0px solid #000000;
-  margin-left:auto;
+  padding-right: 2%;
+}
+
+.home-buttons-container li:first-child {
+  width: 55%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .home-buttons-container a {
   position: relative;
   right: 0;
-  border: 1px solid #000000;
+  border: 1px solid #ee6107;
   padding-left: 20%;
   padding-right: 20%;
   padding-top: 5px;
   padding-bottom: 5px;
   border-radius: 10px;
-  background-color: ;
-
 }
 
-.home-login-button {}
+.home-buttons-container a:hover {
+  border: 1px solid #00000000;
+  transition: 0.3s;
+  -webkit-transition: 0.3s;
+  -moz-transition: 0.3s;
+  -ms-transition: 0.3s;
+  -o-transition: 0.3s;
+  background: #ee6107;
+  color: white;
+  box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.7);
+}
 
-.home-register-button {}
+.home-login-button {
+}
 
-a {
-  color: red;
-  border-right: ;: green;
+.home-register-button {
 }
 
 .active {
-  color: purple;
+  display: flex;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  fill: #f99a56;
+  text-align: center;
+  border-bottom: 2px solid #f99a56;
 }
 
 /*?CSS RELATED TO ABOUT US COMPONENT*/
@@ -102,20 +130,33 @@ a {
 
 .home-container {
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
-  min-height: auto;
-  height: auto;
+  height: 82%;
 }
 
 .home-text {
   display: flex;
-  padding-left: 5%;
-  padding-right: 5%;
-  padding-top: 2%;
-  padding-bottom: 2%;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 5%;
+  height: 100%;
   font-size: 20px;
+}
+
+.home-title {
+  font-family: "Poppins", sans-serif;
+  width: 100%;
+  text-align: center;
+  font-weight: 400;
+  color: #E55A00;
+}
+
+.home-text-desc {
+  font-family: "Poppins", sans-serif;
+  font-weight: 300;
+  text-align: justify;
 }
 
 /*?RELATED TO FOOTER COMPONENT*/
@@ -127,11 +168,47 @@ a {
   justify-content: center;
   height: max-content;
   width: 100%;
-  background-color: lightgray;
-
+  background-color: #484848;
   position: relative;
   left: 0;
   bottom: 0;
-  color: black;
+  color: rgb(255, 255, 255);
   text-align: center;
+  padding: 1%;
+  font-weight: bolder;
+  font-family: "Lexend", sans-serif;
+  height: 8%;
+}
+.home-listnav {
+  display: flex;
+  gap: 20px;
+  font-size: 1.2rem;
+  width: 50%;
+  justify-content: space-between;
+}
+.home-listnav li {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.home-listnav li a {
+  text-align: center;
+}
+.icon_nav {
+  height: 25%;
+}
+.icon_navbar {
+  display: flex;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  text-align: center;
+}
+.nav_options{
+  width: 70%;
+  height: 100%;
+  display: flex;
+  justify-content: end;
+  padding-right: 1.5%;
 }
