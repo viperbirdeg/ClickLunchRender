@@ -5,7 +5,7 @@ import {
   esContrasenaValida,
 } from "../../../other/validation.js";
 import axios from "axios";
-import { ReCAPTCHA } from "react-google-recaptcha";
+//import { ReCAPTCHA } from "react-google-recaptcha";
 import logo from "../../../imagenes/logo-removebg-preview.png";
 import { baseUrl } from "../../../other/extras.js";
 
@@ -14,7 +14,7 @@ const Login = () => {
     email: "",
     password: "",
   });
-  const [captcha, setCaptcha] = useState();
+  //const [captcha, setCaptcha] = useState();
   const [error, setError] = useState("");
   const navigation = useNavigate();
 

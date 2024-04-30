@@ -26,8 +26,9 @@ const HomeLayout = () => {
             navigation("/client");
           } else if (res.data.message.rol === "Cafeteria") {
             navigation("/cafe");
+          } else {
+            window.localStorage.removeItem("token");
           }
-          window.localStorage.removeItem("token");
         })
         .catch((error) => {});
     }

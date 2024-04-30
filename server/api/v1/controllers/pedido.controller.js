@@ -85,6 +85,8 @@ const addNewPedido = async (req, res) => {
     const fecha = now.toISOString().split("T")[0];
 
     const idsAlimentos = req.body.data.cart;
+    const idUsuario = req.body.data.idUsuario;
+    const idCafe = req.body.data.idCafe;
     console.log(idsAlimentos);
 
     const results = await datosAlimento(idsAlimentos[0]);

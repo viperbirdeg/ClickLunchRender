@@ -1,6 +1,5 @@
 import axios from "axios";
 import React from "react";
-import { Link } from "react-router-dom";
 import { baseUrl } from "../../../other/extras";
 import OrderProduct from "./OrderProduct";
 

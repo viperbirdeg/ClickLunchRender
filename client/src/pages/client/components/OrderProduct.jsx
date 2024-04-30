@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { baseUrl, getCart } from "../../../other/extras";
+import { baseUrl } from "../../../other/extras";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
 
 import "../css/CartProducto.css"; // Import the CSS file
 
