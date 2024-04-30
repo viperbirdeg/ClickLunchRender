@@ -21,6 +21,7 @@ const CartProducto = ({ id }) => {
       .then((response) => {
         console.log(response)
         setData(response.data.message);
+        console.log(data.id_cafeteria);
         setCafOrderId(data.id_cafeteria);
       })
       .catch((error) => {
