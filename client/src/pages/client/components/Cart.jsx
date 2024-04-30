@@ -16,7 +16,8 @@ const Cart = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     alert("No hay");
-    console.log(data);
+    const cart = data.map((item) => item.id)
+    console.log(cart);
   };
 
   return (

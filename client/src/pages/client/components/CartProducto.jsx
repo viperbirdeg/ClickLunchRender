@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { baseUrl, getCart } from "../../../other/extras";
+import { baseUrl, deleteCafOrderId, getCart, setCafOrderId } from "../../../other/extras";
 import axios from "axios";
 
 import "../css/CartProducto.css"; // Import the CSS file
@@ -21,6 +21,7 @@ const CartProducto = ({ id }) => {
       .then((response) => {
         console.log(response)
         setData(response.data.message);
+        setCafOrderId(data.id);
       })
       .catch((error) => {
         if (!axios.isCancel(error)) {
@@ -32,13 +33,14 @@ const CartProducto = ({ id }) => {
     return () => {
       source.cancel();
     };
-  }, [id]);
+  }, [id,data]);
 
   const actionHandler = (e) => {
     e.preventDefault();
     const cart = getCart();
     const newCart = cart.filter((item) => item.id !== id);
     window.localStorage.setItem("cart", JSON.stringify(newCart));
+    deleteCafOrderId();
     window.location.reload();
   };
 

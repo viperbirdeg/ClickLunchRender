@@ -114,8 +114,8 @@ const addNewPedido = async (req, res) => {
     const idEncabezado = encabezadoResult.rows[0].id;
 
     const pedidoResult = await client.query(
-      'INSERT INTO clicklunch."Pedido"(id_encabezado, id_usuario) VALUES ($1, $2) RETURNING id',
-      [idEncabezado, idUsuario]
+      'INSERT INTO clicklunch."Pedido"(id_encabezado, id_usuario, id_cafeteria) VALUES ($1, $2, $3) RETURNING id',
+      [idEncabezado, idUsuario, idCafe]
     );
 
     const idPedido = pedidoResult.rows[0].id;
