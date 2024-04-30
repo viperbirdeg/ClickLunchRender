@@ -19,6 +19,7 @@ import CafeLayout from "../pages/cafe/CafeLayout.jsx";
 import HomeCafe from "../pages/cafe/components/HomeCafe.jsx";
 import Orders from "../pages/cafe/components/Orders.jsx";
 import ClientOrders from './../pages/client/components/Orders';
+import NewProduct from './../pages/cafe/components/NewProduct';
 
 //?Client components
 
@@ -46,6 +47,7 @@ const Router = () => {
       <Route path="/cafe" element={<CafeLayout/>}>
         <Route index path="" element={<HomeCafe/>} />
         <Route path="orders" element={<Orders/>}/>
+        <Route path="addProduct" element={<NewProduct/>}/>
       </Route>
       <Route path="*" element={<h1>404 Not Found</h1>} />
     </Routes>

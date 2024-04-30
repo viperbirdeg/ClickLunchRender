@@ -4,14 +4,14 @@ const addNewAlimento = async (req, res) => {
   const client = await pool.connect();
 
   try {
-    const data = req.body;
+    const data = req.body.data;
     //*Obtener informacion
     const nombre = data.nombre;
     const descripcion = data.descripcion;
     const tiempopreparacion = data.tiempopreparacion;
     const costo = data.costo;
     const disponibilidad = data.disponibilidad;
-    const cafId = req.session.idUsuario || 2;
+    const cafId = data.idCaf || 2;
 
     //*Iniciar transacción
     await client.query("BEGIN");

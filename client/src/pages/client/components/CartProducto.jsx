@@ -14,12 +14,12 @@ const CartProducto = ({ id }) => {
 
     axios
       .get(`${baseUrl}/api/alimento/getOneAlimento`, {
-        cancelToken: source.token,
         params: {
           id: id,
         },
       })
       .then((response) => {
+        console.log(response)
         setData(response.data.message);
       })
       .catch((error) => {

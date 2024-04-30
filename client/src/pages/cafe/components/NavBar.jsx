@@ -19,6 +19,7 @@ const NavBar = () => {
     <div>
       <p>NavBar</p>
       <NavLink to="orders">Pedidos</NavLink>
+      <NavLink to='addProduct'>Agregar Alimento</NavLink>
       <button onClick={handleClick}>LogOut</button>
     </div>
   );

@@ -64,8 +64,7 @@ const Login = () => {
           })
           .catch((error) => {
             console.log(error)
-            console.log(error.response.data)
-            return setError(error.response.data.message);
+            return setError(error.message || error.response.data.message);
           });
       } catch (error) {
         return setError("Invalid login");
