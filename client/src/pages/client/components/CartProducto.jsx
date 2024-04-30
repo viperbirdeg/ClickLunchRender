@@ -20,10 +20,9 @@ const CartProducto = ({ id }) => {
       })
       .then((response) => {
         console.log(response)
+        console.log(response.data.message.id_cafeteria)
+        setCafOrderId(response.data.message.id_cafeteria);
         setData(response.data.message);
-        console.log(data.id_cafeteria);
-        console.log(data)
-        setCafOrderId(data.id_cafeteria);
       })
       .catch((error) => {
         if (!axios.isCancel(error)) {
