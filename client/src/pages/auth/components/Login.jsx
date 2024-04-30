@@ -46,17 +46,25 @@ const Login = () => {
           })
           .then((res) => {
             if (res.status === 200) {
-              console.log(res.data.id);
-              window.localStorage.setItem("id", res.data.id);
-              window.localStorage.setItem("rol", res.data.rol);
-              window.localStorage.setItem("token", res.data.token);
-              navigation("/client");
+              if (res.data.rol === "Cliente") {
+                window.localStorage.setItem("id", res.data.id);
+                window.localStorage.setItem("rol", res.data.rol);
+                window.localStorage.setItem("token", res.data.token);
+                navigation("/client");
+              } else if (res.data.rol === "Cafeteria") {
+                window.localStorage.setItem("id", res.data.id);
+                window.localStorage.setItem("rol", res.data.rol);
+                window.localStorage.setItem("token", res.data.token);
+                window.localStorage.setItem("idCafe", res.data.idCafe);
+                navigation("/cafe");
+              }
             } else {
-              return setError("Invalid login");
+              return setError("Contraseña Incorrecta");
             }
           })
           .catch((error) => {
-            return setError("Invalid login");
+            console.log(error.response.data.message)
+            return setError(error.response.data.message);
           });
       } catch (error) {
         return setError("Invalid login");
@@ -74,7 +82,7 @@ const Login = () => {
       <div className="IDK">
         <span className="login-text">Iniciar sesión</span>
         <form className="login-form" onSubmit={handleSubmit}>
-          {error && <div className="login-error">{error.message}</div>}
+          {error && <div className="login-error">{error}</div>}
           <div className="login-form-input-container">
             <input
               type="email"

@@ -1,5 +1,5 @@
 const { pool } = require("../database/db.js");
-const bcrypt = require('bcrypt');
+const bcrypt = require("bcrypt");
 
 const addNewCafeteria = async (req, res) => {
   //Conexion con la bd
@@ -58,7 +58,7 @@ const addNewCafeteria = async (req, res) => {
     //Devolver datos
     if (cafeteriaResult.rowCount > 0) {
       const response = await datosCafeteria(cafeteriaResult.rows[0].id);
-      return res.status(response.estado).json({ message: response.message });
+      return res.status(response.estado).json({ message: response.message, id: cafeteriaResult.rows[0].id });
     }
     return res.status(404).json({
       message: "Hubo problemas encontrando la cafeteria",
@@ -68,7 +68,7 @@ const addNewCafeteria = async (req, res) => {
     await client.query("ROLLBACK");
     return res.status(500).json({
       message: "Hubo problema registrando la cafeteria",
-      error : error.message
+      error: error.message,
     });
   } finally {
     //Liberar la bd
@@ -144,9 +144,11 @@ const deleteOneCafeteria = async (req, res) => {
 
     //Devolver basado en el resultado
     if (deleteResult.rowCount > 0 && delCafeteriaResult.rowCount > 0) {
-      return res.status(200).json({message : 'Cafeteria eliminada de forma correcta'});
+      return res
+        .status(200)
+        .json({ message: "Cafeteria eliminada de forma correcta" });
     } else {
-      return res.status(404).json({message : 'Cafeteria no encontrada'});
+      return res.status(404).json({ message: "Cafeteria no encontrada" });
     }
   } catch (error) {
     //Revertir insercion debido a error
@@ -165,8 +167,6 @@ const getAlimentosCafeteria = async (req, res) => {
 
   try {
     const id = req.query.id;
-    console.log();
-    console.log(id);
     const alimentosResult = await client.query(
       `SELECT * FROM clicklunch."Alimentos_vw" WHERE id_cafeteria = $1`,
       [id]
@@ -177,7 +177,7 @@ const getAlimentosCafeteria = async (req, res) => {
         message: alimentosResult.rows,
       });
     }
-    return res.status(404).json({
+    return res.status(204).json({
       message: "Esta cafeteria no ha registrado alimentos",
     });
   } catch (error) {
@@ -192,7 +192,7 @@ const getAlimentosCafeteria = async (req, res) => {
   }
 };
 
-const getPedidosCafeteria = async (req,res) => {
+const getPedidosCafeteria = async (req, res) => {
   /*
   !const client = await pool.connect();
   !try {
@@ -200,7 +200,37 @@ const getPedidosCafeteria = async (req,res) => {
   !  const id = await datosCafeteria(email);
   !}
   */
-}
+
+  const client = await pool.connect();
+
+  try {
+    const identifier = req.body.data.idCafe;
+
+    const pedidosResult = await client.query(
+      `SELECT * FROM clicklunch."Pedido_vw" WHERE id_cafeteria = $1`,
+      [identifier]
+    );
+
+    if (pedidosResult.rowCount > 0) {
+      return res.status(200).json({
+        message: pedidosResult.rows,
+      });
+    }
+
+    return res.status(204).json({
+      message: "Esta cafeteria no ha registrado pedidos",
+    });
+  } catch (error) {
+    //!Manejar errores
+    return res.status(500).json({
+      message: "Ocurrio un error inesperado en el servidor",
+      error: error.message
+    });
+  } finally {
+    //todo Liberar db
+    client.release();
+  }
+};
 
 const datosCafeteria = async (id) => {
   //Conexion con la bd
@@ -244,4 +274,5 @@ module.exports = {
   getOneCafeteria,
   deleteOneCafeteria,
   getAlimentosCafeteria,
+  getPedidosCafeteria,
 };

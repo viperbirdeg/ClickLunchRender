@@ -14,7 +14,6 @@ const postNewUser = async (req, res) => {
 
     //obtener data
     const data = await req.body.data;
-console.log(data)
 
     const email = data.email;
     const username = data.name;
@@ -34,6 +33,7 @@ console.log(data)
       `SELECT * FROM clicklunch."UsuarioInfo" WHERE nombre = $1`,
       [username]
     );
+
     if (validacionUsuario.rowCount > 0) {
       return res.status(409).json({
         message: "Nombre de usuario ya registrado",
@@ -103,7 +103,12 @@ const postLogin = async (req, res) => {
     const datos = validacionResult.rows[0];
     if (await bcrypt.compare(data.password, datos.token)) {
       //Generar la sesion
-
+      if (datos.rol === "Cafeteria") {
+        datingins = await client.query(
+          'SELECT * FROM clicklunch."Cafeteria" WHERE nombre = $1',
+          [datos.nombre]
+        );
+      }
       try {
         const information = { id: datos.id, rol: datos.rol };
         const jwtConstructor = new SignJWT(information);
@@ -118,6 +123,7 @@ const postLogin = async (req, res) => {
           token: jwt,
           id: datos.id,
           rol: datos.rol,
+          idCafe: datingins.rows[0].id,
         });
       } catch (err) {
         return res.sendStatus(401).json({ message: err.message });
@@ -223,8 +229,6 @@ const getOneUser = async (req, res) => {
     cookies.token,
     encoder.encode(JWT_PRIVATE_KEY)
   );
-  console.log(JSON.stringify(payload));
-
   //Obtener identificador
   const id = req.query.id;
 
@@ -240,26 +244,22 @@ const getOneUser = async (req, res) => {
 //?Verificaciones
 const authOneUser = async (req, res) => {
   const { authorization } = req.headers;
-  
+
   if (!authorization) return res.sendStatus(401);
-  console.log('Errorsin');
   try {
     const encoder = new TextEncoder();
-    console.log(authorization); 
     const { payload } = await jwtVerify(
       authorization,
       encoder.encode(process.env.JWT_PRIVATE_KEY)
     );
-    console.log(payload);
 
     const user = await datosUsuario(payload.id);
 
-    console.log(user); 
     if (!user.message.id) return res.sendStatus(401);
 
     return res.status(200).json(user);
   } catch (err) {
-    return res.status(401).json({message: 'error', error: err.message});
+    return res.status(401).json({ message: "error", error: err.message });
   }
 };
 

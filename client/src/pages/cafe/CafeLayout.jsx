@@ -4,6 +4,8 @@ import Footer from "./components/Footer";
 import { Outlet, useNavigate } from "react-router-dom";
 import { baseUrl } from "../../other/extras";
 import axios from "axios";
+import './css/general.css'
+
 
 const CafeLayout = () => {
 
@@ -14,7 +16,7 @@ const CafeLayout = () => {
     axios.get(`${baseUrl}/api/usuario/authUser`,{
       headers: {
         Authorization: `${localStorage.getItem('token')}`
-      }
+      }      
     }).then((res)=>{
       setData(res.data.message);
       if(res.data.message.rol !== 'Cafeteria'){

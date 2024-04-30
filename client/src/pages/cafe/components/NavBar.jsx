@@ -18,7 +18,7 @@ const NavBar = () => {
   return (
     <div>
       <p>NavBar</p>
-      <NavLink to="/client/cart">carrito</NavLink>
+      <NavLink to="orders">Pedidos</NavLink>
       <button onClick={handleClick}>LogOut</button>
     </div>
   );
