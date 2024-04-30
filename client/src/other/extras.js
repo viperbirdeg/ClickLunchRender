@@ -12,6 +12,7 @@ const getCafOrder = () => {
 
 const setCafOrderId = (id) => {
   const data = getCafOrder();
+  console.log(data);
   if (!data) {
     console.log("Mensaje 1 mdf")
     window.localStorage.setItem("cafOrderId", [id]);
