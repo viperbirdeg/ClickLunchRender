@@ -1,5 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { baseUrl, deleteCafOrderId, getCart, setCafOrderId } from "../../../other/extras";
+import {
+  baseUrl,
+  deleteCafOrderId,
+  getCart,
+  setCafOrderId,
+} from "../../../other/extras";
 import axios from "axios";
 
 import "../css/CartProducto.css"; // Import the CSS file
@@ -19,8 +24,8 @@ const CartProducto = ({ id }) => {
         },
       })
       .then((response) => {
-        console.log(response)
-        console.log(response.data.message.id_cafeteria)
+        console.log(response);
+        console.log(response.data.message.id_cafeteria);
         setCafOrderId(response.data.message.id_cafeteria);
         setData(response.data.message);
       })
@@ -28,12 +33,7 @@ const CartProducto = ({ id }) => {
         if (!axios.isCancel(error)) {
           setError(error.message);
         }
-      })
-      .finally(() => setIsLoading(false));
-
-    return () => {
-      source.cancel();
-    };
+      });
   }, [id]);
 
   const actionHandler = (e) => {
