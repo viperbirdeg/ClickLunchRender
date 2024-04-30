@@ -13,12 +13,14 @@ const getCafOrder = () => {
 const setCafOrderId = (id) => {
   const data = getCafOrder();
   if (!data) {
+    console.log("Mensaje 1 mdf")
     window.localStorage.setItem("cafOrderId", [id]);
   } else {
     if (data[0] === id) {
       console.log("IDK MTF")
       return
     }else{
+      console.log("Mensaje 2 mdf")
       window.localStorage.setItem("restriction", true);
     }
   }
