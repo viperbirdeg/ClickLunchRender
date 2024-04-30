@@ -16,6 +16,7 @@ const setCafOrderId = (id) => {
     window.localStorage.setItem("cafOrderId", [id]);
   } else {
     if (data[0] === id) {
+      console.log("IDK MTF")
       return
     }else{
       window.localStorage.setItem("restriction", true);
