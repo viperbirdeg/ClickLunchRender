@@ -33,7 +33,8 @@ const CartProducto = ({ id }) => {
         if (!axios.isCancel(error)) {
           setError(error.message);
         }
-      });
+      })
+      .finally(() => setIsLoading(false));
   }, [id]);
 
   const actionHandler = (e) => {
