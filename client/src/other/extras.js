@@ -12,7 +12,7 @@ const getCafOrder = () => {
 
 const setCafOrderId = (id) => {
   const data = getCafOrder();
-  if (data == []) {
+  if (!data) {
     window.localStorage.setItem("cafOrderId", [id]);
   } else {
     if (data[0] === id) {
