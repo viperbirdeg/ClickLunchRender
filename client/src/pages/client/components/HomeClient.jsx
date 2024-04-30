@@ -3,6 +3,8 @@ import React from "react";
 import { baseUrl } from "../../../other/extras.js";
 import Cafeteria from "./Cafeteria.jsx";
 
+import "../css/HomeClient.css"; // Import the CSS file
+
 const HomeClient = () => {
   const [data, setData] = React.useState([]);
   const [error, setError] = React.useState(null);
@@ -11,7 +13,6 @@ const HomeClient = () => {
     axios
       .get(`${baseUrl}/api/cafeteria/getAllCafeterias`, {})
       .then((response) => {
-        console.log(response);
         setData(response.data.message);
       })
       .catch((error) => {
@@ -21,16 +22,18 @@ const HomeClient = () => {
 
   return (
     <div>
-      <h1>Cafeterias disponibles</h1>
-      {error && <p>Error: {error}</p>}
-      {data.map((cafeteria) => (
-        <Cafeteria
-          key={cafeteria.id}
-          id={cafeteria.id}
-          nombre={cafeteria.nombre}
-          email={cafeteria.email}
-        />
-      ))}
+      <h1 className="text">Cafeterias disponibles</h1>
+      <div className="home-client">
+        {error && <p>Error: {error}</p>}
+        {data.map((cafeteria) => (
+          <Cafeteria
+            key={cafeteria.id}
+            id={cafeteria.id}
+            nombre={cafeteria.nombre}
+            email={cafeteria.email}
+          />
+        ))}
+      </div>
     </div>
   );
 };

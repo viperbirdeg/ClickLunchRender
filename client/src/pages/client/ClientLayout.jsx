@@ -7,38 +7,46 @@ import Footer from "./components/Footer";
 import { baseUrl } from "../../other/extras";
 import axios from "axios";
 
-const ClientLayout = () => {
+import "./css/ClientLayout.css"; // Import the CSS file
 
+const ClientLayout = () => {
   const navigation = useNavigate();
   const [data, setData] = React.useState([]);
 
-  React.useEffect(()=>{
-    axios.get(`${baseUrl}/api/usuario/authUser`,{
-      headers: {
-        Authorization: `${localStorage.getItem('token')}`
-      }
-    }).then((res)=>{
-      setData(res.data.message);
-      if(res.data.message.rol !== 'Cliente'){
+  React.useEffect(() => {
+    axios
+      .get(`${baseUrl}/api/usuario/authUser`, {
+        headers: {
+          Authorization: `${localStorage.getItem("token")}`,
+        },
+      })
+      .then((res) => {
+        setData(res.data.message);
+        if (res.data.message.rol !== "Cliente") {
+          navigation("/");
+        }
+      })
+      .catch((error) => {
         navigation("/");
-      };
-    }).catch((error)=>{
-      navigation('/');
-    });
-  },[navigation]);
+      });
+  }, [navigation]);
 
   return (
     <div className="client-layout-container">
-      <NavBar />
-      <Outlet />
-      <Footer 
-        key={data.id}
-        id={data.id}
-        nombre={data.nombre}
-        saldo={data.saldo}
-        email={data.email}
-        rol={data.rol}
-      />
+      <NavBar className="navbar" />
+      <div className="outlet">
+        <Outlet />
+      </div>
+      <div className="footer">
+        <Footer
+          key={data.id}
+          id={data.id}
+          nombre={data.nombre}
+          saldo={data.saldo}
+          email={data.email}
+          rol={data.rol}
+        />
+      </div>
     </div>
   );
 };

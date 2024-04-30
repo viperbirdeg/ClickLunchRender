@@ -3,6 +3,8 @@ import React from "react";
 import { useParams } from "react-router-dom";
 import { baseUrl, getCart } from "../../../other/extras";
 
+import '../css/Product.css'
+
 const Producto = () => {
   const props = useParams();
   const [data, setData] = React.useState({});
@@ -16,7 +18,6 @@ const Producto = () => {
         },
       })
       .then((response) => {
-        console.log(response);
         setData(response.data.message);
       })
       .catch((error) => {
@@ -27,13 +28,13 @@ const Producto = () => {
   const handleChange = (e) => {
     e.preventDefault();
     const cart = getCart();
-    console.log(cart);
     cart.push({ id: data.id });
+    alert('Producto agregado')
     return window.localStorage.setItem("cart", JSON.stringify(cart));
   };
 
   return (
-    <div>
+    <div className="producto">
       {error && <p>{error.message}</p>}
       <div className="id">id : {data.id}</div>
       <div className="nombre">Nombre : {data.nombre}</div>
@@ -47,10 +48,8 @@ const Producto = () => {
       <div className="tiempo-preparacion">
         Tiempo de preparacion : {data.tiempo_preparacion} min
       </div>
-      <button onClick={handleChange}>Add </button>
-      <button onClick={() => window.localStorage.setItem("cart", [])}>
-        Reload
-      </button>
+      <button onClick={handleChange}>Add to cart</button>
+      
     </div>
   );
 };

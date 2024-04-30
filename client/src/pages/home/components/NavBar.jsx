@@ -6,7 +6,9 @@ import { NavLink } from "react-router-dom";
 const NavBar = () => {
   return (
     <nav className="home-navbar">
-      <NavLink to='/' className="home-logotipo">CLICK LUNCH</NavLink>
+      <NavLink to="/" className="home-logotipo">
+        CLICK LUNCH
+      </NavLink>
       <ul>
         <li>
           <NavLink to="/" activeClassName="active">

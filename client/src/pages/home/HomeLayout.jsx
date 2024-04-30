@@ -12,24 +12,25 @@ const HomeLayout = () => {
   const navigation = useNavigate();
   React.useEffect(() => {
     const token = window.localStorage.getItem("token");
-
-    if (!token) return;
-    axios
-      .get(`${baseUrl}/api/usuario/authUser`, {
-        headers: {
-          Authorization: `${localStorage.getItem("token")}`,
-        },
-      })
-      .then((res) => {
-        if (res.data.message.rol === "Cliente") {
-          navigation("/client");
-        } else if (res.data.message.rol === "Cafeteria") {
-          navigation("/cafe");
-        }
-      })
-      .catch((error) => {
-        //navigation('/');
-      });
+    if (!token) {
+      return;
+    } else {
+      axios
+        .get(`${baseUrl}/api/usuario/authUser`, {
+          headers: {
+            Authorization: `${localStorage.getItem("token")}`,
+          },
+        })
+        .then((res) => {
+          if (res.data.message.rol === "Cliente") {
+            navigation("/client");
+          } else if (res.data.message.rol === "Cafeteria") {
+            navigation("/cafe");
+          }
+          window.localStorage.removeItem("token");
+        })
+        .catch((error) => {});
+    }
   }, [navigation]);
 
   return (

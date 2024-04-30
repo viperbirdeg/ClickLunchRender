@@ -1,11 +1,9 @@
-import React from 'react'
+import React from "react";
 
-const text = '<3';
+const text = "<3";
 
 const Footer = () => {
-  return (
-    <div className='footer-container'> Made by Hi-Stern {text}</div>
-  )
-}
+  return <div className="footer-container"> Made by Hi-Stern {text}</div>;
+};
 
-export default Footer
+export default Footer;

@@ -1,0 +1,28 @@
+.cafeteria {
+  width: 300px;
+  background-color: white;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  margin: 1rem;
+  padding: 1rem;
+  text-align: center;
+}
+
+.cafeteria div {
+  margin: 0;
+  margin-bottom: 0.5rem;
+}
+
+.cafeteria a {
+  display: block;
+  background-color: #333;
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  text-decoration: none;
+  margin-top: 1rem;
+}
+
+.cafeteria a:hover {
+  background-color: #555;
+}

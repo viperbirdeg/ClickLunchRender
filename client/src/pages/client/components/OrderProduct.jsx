@@ -5,11 +5,10 @@ import { useNavigate } from "react-router-dom";
 
 import "../css/CartProducto.css"; // Import the CSS file
 
-const CartProducto = ({ id }) => {
+const OrderProduct = ({ id }) => {
   const [data, setData] = useState(null);
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
-  const navigate = useNavigate();
 
   useEffect(() => {
     const source = axios.CancelToken.source();
@@ -36,14 +35,6 @@ const CartProducto = ({ id }) => {
     };
   }, [id]);
 
-  const actionHandler = (e) => {
-    e.preventDefault();
-    const cart = getCart();
-    const newCart = cart.filter((item) => item.id !== id);
-    window.localStorage.setItem("cart", JSON.stringify(newCart));
-    window.location.reload();
-  };
-
   return (
     <div className="cart-producto">
       {isLoading && <p>Loading...</p>}
@@ -64,10 +55,8 @@ const CartProducto = ({ id }) => {
           </div>
         </div>
       )}
-
-      <button onClick={actionHandler}>Eliminar</button>
     </div>
   );
 };
 
-export default CartProducto;
+export default OrderProduct;

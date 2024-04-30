@@ -18,6 +18,7 @@ import Cart from "../pages/client/components/Cart.jsx";
 import CafeLayout from "../pages/cafe/CafeLayout.jsx";
 import HomeCafe from "../pages/cafe/components/HomeCafe.jsx";
 import Orders from "../pages/cafe/components/Orders.jsx";
+import ClientOrders from './../pages/client/components/Orders';
 
 //?Client components
 
@@ -40,6 +41,7 @@ const Router = () => {
         <Route path="products/:id" element={<Productos/>}/>
         <Route path="product/:id" element={<Producto/>}/>
         <Route path="cart" element={<Cart/>}/>
+        <Route path="orders" element={<ClientOrders/>}/>
       </Route>
       <Route path="/cafe" element={<CafeLayout/>}>
         <Route index path="" element={<HomeCafe/>} />

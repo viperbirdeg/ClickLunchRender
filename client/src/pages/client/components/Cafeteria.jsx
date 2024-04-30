@@ -1,14 +1,18 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
+import "../css/Cafeteria.css"; // Import the CSS file
+
 const Cafeteria = ({ id, nombre, email }) => {
-  const route = `products/${id}`
+  const route = `products/${id}`;
   return (
-    <div>
-      <div>{id}</div>
-      <div>{nombre}</div>
-      <div>{email}</div>
-      <Link to={route} >Seleccionar</Link>
+    <div className="cafeteria">
+      <div>ID : {id}</div>
+      <div>Nombre : {nombre}</div>
+      <div>Contacto : {email}</div>
+      <Link to={route} className="cafeteria-link">
+        Seleccionar
+      </Link>
     </div>
   );
 };

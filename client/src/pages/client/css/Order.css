@@ -1,0 +1,38 @@
+.order {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  width: 100%;
+}
+
+.order-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.order-details {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.order-details li {
+  margin-bottom: 0.5rem;
+}
+
+.order-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.order-actions button {
+  margin-left: 1rem;
+}
+
+.order-product {
+  margin-bottom: 1rem;
+}
