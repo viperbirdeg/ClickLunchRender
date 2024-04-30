@@ -63,7 +63,8 @@ const Login = () => {
             }
           })
           .catch((error) => {
-            console.log(error.response.data.message)
+            console.log(error)
+            console.log(error.response.data)
             return setError(error.response.data.message);
           });
       } catch (error) {

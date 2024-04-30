@@ -103,12 +103,7 @@ const postLogin = async (req, res) => {
     const datos = validacionResult.rows[0];
     if (await bcrypt.compare(data.password, datos.token)) {
       //Generar la sesion
-      if (datos.rol === "Cafeteria") {
-        datingins = await client.query(
-          'SELECT * FROM clicklunch."Cafeteria" WHERE nombre = $1',
-          [datos.nombre]
-        );
-      }
+
       try {
         const information = { id: datos.id, rol: datos.rol };
         const jwtConstructor = new SignJWT(information);
@@ -119,12 +114,24 @@ const postLogin = async (req, res) => {
           .setExpirationTime("1h")
           .sign(encoder.encode(process.env.JWT_PRIVATE_KEY));
 
-        return res.status(200).json({
-          token: jwt,
-          id: datos.id,
-          rol: datos.rol,
-          idCafe: datingins.rows[0].id,
-        });
+        if (datos.rol === "Cafeteria") {
+          datingins = await client.query(
+            'SELECT * FROM clicklunch."Cafeteria" WHERE nombre = $1',
+            [datos.nombre]
+          );
+          return res.status(200).json({
+            token: jwt,
+            id: datos.id,
+            rol: datos.rol,
+            idCafe: datingins.rows[0].id,
+          });
+        } else {
+          return res.status(200).json({
+            token: jwt,
+            id: datos.id,
+            rol: datos.rol,
+          });
+        }
       } catch (err) {
         return res.sendStatus(401).json({ message: err.message });
       }
