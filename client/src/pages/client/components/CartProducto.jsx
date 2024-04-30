@@ -33,7 +33,7 @@ const CartProducto = ({ id }) => {
     return () => {
       source.cancel();
     };
-  }, [id,data]);
+  }, [id]);
 
   const actionHandler = (e) => {
     e.preventDefault();
