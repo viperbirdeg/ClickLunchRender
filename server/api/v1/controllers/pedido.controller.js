@@ -80,31 +80,18 @@ const addNewPedido = async (req, res) => {
      * ? }wd
      * */
 
+    
     await client.query("BEGIN");
+    
+    const now = new Date();
     const hora = now.toTimeString().split(" ")[0];
+    
     const fecha = now.toISOString().split("T")[0];
 
-    const idsAlimentos = req.body.data.cart;
+
+    const idsAlimentos = JSON.parse(req.body.data.cart);
     const idUsuario = req.body.data.idUsuario;
     const idCafe = req.body.data.idCafe;
-    console.log(idsAlimentos);
-
-    const results = await datosAlimento(idsAlimentos[0]);
-
-    console.log(results);
-
-    for (let i = 0; i < idsAlimentos.length; i++) {
-      const result = await datosAliemento(idsAlimentos[i]);
-      console.log(result);
-      if (results.rows[0].id_cafeteria != result.rows[0].id_cafeteria) {
-        return res
-          .status(400)
-          .json({
-            message:
-              "No se pueden agregar dos alimentos de diferente cafeteria",
-          });
-      }
-    }
 
     const encabezadoResult = await client.query(
       'INSERT INTO clicklunch."Encabezado"(fecha_pedido, hora) VALUES ($1, $2) RETURNING id',
@@ -120,12 +107,15 @@ const addNewPedido = async (req, res) => {
 
     const idPedido = pedidoResult.rows[0].id;
 
-    const result = await idsAlimentos.map(async (id, i) => {
+    let result = []
+
+    for (let i = 0; i < idsAlimentos.length; i++) {
       const alimentosResult = await client.query(
-        'INSERT INTO clicklunch."Alimento"(id_pedido, id_alimento) VALUES ($1, $2) ',
-        [idPedido, id]
+        'INSERT INTO clicklunch."pedido_alimento"(id_pedido, id_alimento) VALUES ($1, $2) ',
+        [idPedido, idsAlimentos[i].id]
       );
-    });
+      result.push('a');
+    }
 
     client.query("COMMIT");
 
@@ -140,7 +130,7 @@ const addNewPedido = async (req, res) => {
     client.query("ROLLBACK");
     return res.status(500).json({
       message: "Ocurrio un error inesperado en el servidor",
-      error: error,
+      error: error.message,
     });
   } finally {
     client.release();
@@ -172,7 +162,7 @@ const getPedidosCliente = async (req, res) => {
   } catch (error) {
     return res.status(500).json({
       message: "Ocurrio un error inesperado en el servidor",
-      error: error,
+      error: error.message,
     });
   } finally {
     client.release();

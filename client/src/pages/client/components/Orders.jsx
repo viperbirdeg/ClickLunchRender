@@ -36,6 +36,7 @@ const Orders = () => {
               fecha_pedido={item.fecha_pedido}
               hora={item.hora}
               id_cafeteria={item.id_cafeteria}
+              estado={item.estado}
             />
           ))
         ) : (
