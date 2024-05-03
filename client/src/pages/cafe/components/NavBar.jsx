@@ -17,7 +17,7 @@ const NavBar = () => {
 
   return (
     <div>
-      <p>NavBar</p>
+      <p><img src='../../../imagenes/logo-removebg-preview.png' alt="none" /></p>
       <NavLink to="orders">Pedidos</NavLink>
       <NavLink to='addProduct'>Agregar Alimento</NavLink>
       <button onClick={handleClick}>LogOut</button>

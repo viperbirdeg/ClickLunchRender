@@ -67,12 +67,12 @@ const NewProduct = () => {
               alert("Alimento correctamente agregado");
             })
             .catch((error) => {
-              alert("No se ha podido completar la solicitud");
+              alert("Ocurrio un error inesperado en el servidor");
             });
-        } else return alert("No se ha podido completar la solicitud");
+        } else return alert("La imagen no se cargado la imagen");
       })
       .catch((error) => {
-        alert("No se ha podido completar la solicitud");
+        alert("No se ha podido añadir la imagen");
       });
   };
   return (
