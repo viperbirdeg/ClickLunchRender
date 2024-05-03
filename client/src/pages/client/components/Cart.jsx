@@ -7,9 +7,8 @@ import { baseUrl } from "../../../other/extras";
 import { useNavigate } from "react-router-dom";
 
 const Cart = () => {
-  
   const [data, setData] = React.useState([]);
-  const [error, setError]  = React.useState();
+  const [error, setError] = React.useState();
   const navigation = useNavigate();
 
   React.useEffect(() => {
@@ -27,23 +26,27 @@ const Cart = () => {
         "No puede realizar pedidos a dos cafeterias distintas a la vez"
       );
     } else {
-      alert("No hay");
-      const cart = data.map((item) => {return({id : item.id})});
-      console.log(cart);
-      axios.post(`${baseUrl}/api/pedido/addNewPedido`, {
-        data : {
-          idUsuario : window.localStorage.getItem("id"),
-          idCafe : window.localStorage.getItem("idCafeteria"),
-          cart : JSON.stringify(cart)
-        }
-      }).then((res)=>{
-        console.log(res.data);
-        window.localStorage.removeItem('cart');
-        window.localStorage.removeItem('cafOrderId');
-        navigation('/client/orders');
-      }).catch((error)=>{
-        setError('idk ', error.message);
+      const cart = data.map((item) => {
+        return { id: item.id };
       });
+      console.log(cart);
+      axios
+        .post(`${baseUrl}/api/pedido/addNewPedido`, {
+          data: {
+            idUsuario: window.localStorage.getItem("id"),
+            idCafe: window.localStorage.getItem("idCafeteria"),
+            cart: JSON.stringify(cart),
+          },
+        })
+        .then((res) => {
+          console.log(res.data);
+          window.localStorage.removeItem("cart");
+          window.localStorage.removeItem("cafOrderId");
+          navigation("/client/orders");
+        })
+        .catch((error) => {
+          setError("idk ", error.message);
+        });
     }
   };
   return (

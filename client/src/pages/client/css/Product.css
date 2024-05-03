@@ -53,7 +53,7 @@
 }
 
 .producto button {
-  background-color: #333;
+  background-color: #333;   
   color: white;
   padding: 0.5rem 1rem;
   border-radius: 5px;
@@ -67,4 +67,10 @@
 .producto button:hover {
   transform: translateY(-3px);
   background-color: #555;
+}
+
+.img-container img {
+  width: 100%;
+  height: auto;
+  border-radius: 5px 5px 0 0;
 }

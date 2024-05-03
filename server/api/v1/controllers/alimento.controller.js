@@ -12,13 +12,22 @@ const addNewAlimento = async (req, res) => {
     const costo = data.costo;
     const disponibilidad = data.disponibilidad;
     const cafId = data.idCaf || 2;
+    const url = data.url;
 
     //*Iniciar transacción
     await client.query("BEGIN");
 
     const dataResult = await client.query(
-      `INSERT INTO clicklunch."Alimento"(nombre,descripcion,tiempo_preparacion,costo,disponibilidad,id_cafeteria) VALUES ($1,$2,$3,$4,$5,$6) RETURNING id`,
-      [nombre, descripcion, tiempopreparacion, costo, disponibilidad, cafId]
+      `INSERT INTO clicklunch."Alimento"(nombre,descripcion,tiempo_preparacion,costo,disponibilidad,id_cafeteria,url) VALUES ($1,$2,$3,$4,$5,$6,$7) RETURNING id`,
+      [
+        nombre,
+        descripcion,
+        tiempopreparacion,
+        costo,
+        disponibilidad,
+        cafId,
+        url,
+      ]
     );
 
     //*Terminar transacción
@@ -33,12 +42,10 @@ const addNewAlimento = async (req, res) => {
   } catch (error) {
     //*Manejar errores cancelando operacion
     await client.query("ROLLBACK");
-    return res
-      .status(500)
-      .json({
-        message: "No se ha podido agregar el almento",
-        error: error.message,
-      });
+    return res.status(500).json({
+      message: "No se ha podido agregar el almento",
+      error: error.message,
+    });
   } finally {
     //*Liberar la bd
     client.release();
@@ -76,7 +83,7 @@ const getAllAlimentos = async (req, res) => {
     client.release();
   }
 };
-const getOneAlimento = async (req,res) => {
+const getOneAlimento = async (req, res) => {
   //*Conexion con la bd
   const client = await pool.connect();
 
@@ -260,5 +267,5 @@ module.exports = {
   deleteOneAlimento,
   updateOneAlimento,
   getAllComentarios,
-  getOneAlimento
+  getOneAlimento,
 };

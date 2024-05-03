@@ -10,6 +10,9 @@ const NewProduct = () => {
     costo: 0,
     disponibilidad: 0,
   });
+  const [file, setFile] = React.useState(null);
+  const [imagina, setImagina] = React.useState(null);
+  const [res, setRes] = React.useState(null);
 
   const handleChange = (e) => {
     setCredentials({
@@ -18,30 +21,78 @@ const NewProduct = () => {
     });
   };
 
+  React.useEffect(() => {
+    if (imagina) {
+      setRes(null);
+    }
+  }, [imagina]);
+
+  const handleSelectFile = (e) => {
+    if (e.target.files[0]) {
+      const reader = new FileReader();
+      reader.onload = function (e) {
+        setImagina(e.target.result);
+      };
+      reader.readAsDataURL(e.target.files[0]);
+      setFile(e.target.files[0]);
+    } else {
+      setImagina(null);
+      setFile(null);
+      setRes(null);
+    }
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    alert(
-      `Nombre : ${credentials.nombre} , descripcion : ${credentials.descripcion} , tiempopreparacion : ${credentials.tiempopreparacion} , costo : ${credentials.costo} , disponibilidad : ${credentials.disponibilidad}`
-    );
-    axios.post(`${baseUrl}/api/alimento/addAlimento`, {
-      data:{
-        nombre: credentials.nombre,
-        descripcion: credentials.descripcion,
-        tiempopreparacion: credentials.tiempopreparacion,
-        costo: credentials.costo,
-        disponibilidad: credentials.disponibilidad,
-        idCaf : window.localStorage.getItem('idCafe')
-      }
-    }).then((response)=>{
-      console.log(response.data)
-    }).catch((error)=>{
-      console.log(error)
-    });
+
+    const data = new FormData();
+    data.append("my_file", file);
+    axios
+      .post(`${baseUrl}/upload`, data)
+      .then((res) => {
+        if (res.data.secure_url) {
+          axios
+            .post(`${baseUrl}/api/alimento/addAlimento`, {
+              data: {
+                nombre: credentials.nombre,
+                descripcion: credentials.descripcion,
+                tiempopreparacion: credentials.tiempopreparacion,
+                costo: credentials.costo,
+                disponibilidad: credentials.disponibilidad,
+                idCaf: window.localStorage.getItem("idCafe"),
+                url: res.data.secure_url,
+              },
+            })
+            .then((response) => {
+              alert("Alimento correctamente agregado");
+            })
+            .catch((error) => {
+              alert("No se ha podido completar la solicitud");
+            });
+        } else return alert("No se ha podido completar la solicitud");
+      })
+      .catch((error) => {
+        alert("No se ha podido completar la solicitud");
+      });
   };
   return (
     <div>
-      NewProduct
+      Agregar aliment
       <form onSubmit={handleSubmit}>
+        <div className="input-form-container">
+          <input
+            id="file"
+            type="file"
+            accept="image/png, image/jpeg, image/jpg"
+            onChange={handleSelectFile}
+            multiple={false}
+          />
+          {imagina && (
+            <div>
+              <img src={imagina} alt="" />
+            </div>
+          )}
+        </div>
         <div className="input-form-contaienr">
           Nombre :{" "}
           <input

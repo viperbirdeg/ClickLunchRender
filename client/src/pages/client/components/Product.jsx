@@ -3,7 +3,7 @@ import React from "react";
 import { useParams } from "react-router-dom";
 import { baseUrl, getCart } from "../../../other/extras";
 
-import '../css/Product.css'
+import "../css/Product.css";
 
 const Producto = () => {
   const props = useParams();
@@ -29,13 +29,16 @@ const Producto = () => {
     e.preventDefault();
     const cart = getCart();
     cart.push({ id: data.id });
-    alert('Producto agregado')
+    alert("Producto agregado");
     return window.localStorage.setItem("cart", JSON.stringify(cart));
   };
 
   return (
     <div className="producto">
       {error && <p>{error.message}</p>}
+      <div className="img-container">
+        <img src={data.url} alt="Loading..." />
+      </div>
       <div className="id">id : {data.id}</div>
       <div className="nombre">Nombre : {data.nombre}</div>
       <div className="descripcion">Descripcion : {data.descripcion}</div>
@@ -44,12 +47,11 @@ const Producto = () => {
         Disponibilidad Aproximada : {data.disponibilidad}
       </div>
       <div className="estado">{data.estado}</div>
-      <div className="id-Cafeteria">ID - Cafeteria{data.id_cafeteria}</div>
+      <div className="id-Cafeteria">ID - Cafeteria : {data.id_cafeteria}</div>
       <div className="tiempo-preparacion">
         Tiempo de preparacion : {data.tiempo_preparacion} min
       </div>
       <button onClick={handleChange}>Add to cart</button>
-      
     </div>
   );
 };

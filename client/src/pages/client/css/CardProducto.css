@@ -33,3 +33,8 @@
   font-size: 1.1rem;
   font-weight: bold;
 } 
+.card-producto img {
+  width: 100%;
+  height: auto;
+  border-radius: 5px 5px 0 0;
+}
