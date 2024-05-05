@@ -29,13 +29,17 @@ const Cart = () => {
       const cart = data.map((item) => {
         return { id: item.id };
       });
-      console.log(cart);
+      const now = new Date();
+      const fecha = now.toISOString().split("T")[0];
+      const hora = now.toTimeString().split(" ")[0];
       axios
         .post(`${baseUrl}/api/pedido/addNewPedido`, {
           data: {
             idUsuario: window.localStorage.getItem("id"),
             idCafe: window.localStorage.getItem("idCafeteria"),
             cart: JSON.stringify(cart),
+            fecha : fecha,
+            hora : hora,
           },
         })
         .then((res) => {

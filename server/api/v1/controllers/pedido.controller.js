@@ -69,8 +69,8 @@ const addNewPedido = async (req, res) => {
     /**
      * ? {
      * !Encabezado
-     * ? fechapedido : no pide
-     * ? hora : no pide
+     * ? fechapedido : new Date().toISOString();
+     * ? hora : new Date().toTimeString();
      * ! Usuario
      * ? Id usuario : no pide
      * ! pedido
@@ -84,14 +84,15 @@ const addNewPedido = async (req, res) => {
     await client.query("BEGIN");
     
     const now = new Date();
-    const hora = now.toTimeString().split(" ")[0];
-    
-    const fecha = now.toISOString().split("T")[0];
+    //const hora = now.toTimeString().split(" ")[0];
+    //const fecha = now.toISOString().split("T")[0];
 
 
     const idsAlimentos = JSON.parse(req.body.data.cart);
     const idUsuario = req.body.data.idUsuario;
     const idCafe = req.body.data.idCafe;
+    const fecha = req.body.data.fecha;
+    const hora = req.body.data.hora;
 
     const encabezadoResult = await client.query(
       'INSERT INTO clicklunch."Encabezado"(fecha_pedido, hora) VALUES ($1, $2) RETURNING id',
