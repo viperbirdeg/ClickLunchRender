@@ -8,6 +8,14 @@
   box-sizing: border-box;
 }
 
+.font{
+  font-family: "Poppins", sans-serif;
+}
+
+.font::placeholder{
+  font-family: "Poppins", sans-serif;
+}
+
 /*?CSS RELATED TO HOME LAYOUT*/
 
 .home-layout-container {
@@ -76,7 +84,6 @@
 
 .home-buttons-container li:first-child {
   width: 55%;
-  height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -121,6 +128,13 @@
   text-align: center;
   border-bottom: 2px solid #f99a56;
   color: #f99a56;
+}
+
+.active_btn{
+  border: 1px solid #00000000;
+  background: #ee6107;
+  color: white;
+  box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.7);
 }
 
 /*?CSS RELATED TO ABOUT US COMPONENT*/

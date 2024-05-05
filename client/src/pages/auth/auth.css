@@ -38,11 +38,12 @@
   align-items: center;
   justify-content: center;
   background-color: #ffffff;
-
+  gap: 5%;
 }
 
-.login-text{
-
+.login-text, .register-text{
+  font-size: 3rem;
+  border-bottom: 2px solid #f99a56;
 }
 
 .login-logo-img{
@@ -53,23 +54,98 @@
 
 /*! Start related to login form */
 .login-form{
-
+  width: 60%;
+  display: flex;
+  flex-direction: column;
+  height: 60%;
+  justify-content: space-evenly;
+  align-items: center;
+  gap: 1%;
 }
 
 .login-form-input-container{
-
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  gap: 3%;
+  padding: 3.3%;
+  background: #F1F1F1;
+  box-shadow: 2px 2px 5px #808080;
+  border-radius: 25px;
+  -webkit-border-radius: 25px;
+  -moz-border-radius: 25px;
+  -ms-border-radius: 25px;
+  -o-border-radius: 25px;
+  height: 17%;
+  width: 80%;
+  position: relative;
+}
+.register-form-input-container{
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  gap: 3%;
+  background: #F1F1F1;
+  box-shadow: 2px 2px 5px #808080;
+  border-radius: 25px;
+  -webkit-border-radius: 25px;
+  -moz-border-radius: 25px;
+  -ms-border-radius: 25px;
+  -o-border-radius: 25px;
+  height: 17%;
+  width: 80%;
+  position: relative;
+  padding: 1.5%;
 }
 
-.login-form-input-email{
-
+.login-form-input-container:focus-within, .register-form-input-container:focus-within{
+  background: white;
 }
 
-.login-form-input-password{
-
+.login-form-input-container svg, .register-form-input-container svg{
+  height: 100%;
+  fill: #EF6106;
 }
 
-.login-button-submit{
+.login-form-input-email, .login-form-input-password, .register-form-input-user, .register-form-input-email, .register-form-input-password{
+  background: none;
+  border: none;
+  outline: none;
+  font-size: 1.1rem;
+  width: 87%;
+  height: 100%;
+  position: absolute;
+  right: 0;
+  padding-right: 5%;
+}
 
+.login-button-submit, .register-button-submit{
+  padding: 3%;
+  border-radius: 20px;
+  -webkit-border-radius: 20px;
+  -moz-border-radius: 20px;
+  -ms-border-radius: 20px;
+  -o-border-radius: 20px;
+  padding-left: 10%;
+  padding-right: 10%;
+  border: none;
+  cursor: pointer;
+  background: #EF6106;
+  color: white;
+  font-size: 1.2rem;
+  border: 3px solid #EF6106;
+}
+
+.login-button-submit:hover, .register-button-submit:hover{
+  transition: 0.3s;
+  -webkit-transition: 0.3s;
+  -moz-transition: 0.3s;
+  -ms-transition: 0.3s;
+  -o-transition: 0.3s;
+  background: white;
+  border: 3px solid #f99a56;
+  color: #EF6106;
+  font-weight: bold;
 }
 
 .login-submit{
@@ -79,7 +155,64 @@
 /*! End related to login form*/
 
 .register-link{
-
+  display: flex;
+  gap: 1%;
+  width: 100%;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
 }
 
+.register-link_txt{
+  color: #f99a56;
+}
+
+.register-link_txt:hover{
+  transition: 0.2s;
+  -webkit-transition: 0.2s;
+  -moz-transition: 0.2s;
+  -ms-transition: 0.2s;
+  -o-transition: 0.2s;
+  color: #EF6106;
+  font-weight: bold;
+}
 /** Related to register component*/
+.reg-img-container{
+  position: absolute;
+  right: 0;
+  top: 0;
+  height: 40%;
+}
+.reg-img-container img{
+  height: 100%;
+  width: 100%;
+}
+.register-form-container{
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 8%;
+}
+.register-container{
+  height: 90%;
+  width: 100%;
+  display: flex;
+  position: relative;
+  justify-content: center;
+  align-items: center;
+}
+.register-form{
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 50%;
+  height: 60%;
+  justify-content: center;
+  align-items: center;
+}
+.d-none{
+  display: none;
+}
