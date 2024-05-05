@@ -34,17 +34,21 @@ const NavBar = () => {
           <li>
             <NavLink
               to="/auth"
-              activeClassName="active"
-              className="home-login-button"
-            >
+              className={({ isActive, isPending }) =>
+                [isActive ? "active_btn" : ""
+                ].join("home-login-button")
+              }
+            end>
               Iniciar Sesión
             </NavLink>
           </li>
           <li>
             <NavLink
               to="/auth/register"
-              activeClassName="active"
-              className="home-register-button"
+              className={({ isActive, isPending }) =>
+                [isActive ? "active_btn" : ""
+                ].join("home-register-button")
+              }
             >
               Registrarse
             </NavLink>

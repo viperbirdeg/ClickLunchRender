@@ -113,7 +113,7 @@ const Login = () => {
         </form>
         <span className="register-link">
           ¿No tienes cuenta?
-          <NavLink to="/Auth/Register" className="register-link_txt">Registrate</NavLink>
+          <NavLink to="/auth/register" className="register-link_txt">Registrate</NavLink>
         </span>
         {/*
         <div className="">
