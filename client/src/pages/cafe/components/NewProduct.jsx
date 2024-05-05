@@ -1,6 +1,7 @@
 import React from "react";
 import { baseUrl } from "../../../other/extras";
 import axios from "axios";
+import '../css/NewProduct.css'
 
 const NewProduct = () => {
   const [credentials, setCredentials] = React.useState({
@@ -69,7 +70,7 @@ const NewProduct = () => {
             .catch((error) => {
               alert("Ocurrio un error inesperado en el servidor");
             });
-        } else return alert("La imagen no se cargado la imagen");
+        } else return alert("No se cargo la imagen");
       })
       .catch((error) => {
         alert("No se ha podido añadir la imagen");
@@ -88,7 +89,7 @@ const NewProduct = () => {
             multiple={false}
           />
           {imagina && (
-            <div>
+            <div className="img-container">
               <img src={imagina} alt="" />
             </div>
           )}

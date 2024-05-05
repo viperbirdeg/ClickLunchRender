@@ -1,5 +1,6 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
+import logo from '../../../imagenes/logo-removebg-preview.png'
 
 const NavBar = () => {
 
@@ -17,7 +18,7 @@ const NavBar = () => {
 
   return (
     <div>
-      <p><img src='../../../imagenes/logo-removebg-preview.png' alt="none" /></p>
+      <p><img src={logo} alt="none" /></p>
       <NavLink to="orders">Pedidos</NavLink>
       <NavLink to='addProduct'>Agregar Alimento</NavLink>
       <button onClick={handleClick}>LogOut</button>

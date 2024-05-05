@@ -113,8 +113,8 @@ const Register = () => {
       <div className="img-container"></div>
       <div className="register-form-container">
         <span className="titlecontainer">Register</span>
-        <span>{usertype}</span>
-        <button onClick={handleUsertype}>Register</button>
+        {/*<span>{usertype}</span>
+        <button onClick={handleUsertype}>Register</button>*/}
         <form className="register-form" onSubmit={handleSubmit}>
           {error && <div className="login-error">{error.message}</div>}
           <div className="register-form-input-container">
