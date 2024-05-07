@@ -11,7 +11,6 @@ const Cart = () => {
   const [error, setError] = React.useState();
   const [total, setTotal] = React.useState(0);
   const navigation = useNavigate();
-  const carti = window.localStorage.getItem('totalCart');
 
   React.useEffect(() => {
     const storedCart = window.localStorage.getItem("cart");
@@ -19,22 +18,11 @@ const Cart = () => {
     if (storedCart) {
       setData(JSON.parse(storedCart));
     }
-    setTotal(window.localStorage.getItem("totalCart")); 
+    setTotal(window.localStorage.getItem("totalCart"));
   }, []);
+  React.useEffect(() =>{
 
-  React.useEffect(() => {
-    const storedCart = window.localStorage.getItem("cart");
-    if (storedCart) {
-      setData(JSON.parse(storedCart));
-    }
   }, []);
-
-  React.useEffect(() => {
-    const totalCart = window.localStorage.getItem("totalCart");
-    if (totalCart) {
-      setTotal(parseInt(totalCart));
-    }
-  }, [carti]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -56,8 +44,8 @@ const Cart = () => {
             idUsuario: window.localStorage.getItem("id"),
             idCafe: window.localStorage.getItem("idCafe"),
             cart: JSON.stringify(cart),
-            fecha : fecha,
-            hora : hora,
+            fecha: fecha,
+            hora: hora,
           },
         })
         .then((res) => {
