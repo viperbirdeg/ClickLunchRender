@@ -18,13 +18,13 @@ const NavBar = () => {
     <nav className="navbar">
       <p>NavBar</p>
       <NavLink to='' end>Inicio</NavLink>
-      <NavLink to="/client/orders" className="navbar-link" end>
+      <NavLink to="/client/orders" className="navbar-link" end='true' >
         Pedidos
       </NavLink>
-      <NavLink to="/client/cart" className="navbar-link" end>
+      <NavLink to="/client/cart" className="navbar-link" end='true'>
         carrito
       </NavLink>
-      <button onClick={handleClick} className="navbar-button" end >
+      <button onClick={handleClick} className="navbar-button" end='true' >
         LogOut
       </button>
     </nav>

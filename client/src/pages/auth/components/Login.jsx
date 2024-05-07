@@ -64,10 +64,11 @@ const Login = () => {
             }
           })
           .catch((error) => {
-            return setError(error.message || error.response.data.message);
+            console.log(error)
+            return setError( error.response.data.message || error.message );
           });
       } catch (error) {
-        return setError("Invalid login");
+        return setError("Registro invalido");
       }
     } else {
       return alert("Ingresa el captcha");

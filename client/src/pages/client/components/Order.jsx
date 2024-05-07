@@ -3,10 +3,10 @@ import React from "react";
 import { baseUrl } from "../../../other/extras";
 import OrderProduct from "./OrderProduct";
 
-import "../css/Order.css"; 
+import "../css/Order.css";
 
-const Order = ({ id, fecha_pedido, hora, id_cafeteria, estado }) => {
-  fecha_pedido = (fecha_pedido.split('T'))[0];
+const Order = ({ id, fecha_pedido, hora, id_cafeteria, estado, costo_total }) => {
+  fecha_pedido = fecha_pedido.split("T")[0];
   const [data, setData] = React.useState();
   const handleState = (e) => {
     axios
@@ -39,6 +39,7 @@ const Order = ({ id, fecha_pedido, hora, id_cafeteria, estado }) => {
         <li>hora : {hora}</li>
         <li>ID cafeteria : {id_cafeteria}</li>
         <li>estado : {estado}</li>
+        <li>costo : ${costo_total}</li>
       </div>
       <div className="order-details">
         <button onClick={handleState}>Detalles</button>
@@ -48,9 +49,11 @@ const Order = ({ id, fecha_pedido, hora, id_cafeteria, estado }) => {
           <h2>Detalle del pedido</h2>
           {data.map((item, key) => {
             return (
-              <OrderProduct className="order-product" 
-              key={key}
-              id={item.id_alimento} />
+              <OrderProduct
+                className="order-product"
+                key={key}
+                id={item.id_alimento}
+              />
             );
           })}
           <button onClick={handleDelete}>ocultar</button>

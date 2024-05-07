@@ -80,19 +80,48 @@ const addNewPedido = async (req, res) => {
      * ? }wd
      * */
 
-    
     await client.query("BEGIN");
-    
+
     const now = new Date();
     //const hora = now.toTimeString().split(" ")[0];
     //const fecha = now.toISOString().split("T")[0];
-
 
     const idsAlimentos = JSON.parse(req.body.data.cart);
     const idUsuario = req.body.data.idUsuario;
     const idCafe = req.body.data.idCafe;
     const fecha = req.body.data.fecha;
     const hora = req.body.data.hora;
+
+    const saldoResult = await client.query(
+      'SELECT saldo FROM clicklunch."UsuarioInfo" WHERE id = $1',
+      [idUsuario]
+    );
+
+    console.log('saldo:' , saldoResult.rows[0].saldo);
+
+    var preciototal = 0;
+    for (let i = 0; i < idsAlimentos.length; i++) {
+      const alimentosResult = await client.query(
+        'SELECT costo FROM clicklunch."Alimentos_vw" WHERE id = $1',
+        [idsAlimentos[i].id]
+      );
+      preciototal += alimentosResult.rows[0].costo;
+      console.log('costo' ,alimentosResult.rows[0].costo);
+      console.log('preciototal', preciototal)
+    }
+
+    if (saldoResult.rows[0].saldo < preciototal) {
+      return res.status(403).json({
+        message: "Saldo insuficiente",
+      });
+    }
+
+    const newSaldo = parseInt(saldoResult.rows[0].saldo) - parseInt(preciototal);
+    
+    const updateResult = await client.query(
+      `UPDATE clicklunch."Usuario" SET saldo = $1 WHERE id = $2`,
+      [newSaldo, idUsuario]
+    );
 
     const encabezadoResult = await client.query(
       'INSERT INTO clicklunch."Encabezado"(fecha_pedido, hora) VALUES ($1, $2) RETURNING id',
@@ -102,20 +131,20 @@ const addNewPedido = async (req, res) => {
     const idEncabezado = encabezadoResult.rows[0].id;
 
     const pedidoResult = await client.query(
-      'INSERT INTO clicklunch."Pedido"(id_encabezado, id_usuario, id_cafeteria) VALUES ($1, $2, $3) RETURNING id',
-      [idEncabezado, idUsuario, idCafe]
+      'INSERT INTO clicklunch."Pedido"(id_encabezado, id_usuario, id_cafeteria, costo_total) VALUES ($1, $2, $3, $4) RETURNING id',
+      [idEncabezado, idUsuario, idCafe, preciototal]
     );
 
     const idPedido = pedidoResult.rows[0].id;
 
-    let result = []
+    let result = [];
 
     for (let i = 0; i < idsAlimentos.length; i++) {
       const alimentosResult = await client.query(
         'INSERT INTO clicklunch."pedido_alimento"(id_pedido, id_alimento) VALUES ($1, $2) ',
         [idPedido, idsAlimentos[i].id]
       );
-      result.push('a');
+      result.push("a");
     }
 
     client.query("COMMIT");

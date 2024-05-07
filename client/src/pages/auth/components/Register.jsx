@@ -57,11 +57,11 @@ const Register = () => {
             if (res.status === 200) {
               navigation("/auth");
             } else {
-              return setError("Invalid login");
+              return setError("Invalid login 01");
             }
           })
           .catch((error) => {
-            return setError("Invalid login");
+            return setError(error.response.data.message);
           });
       } catch (error) {
         return setError("Invalid login");
@@ -80,14 +80,14 @@ const Register = () => {
             if (res.status === 200) {
               navigation("/auth");
             } else {
-              return setError("Invalid login");
+              return setError(res.data.message);
             }
           })
           .catch((error) => {
-            return setError("Invalid login");
+            return setError(error.response.data.message);
           });
       } catch (error) {
-        return setError("Invalid login");
+        return setError(error.response.data.message);
       }
     } else {
       return alert("Ingresa el captcha");
@@ -99,7 +99,7 @@ const Register = () => {
       <div className="register-form-container">
         <span className="register-text">Registro</span>
         <form className="register-form" onSubmit={handleSubmit}>
-          {error && <div className="login-error">{error.message}</div>}
+          {error && <div className="login-error">{error}</div>}
           <div className="register-form-input-container">
             <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-person" viewBox="0 0 16 16">
               <path d={userIcon} />

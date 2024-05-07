@@ -26,6 +26,8 @@ const AuthLayout = () => {
         }
       })
       .catch((error) => {
+        
+        console.log(error)
         //navigation('/');
       });
   }, [navigation]);
