@@ -1,6 +1,7 @@
 import React from "react";
 import { baseUrl } from "../../../other/extras";
 import axios from "axios";
+import '../css/AddSaldo.css'
 
 const AddSaldo = () => {
   const [usuario, setUsuario] = React.useState();
@@ -79,14 +80,16 @@ const AddSaldo = () => {
   };
 
   return (
-    <div>
+    <div className="add-saldo-container">
       {error && <div className="error">{error}</div>}
       {usuario && (
-        <div>
-          <form onSubmit={handleSubmit}>
-            <div>Identifier : {usuario.id}</div>
-            <div>Nombre de usuario : {usuario.nombre}</div>
-            <div>Saldo actual : {usuario.saldo}</div>
+        <div className="add-saldo-form-container">
+          <form onSubmit={handleSubmit} className="add-saldo-form">
+            <div className="user-info">
+              <div>Identifier : {usuario.id}</div>
+              <div>Nombre de usuario : {usuario.nombre}</div>
+              <div>Saldo actual : {usuario.saldo}</div>
+            </div>
 
             {credentials.saldo && (
               <div className="credentials">
@@ -107,7 +110,7 @@ const AddSaldo = () => {
         </div>
       )}
       {!usuario && (
-        <form onSubmit={searchUser}>
+        <form onSubmit={searchUser} className="search-user-form">
           <label>Id usuario</label>
           <input
             type="number"

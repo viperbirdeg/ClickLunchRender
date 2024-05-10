@@ -140,7 +140,7 @@ const NewProduct = () => {
           />
         </div>
         <div className="input-form-contaienr">
-          <input type="submit" value="Submit" />
+          <input type="submit" value="Agregar" />
         </div>
       </form>
     </div>

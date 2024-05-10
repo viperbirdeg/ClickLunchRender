@@ -30,7 +30,9 @@ const CafeLayout = () => {
   return (
     <div className="client-layout-container">
       <NavBar />
-      <Outlet />
+      <div className="client-layout-content">
+        <Outlet />
+      </div>
       <Footer 
         key={data.id}
         id={data.id}
