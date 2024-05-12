@@ -1,0 +1,87 @@
+.profile-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+  background-color: #f9f9f9;
+}
+
+.profile-info {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  width: 80%;
+  max-width: 400px;
+}
+
+.profile-info h2 {
+  margin-top: 0;
+  text-align: center;
+}
+
+.profile-info ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.profile-info li {
+  margin-bottom: 10px;
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+}
+
+.profile-info li:last-child {
+  border-bottom: none;
+}
+
+.profile-info span {
+  font-weight: bold;
+  margin-right: 10px;
+}
+
+.profile-info li::before {
+  /*content: "";*/
+  display: block;
+  width: 10px;
+  height: 10px;
+  background-color: #ccc;
+  border-radius: 50%;
+  margin-right: 10px;
+  float: left;
+}
+
+.edit-button-container {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.edit-button {
+  width: 50%;
+  background-color: #6666;
+}
+
+.edit-button:hover {
+  background-color: red;
+}
+
+.ul-info-container {
+  display: flex;
+  flex-direction: row;
+}
+
+ul>li>span {
+  display: flex;
+  height: 100%;
+}
+
+ul.center>li>span {
+  align-items: center;
+  justify-content: start;
+}

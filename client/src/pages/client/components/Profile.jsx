@@ -1,0 +1,95 @@
+import axios from "axios";
+import React from "react";
+import { baseUrl } from "../../../other/extras";
+import "../css/Profile.css";
+
+const Profile = () => {
+  const [edit, setEdit] = React.useState(false);
+  const [data, setData] = React.useState({});
+
+  const handleEdit = (e) => {
+    e.preventDefault();
+    setEdit(!edit);
+  };
+
+  React.useEffect(() => {
+    axios
+      .post(`${baseUrl}/api/usuario/userPerId`, {
+        data: {
+          id: window.localStorage.getItem("id"),
+        },
+      })
+      .then((res) => {
+        console.log(res);
+        setData(res.data.message);
+        console.log(res.data.message);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
+
+  return (
+    <div className="profile-container">
+      <h1>Profile</h1>
+      {!edit && (
+        <div className="profile-info">
+          <h2>Información de la cuenta</h2>
+          <div className="ul-info-container">
+            <ul>
+              <li>
+                <span>Identificador:</span>
+              </li>
+              <li>
+                <span>Nombre:</span>
+              </li>
+              <li>
+                <span>Saldo:</span>{" "}
+              </li>
+              <li>
+                <span>Correo:</span>
+              </li>
+              <li>
+                <span>Rol:</span>
+              </li>
+            </ul>
+            <ul className="center">
+              <li>
+                <span>{data.id}</span>
+              </li>
+              <li>
+                <span>{data.nombre}</span>
+              </li>
+              <li>
+                <span>{data.saldo}</span>
+              </li>
+              <li>
+                <span>{data.email}</span>
+              </li>
+              <li>
+                <span>{data.rol}</span>
+              </li>
+            </ul>
+          </div>
+          <div className="edit-button-container">
+            <button className="edit-button" onClick={handleEdit}>
+              Editar campos
+            </button>
+          </div>
+        </div>
+      )}
+      {edit && (
+        <div className="profile-info">
+          <h2>Editar Información de la cuenta no disponible</h2>
+          <div className="edit-button-container">
+            <button className="edit-button" onClick={handleEdit}>
+              Regresar
+            </button>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+};
+
+export default Profile;
