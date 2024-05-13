@@ -28,9 +28,9 @@ const CafeLayout = () => {
   },[navigation]);
 
   return (
-    <div className="client-layout-container">
+    <div className="cafe-layout-container">
       <NavBar />
-      <div className="client-layout-content">
+      <div className="cafe-layout-content">
         <Outlet />
       </div>
       <Footer 

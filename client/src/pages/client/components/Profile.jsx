@@ -6,6 +6,37 @@ import "../css/Profile.css";
 const Profile = () => {
   const [edit, setEdit] = React.useState(false);
   const [data, setData] = React.useState({});
+  const [buttonText, setButtonText] = React.useState("Eliminar cuenta");
+  const [first, setFirst] = React.useState(false);
+
+  const handleDelete = (e) => {
+    e.preventDefault();
+    setFirst(!first);
+    setButtonText(
+      buttonText === "Eliminar cuenta"
+        ? "Cancelar eliminacion"
+        : "Eliminar cuenta"
+    );
+  };
+
+  const handleFirst = (e) => {
+    e.preventDefault();
+    axios
+      .delete(`${baseUrl}/api/usuario/deleteUsuario`)
+      .then((res) => {
+        if (res.statusCode === 200) {
+          window.localStorage.removeItem("token");
+          window.localStorage.removeItem("rol");
+          window.localStorage.removeItem("id");
+          window.localStorage.removeItem("cart");
+          window.location.reload();
+        }
+      })
+      .catch((error) => {
+        console.log(error)
+      });
+    alert("Eliminando");
+  };
 
   const handleEdit = (e) => {
     e.preventDefault();
@@ -86,6 +117,19 @@ const Profile = () => {
               Regresar
             </button>
           </div>
+        </div>
+      )}
+      <button className="delete-account-button" onClick={handleDelete}>
+        {buttonText}
+      </button>
+      {first && (
+        <div>
+          <section className="confirmation-text">
+            De verdad desea eliminar la cuenta?
+          </section>
+          <button className="delete-account-button" onClick={handleFirst}>
+            Eliminar
+          </button>
         </div>
       )}
     </div>
