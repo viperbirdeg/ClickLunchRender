@@ -36,6 +36,11 @@ const NavBar = () => {
           </NavLink>
         </li>
         <li>
+          <NavLink to="products" end="true">
+            Alimentos
+          </NavLink>
+        </li>
+        <li>
           <NavLink to="addSaldo" end="true">
             Agregar Saldo
           </NavLink>

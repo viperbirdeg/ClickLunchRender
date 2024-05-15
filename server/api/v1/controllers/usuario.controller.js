@@ -261,7 +261,7 @@ const deleteOneUsuario = async (req, res) => {
     await client.query("BEGIN");
 
     //Obtener informacion
-    const data = await req.body;
+    const data = await req.body.data;
     const email = data.email;
 
     //Volver invisible en la base de datos

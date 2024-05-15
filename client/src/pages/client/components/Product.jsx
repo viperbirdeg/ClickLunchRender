@@ -37,7 +37,13 @@ const Producto = () => {
     <div className="producto">
       {error && <p>{error.message}</p>}
       <div className="img-container">
-        <img src={data.url} alt="Loading..." />
+        <img
+          src={
+            data.url ||
+            "https://t3.ftcdn.net/jpg/04/60/01/36/360_F_460013622_6xF8uN6ubMvLx0tAJECBHfKPoNOR5cRa.jpg"
+          }
+          alt="Loading..."
+        />
       </div>
       <div className="id">id : {data.id}</div>
       <div className="nombre">Nombre : {data.nombre}</div>

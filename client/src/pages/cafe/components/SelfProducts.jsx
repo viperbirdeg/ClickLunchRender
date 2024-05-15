@@ -1,44 +1,43 @@
 import axios from "axios";
 import React from "react";
-import { useParams } from "react-router-dom";
 import { baseUrl } from "../../../other/extras";
-import CardProducto from "./CardProducto";
+import CafeCardProducto from "./CafeCardProducto";
 
-import "../css/Productos.css"; // Import the CSS file
-
-const Productos = () => {
-  const props = useParams();
-  const [data, setData] = React.useState([]);
+const SelfProducts = () => {
   const [error, setError] = React.useState();
+  const [data, setData] = React.useState([]);
 
+  const id = window.localStorage.getItem("idCafe");
   React.useEffect(() => {
     axios
       .get(`${baseUrl}/api/cafeteria/getAlimentosCafeteria`, {
         params: {
-          id: props.id,
+          id: id,
         },
       })
       .then((response) => {
         if (response.status === 200) {
           setData(response.data.message);
         } else if (response.status === 204) {
-          setError("No se han registrado alimentos en esta cafeteria");
+          setError("No se han registrado alimentos");
+          console.log(response);
         } else {
           setError(response.data.message);
         }
       })
       .catch((error) => {
         setError(error.message);
+        console.log(error)
       });
-  }, [props]);
+  }, [id]);
 
   return (
-    <div className="text">
+    <div className="items-container">
       <h1>Productos</h1>
       <div className="productos">
-        {error == null ? ( // undefined == null
+        {!error ? (
           data.map((item) => (
-            <CardProducto
+            <CafeCardProducto
               key={item.id}
               id={item.id}
               nombre={item.nombre}
@@ -59,4 +58,4 @@ const Productos = () => {
   );
 };
 
-export default Productos;
+export default SelfProducts;
