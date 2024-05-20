@@ -3,16 +3,32 @@ import { NavLink } from "react-router-dom";
 
 import "../css/NavBar.css"; // Import the CSS file
 import logo from '../../../imagenes/logo-removebg-preview.png'
+import Swal from 'sweetalert2';
+import withReactContent from 'sweetalert2-react-content';
+const MySwal = withReactContent(Swal);
+
 
 const NavBar = () => {
   const handleClick = (e) => {
     e.preventDefault();
-
-    window.localStorage.removeItem("token");
-    window.localStorage.removeItem("rol");
-    window.localStorage.removeItem("id");
-    window.localStorage.removeItem("cart");
-    window.location.reload();
+    MySwal.fire({
+      title: '¡Advertencia!',
+      text: '¿Está seguro de cerrar su sesión?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Sí, hazlo!',
+      cancelButtonText: 'No, cancelar',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        window.localStorage.removeItem("token");
+        window.localStorage.removeItem("rol");
+        window.localStorage.removeItem("id");
+        window.localStorage.removeItem("cart");
+        window.location.reload();
+      }
+    });
   };
 
   return (

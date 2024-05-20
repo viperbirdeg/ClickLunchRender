@@ -8,6 +8,7 @@ import axios from "axios";
 import { baseUrl } from "../../../other/extras";
 import logo from "../../../imagenes/logo-removebg-preview.png";
 import { emailIcon, passwordIcon, userIcon } from "../../../other/icons";
+import LoadingSpinner from "./LoadingSpinne.jsx";
 
 const Register = () => {
   const [credentials, setCredentials] = useState({
@@ -20,6 +21,7 @@ const Register = () => {
 
   const [error, setError] = useState("");
   const navigation = useNavigate();
+  const [loading, setLoading] = useState(false);
 
   const handleChange = (e) => {
     setCredentials({
@@ -30,16 +32,21 @@ const Register = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
     if (!credentials.email || !credentials.password || !credentials.username) {
+      setLoading(false); 
       return alert("Todos los campos son obligatorios");
     }
     if (!esCorreoElectronico(credentials.email)) {
+      setLoading(false); 
       return alert("El correo electronico es invalido");
     }
     if (!esContrasenaValida(credentials.password)) {
+      setLoading(false); 
       return alert("La contraseña es invalida");
     }
     if (!esContrasenaValida(credentials.username)) {
+      setLoading(false); 
       return alert("El usuario es invalido");
     }
 
@@ -54,6 +61,7 @@ const Register = () => {
             },
           })
           .then((res) => {
+            setLoading(false);
             if (res.status === 200) {
               navigation("/auth");
             } else {
@@ -61,9 +69,11 @@ const Register = () => {
             }
           })
           .catch((error) => {
+            setLoading(false);
             return setError(error.response.data.message);
           });
       } catch (error) {
+        setLoading(false);
         return setError("Invalid login");
       }
     } else if (usertype === "cafe") {
@@ -77,6 +87,7 @@ const Register = () => {
             },
           })
           .then((res) => {
+            setLoading(false);
             if (res.status === 200) {
               navigation("/auth");
             } else {
@@ -84,9 +95,11 @@ const Register = () => {
             }
           })
           .catch((error) => {
+            setLoading(false);
             return setError(error.response.data.message);
           });
       } catch (error) {
+        setLoading(false);
         return setError(error.response.data.message);
       }
     } else {
@@ -96,6 +109,7 @@ const Register = () => {
 
   return (
     <div className="register-container font">
+      {loading && <LoadingSpinner />}
       <div className="register-form-container">
         <span className="register-text">Registro</span>
         <form className="register-form" onSubmit={handleSubmit}>

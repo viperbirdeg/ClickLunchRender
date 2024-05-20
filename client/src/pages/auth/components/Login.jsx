@@ -9,6 +9,7 @@ import axios from "axios";
 import logo from "../../../imagenes/logo-removebg-preview.png";
 import { baseUrl } from "../../../other/extras.js";
 import { emailIcon, passwordIcon } from "../../../other/icons.js";
+import LoadingSpinner from "./LoadingSpinne.jsx";
 
 const Login = () => {
   const [credentials, setCredentials] = useState({
@@ -17,6 +18,7 @@ const Login = () => {
   });
   //const [captcha, setCaptcha] = useState();
   const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
   const navigation = useNavigate();
 
   const handleChange = (e) => {
@@ -27,13 +29,17 @@ const Login = () => {
   };
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
     if (!credentials.email || !credentials.password) {
+      setLoading(false); 
       return alert("Todos los campos son obligatorios");
     }
     if (!esCorreoElectronico(credentials.email)) {
+      setLoading(false); 
       return alert("El correo electronico es invalido");
     }
     if (!esContrasenaValida(credentials.password)) {
+      setLoading(false); 
       return alert("La contraseña es invalida");
     }
     if (/*captcha || */ true) {
@@ -46,6 +52,7 @@ const Login = () => {
             },
           })
           .then((res) => {
+            setLoading(false);
             if (res.status === 200) {
               if (res.data.rol === "Cliente") {
                 window.localStorage.setItem("id", res.data.id);
@@ -64,10 +71,12 @@ const Login = () => {
             }
           })
           .catch((error) => {
+            setLoading(false);
             console.log(error)
             return setError( error.response.data.message || error.message );
           });
       } catch (error) {
+        setLoading(false);
         return setError("Registro invalido");
       }
     } else {
@@ -77,6 +86,7 @@ const Login = () => {
 
   return (
     <div className="login-container">
+      {loading && <LoadingSpinner />}
       <div className="login-img-container">
         <img className="login-logo-img" src={logo} alt="Logo" />
       </div>
