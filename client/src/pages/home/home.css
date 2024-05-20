@@ -105,11 +105,11 @@
   box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.7);
 }
 
-.home-login-button {
+/*.home-login-button {
 }
 
 .home-register-button {
-}
+}*/
 
 .active {
   display: flex;
@@ -211,4 +211,28 @@
   display: flex;
   justify-content: end;
   padding-right: 1.5%;
+}
+
+@media screen and (max-width:1024px){
+  .nav_options{
+    display: none;
+  }
+  .home-layout-container{
+    height: auto;
+  }
+  .home-container {
+    flex-direction: column;
+  }
+  .home-logo{
+    width: 50%;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.0);
+    margin-top: 10vh;
+  }
+  .home-navbar{
+    height: 10vh;
+    position: fixed;
+  }
+  .footer-container{
+    height: 8vh;
+  }
 }

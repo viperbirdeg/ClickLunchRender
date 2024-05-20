@@ -49,6 +49,7 @@ const NavBar = () => {
               Registrarse
             </NavLink>
           </li>
+          <i class="fa-solid fa-bars"></i>
         </ul>
       </section>
     </nav>
