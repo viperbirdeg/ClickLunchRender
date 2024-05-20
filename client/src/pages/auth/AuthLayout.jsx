@@ -4,6 +4,7 @@ import NavBar from "../home/components/NavBar";
 import './auth.css';
 import axios from "axios";
 import { baseUrl } from "../../other/extras";
+import Footer from './../home/components/Footer';
 
 const AuthLayout = () => {
 
@@ -26,6 +27,8 @@ const AuthLayout = () => {
         }
       })
       .catch((error) => {
+        
+        console.log(error)
         //navigation('/');
       });
   }, [navigation]);
@@ -34,6 +37,7 @@ const AuthLayout = () => {
     <div className="auth-container">
       <NavBar />
       <Outlet />
+      <Footer/>
     </div>
   );
 };

@@ -1,5 +1,6 @@
 const { pool } = require("../database/db.js");
 const bcrypt = require("bcrypt");
+const { authToken, datosUsuario } = require("./usuario.controller.js");
 
 const addNewCafeteria = async (req, res) => {
   //Conexion con la bd
@@ -58,7 +59,9 @@ const addNewCafeteria = async (req, res) => {
     //Devolver datos
     if (cafeteriaResult.rowCount > 0) {
       const response = await datosCafeteria(cafeteriaResult.rows[0].id);
-      return res.status(response.estado).json({ message: response.message, id: cafeteriaResult.rows[0].id });
+      return res
+        .status(response.estado)
+        .json({ message: response.message, id: cafeteriaResult.rows[0].id });
     }
     return res.status(404).json({
       message: "Hubo problemas encontrando la cafeteria",
@@ -224,7 +227,56 @@ const getPedidosCafeteria = async (req, res) => {
     //!Manejar errores
     return res.status(500).json({
       message: "Ocurrio un error inesperado en el servidor",
-      error: error.message
+      error: error.message,
+    });
+  } finally {
+    //todo Liberar db
+    client.release();
+  }
+};
+
+const updateSaldo = async (req, res) => {
+  const client = await pool.connect();
+  const { authorization } = req.headers;
+  const idUser = req.body.data.idUser;
+  const saldoextra = req.body.data.saldo;
+  
+  //Validacion cafeteria:
+  const data = await authToken(authorization);
+
+  if (data.status !== 200) {
+    return res.status(data.status).json(data.message);
+  }
+
+  try {
+    
+    const userData = await datosUsuario(idUser);
+    if (!userData.status === 200) {
+      return res.sendStatus(userData.status).json(userData.message);
+    }
+    
+
+    const saldoNuevo = (parseInt(userData.message.saldo)) + (parseInt(saldoextra));
+    console.log(saldoNuevo);
+    
+    const updateResult = await client.query(
+      `UPDATE clicklunch."Usuario" SET saldo = $1 WHERE id = $2`,
+      [saldoNuevo, idUser]
+    );
+
+    if (updateResult.rowCount > 0) {
+      return res.status(200).json({
+        message: "Saldo actualizado correctamente",
+      });
+    }
+    return res.status(404).json({
+      message: "No se ha podido actualizar el saldo",
+    });
+  } catch (error) {
+    //!Manejar errores
+    return res.status(500).json({
+      message: "Ocurrio un error inesperado en el servidor",
+      error: error.message,
     });
   } finally {
     //todo Liberar db
@@ -275,4 +327,5 @@ module.exports = {
   deleteOneCafeteria,
   getAlimentosCafeteria,
   getPedidosCafeteria,
+  updateSaldo,
 };

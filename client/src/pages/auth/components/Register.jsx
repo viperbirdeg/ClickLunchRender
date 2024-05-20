@@ -1,11 +1,14 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import {
   esContrasenaValida,
   esCorreoElectronico,
 } from "../../../other/validation";
 import axios from "axios";
 import { baseUrl } from "../../../other/extras";
+import logo from "../../../imagenes/logo-removebg-preview.png";
+import { emailIcon, passwordIcon, userIcon } from "../../../other/icons";
+import LoadingSpinner from "./LoadingSpinne.jsx";
 
 const Register = () => {
   const [credentials, setCredentials] = useState({
@@ -14,11 +17,11 @@ const Register = () => {
     passwordConfirm: "",
     username: "",
   });
-
-  const [usertype, setUsertype] = useState("client");
+  const usertype = 'client';
 
   const [error, setError] = useState("");
   const navigation = useNavigate();
+  const [loading, setLoading] = useState(false);
 
   const handleChange = (e) => {
     setCredentials({
@@ -29,16 +32,21 @@ const Register = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
     if (!credentials.email || !credentials.password || !credentials.username) {
+      setLoading(false); 
       return alert("Todos los campos son obligatorios");
     }
     if (!esCorreoElectronico(credentials.email)) {
+      setLoading(false); 
       return alert("El correo electronico es invalido");
     }
     if (!esContrasenaValida(credentials.password)) {
+      setLoading(false); 
       return alert("La contraseña es invalida");
     }
     if (!esContrasenaValida(credentials.username)) {
+      setLoading(false); 
       return alert("El usuario es invalido");
     }
 
@@ -53,21 +61,19 @@ const Register = () => {
             },
           })
           .then((res) => {
+            setLoading(false);
             if (res.status === 200) {
-              console.log(res.data);
-              /*window.localStorage.setItem("id", res.data.id);
-              window.localStorage.setItem("rol", res.data.rol);
-              window.localStorage.setItem("token", res.data.token);
-              */
               navigation("/auth");
             } else {
-              return setError("Invalid login");
+              return setError("Invalid login 01");
             }
           })
           .catch((error) => {
-            return setError("Invalid login");
+            setLoading(false);
+            return setError(error.response.data.message);
           });
       } catch (error) {
+        setLoading(false);
         return setError("Invalid login");
       }
     } else if (usertype === "cafe") {
@@ -81,43 +87,37 @@ const Register = () => {
             },
           })
           .then((res) => {
+            setLoading(false);
             if (res.status === 200) {
-              console.log(res.data);
-              /*window.localStorage.setItem("id", res.data.id);
-              window.localStorage.setItem("rol", res.data.rol);
-              window.localStorage.setItem("token", res.data.token);
-              */
               navigation("/auth");
             } else {
-              return setError("Invalid login");
+              return setError(res.data.message);
             }
           })
           .catch((error) => {
-            return setError("Invalid login");
+            setLoading(false);
+            return setError(error.response.data.message);
           });
       } catch (error) {
-        return setError("Invalid login");
+        setLoading(false);
+        return setError(error.response.data.message);
       }
     } else {
       return alert("Ingresa el captcha");
     }
   };
 
-  const handleUsertype = (e) => {
-    e.preventDefault();
-    return usertype === "client" ? setUsertype("cafe") : setUsertype("client");
-  };
-
   return (
-    <div className="register-container">
-      <div className="img-container"></div>
+    <div className="register-container font">
+      {loading && <LoadingSpinner />}
       <div className="register-form-container">
-        <span className="titlecontainer">Register</span>
-        <span>{usertype}</span>
-        <button onClick={handleUsertype}>Register</button>
+        <span className="register-text">Registro</span>
         <form className="register-form" onSubmit={handleSubmit}>
-          {error && <div className="login-error">{error.message}</div>}
+          {error && <div className="login-error">{error}</div>}
           <div className="register-form-input-container">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-person" viewBox="0 0 16 16">
+              <path d={userIcon} />
+            </svg>
             <input
               type="text"
               name="username"
@@ -128,6 +128,9 @@ const Register = () => {
             />
           </div>
           <div className="register-form-input-container">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-envelope" viewBox="0 0 16 16">
+              <path d={emailIcon} />
+            </svg>
             <input
               type="email"
               name="email"
@@ -138,6 +141,9 @@ const Register = () => {
             />
           </div>
           <div className="register-form-input-container">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-lock" viewBox="0 0 16 16">
+              <path d={passwordIcon} />
+            </svg>
             <input
               type="password"
               name="password"
@@ -147,7 +153,10 @@ const Register = () => {
               onChange={handleChange}
             />
           </div>
-          <div>
+          <div className="register-form-input-container">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-lock" viewBox="0 0 16 16">
+              <path d={passwordIcon} />
+            </svg>
             <input
               type="password"
               name="passwordConfirm"
@@ -157,12 +166,16 @@ const Register = () => {
               onChange={handleChange}
             />
           </div>
-          <button className="register-button-submit">
-            <div className="register-submit">Registrar</div>
-          </button>
+          <button className="register-button-submit">Registrar</button>
         </form>
+        <span className="register-link">
+          ¿Ya tienes una cuenta?
+          <NavLink to="/auth" className="register-link_txt">Inicia Sesión</NavLink>
+        </span>
       </div>
-      <div className="img-container"></div>
+      <div className="reg-img-container">
+        <img className="login-logo-img log_reg" src={logo} alt="Logo" />
+      </div>
     </div>
   );
 };

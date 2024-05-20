@@ -37,6 +37,7 @@ const Orders = () => {
               hora={item.hora}
               id_cafeteria={item.id_cafeteria}
               estado={item.estado}
+              costo_total={item.costo_total}
             />
           ))
         ) : (

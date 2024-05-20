@@ -9,13 +9,19 @@ import { useNavigate } from "react-router-dom";
 const Cart = () => {
   const [data, setData] = React.useState([]);
   const [error, setError] = React.useState();
+  const [total, setTotal] = React.useState(0);
   const navigation = useNavigate();
 
   React.useEffect(() => {
     const storedCart = window.localStorage.getItem("cart");
+    window.localStorage.removeItem("totalCart");
     if (storedCart) {
       setData(JSON.parse(storedCart));
     }
+    setTotal(window.localStorage.getItem("totalCart"));
+  }, []);
+  React.useEffect(() =>{
+
   }, []);
 
   const handleSubmit = (e) => {
@@ -29,23 +35,27 @@ const Cart = () => {
       const cart = data.map((item) => {
         return { id: item.id };
       });
-      console.log(cart);
+      const now = new Date();
+      const fecha = now.toISOString().split("T")[0];
+      const hora = now.toTimeString().split(" ")[0];
       axios
         .post(`${baseUrl}/api/pedido/addNewPedido`, {
           data: {
             idUsuario: window.localStorage.getItem("id"),
-            idCafe: window.localStorage.getItem("idCafeteria"),
+            idCafe: window.localStorage.getItem("idCafe"),
             cart: JSON.stringify(cart),
+            fecha: fecha,
+            hora: hora,
           },
         })
         .then((res) => {
-          console.log(res.data);
+          window.localStorage.removeItem("totalCart");
           window.localStorage.removeItem("cart");
           window.localStorage.removeItem("cafOrderId");
           navigation("/client/orders");
         })
         .catch((error) => {
-          setError("idk ", error.message);
+          setError(`${error.response.data.message}`);
         });
     }
   };
@@ -55,6 +65,7 @@ const Cart = () => {
       {error && <div className="">{error}</div>}
       {data.length > 0 ? (
         <div>
+          <div>Total : {total}</div>
           <ul>
             {data.map((item, key) => (
               <CartProducto key={key} id={item.id} />

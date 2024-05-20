@@ -23,7 +23,9 @@ app.use(morgan("dev"));
 //* Utilizar formato .JSON
 app.use(express.json());
 //* Utilizar cors for fetchs
+const whitelist = ['http://localhost:3000', 'https://clicklunchrender.onrender.com']
 app.use(cors({
+  origin: whitelist,
   //credentials: true
 }));
 //*Utiliar body parser

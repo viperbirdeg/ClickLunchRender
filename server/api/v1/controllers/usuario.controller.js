@@ -228,14 +228,6 @@ const getAllUsers = async (req, res) => {
 
 //?Usado para obtener un usuario a partir de un identificador
 const getOneUser = async (req, res) => {
-  const { cookies } = req;
-
-  if (!cookies.token) return res.sendStatus(401);
-  const encoder = new TextEncoder();
-  const { payload } = await jwtVerify(
-    cookies.token,
-    encoder.encode(JWT_PRIVATE_KEY)
-  );
   //Obtener identificador
   const id = req.query.id;
 
@@ -252,22 +244,11 @@ const getOneUser = async (req, res) => {
 const authOneUser = async (req, res) => {
   const { authorization } = req.headers;
 
-  if (!authorization) return res.sendStatus(401);
-  try {
-    const encoder = new TextEncoder();
-    const { payload } = await jwtVerify(
-      authorization,
-      encoder.encode(process.env.JWT_PRIVATE_KEY)
-    );
+  const data = await authToken(authorization);
 
-    const user = await datosUsuario(payload.id);
-
-    if (!user.message.id) return res.sendStatus(401);
-
-    return res.status(200).json(user);
-  } catch (err) {
-    return res.status(401).json({ message: "error", error: err.message });
-  }
+  if (data.status === 200) {
+    return res.status(data.status).json(data.user);
+  } else return res.status(data.status).json({ message: data.message });
 };
 
 //?Eliminar un usuario cambiando su estado a false
@@ -280,7 +261,7 @@ const deleteOneUsuario = async (req, res) => {
     await client.query("BEGIN");
 
     //Obtener informacion
-    const data = await req.body;
+    const data = await req.body.data;
     const email = data.email;
 
     //Volver invisible en la base de datos
@@ -313,6 +294,16 @@ const deleteOneUsuario = async (req, res) => {
     //Liberar la db
     client.release();
   }
+};
+
+const getUserPerId = async (req, res) => {
+  const id = req.body.data.id;
+
+  const userDatos = await datosUsuario(id);
+
+  return res.status(userDatos.estado).json({
+    message: userDatos.message,
+  });
 };
 
 //?Funcion interna de obtencion de usuarios
@@ -353,6 +344,37 @@ const datosUsuario = async (id) => {
   }
 };
 
+const authToken = async (token) => {
+  if (!token) {
+    return {
+      status: 401,
+      message: "No cuenta con autorizacion",
+    };
+  }
+
+  try {
+    const encoder = new TextEncoder();
+    const { payload } = await jwtVerify(
+      token,
+      encoder.encode(process.env.JWT_PRIVATE_KEY)
+    );
+    const user = await datosUsuario(payload.id);
+    if (!user.message.id) {
+      return {
+        status: 401,
+        message: "No cuenta con autorizacion",
+      };
+    }
+    return {
+      status: 200,
+      message: "Autorizacion correcta",
+      user: user,
+    };
+  } catch (err) {
+    return { status: 401, message: "error", error: err.message };
+  }
+};
+
 //Exportaciones
 module.exports = {
   postNewUser,
@@ -363,4 +385,7 @@ module.exports = {
   getOneUser,
   authOneUser,
   deleteOneUsuario,
+  authToken,
+  datosUsuario,
+  getUserPerId,
 };

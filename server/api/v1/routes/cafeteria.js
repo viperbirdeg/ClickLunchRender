@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { addNewCafeteria, getAllCafeterias, getOneCafeteria, deleteOneCafeteria, getAlimentosCafeteria, getPedidosCafeteria } = require('../controllers/cafeteria.controller');
+const { addNewCafeteria, getAllCafeterias, getOneCafeteria, deleteOneCafeteria, getAlimentosCafeteria, getPedidosCafeteria, updateSaldo } = require('../controllers/cafeteria.controller');
 
 router.post('/addNewCafeteria', addNewCafeteria);
 
@@ -12,5 +12,7 @@ router.delete('/deleteOneCafeteria', deleteOneCafeteria);
 router.get('/getAlimentosCafeteria', getAlimentosCafeteria);
 
 router.post('/getPedidosCafe', getPedidosCafeteria);
+
+router.put('/updateSaldo', updateSaldo);
 
 module.exports = router;

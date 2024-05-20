@@ -4,6 +4,7 @@ import {
   deleteCafOrderId,
   getCart,
   setCafOrderId,
+  setTotalCart,
 } from "../../../other/extras";
 import axios from "axios";
 
@@ -15,8 +16,6 @@ const CartProducto = ({ id }) => {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    const source = axios.CancelToken.source();
-
     axios
       .get(`${baseUrl}/api/alimento/getOneAlimento`, {
         params: {
@@ -24,10 +23,9 @@ const CartProducto = ({ id }) => {
         },
       })
       .then((response) => {
-        console.log(response);
-        console.log(response.data.message.id_cafeteria);
         setCafOrderId(response.data.message.id_cafeteria);
         setData(response.data.message);
+        setTotalCart(response.data.message.costo);
       })
       .catch((error) => {
         if (!axios.isCancel(error)) {

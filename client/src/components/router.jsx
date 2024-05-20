@@ -20,6 +20,10 @@ import HomeCafe from "../pages/cafe/components/HomeCafe.jsx";
 import Orders from "../pages/cafe/components/Orders.jsx";
 import ClientOrders from './../pages/client/components/Orders';
 import NewProduct from './../pages/cafe/components/NewProduct';
+import AddSaldo from "../pages/cafe/components/AddSaldo.jsx";
+import Profile from './../pages/client/components/Profile';
+import SelfProducts from "../pages/cafe/components/SelfProducts.jsx";
+import EditProduct from "../pages/cafe/components/EditProduct.jsx";
 
 //?Client components
 
@@ -43,11 +47,15 @@ const Router = () => {
         <Route path="product/:id" element={<Producto/>}/>
         <Route path="cart" element={<Cart/>}/>
         <Route path="orders" element={<ClientOrders/>}/>
+        <Route path="profile" element={<Profile/>}/>
       </Route>
       <Route path="/cafe" element={<CafeLayout/>}>
         <Route index path="" element={<HomeCafe/>} />
         <Route path="orders" element={<Orders/>}/>
+        <Route path="products" element={<SelfProducts/>}/>
+        <Route path="editProduct/:id" element={<EditProduct/>}/>
         <Route path="addProduct" element={<NewProduct/>}/>
+        <Route path="addSaldo" element={<AddSaldo/>}/>
       </Route>
       <Route path="*" element={<h1>404 Not Found</h1>} />
     </Routes>
