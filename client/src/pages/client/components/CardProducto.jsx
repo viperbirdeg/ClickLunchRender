@@ -12,9 +12,9 @@ const CardProducto = ({ id, nombre, costo, disponibilidad, url }) => {
         <img src={url} alt="Imagen no disponible" />
       </div>
       <div>ID : {id}</div>
-      <div>Nombre : {nombre}</div>
-      <div>Costo : ${costo} </div>
-      <div> Disponibilidad aproximada : {disponibilidad} productos</div>
+      <div>Unidades Disponibles: {disponibilidad}</div>
+      <div className="name_procard">{nombre}</div>
+      <div className="pre_procard">${costo} </div>
       <Link to={route} className="card-producto-link">
         Detalles
       </Link>
