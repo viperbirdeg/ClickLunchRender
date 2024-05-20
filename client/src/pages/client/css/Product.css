@@ -1,76 +1,99 @@
 .producto {
   display: flex;
-  flex-direction: column;
   align-items: center;
   padding: 2rem;
-  background-color: #f5f5f5;
-  border-radius: 10px;
+  background: white;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s ease-in-out;
-}
-
-.producto:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+  position: relative;
+  -webkit-transition: transform 0.3s ease-in-out;
+  -moz-transition: transform 0.3s ease-in-out;
+  -ms-transition: transform 0.3s ease-in-out;
+  -o-transition: transform 0.3s ease-in-out;
+  height: 83vh;
+  width: 80%;
+  gap: 2%;
 }
 
 .producto div {
   margin-bottom: 1rem;
 }
 
-.producto.id {
-  font-weight: bold;
-  font-size: 1.2rem;
-}
-
-.producto.nombre {
-  font-size: 1.1rem;
-}
-
-.producto.descripcion {
-  font-size: 1rem;
-}
-
-.producto.costo {
-  font-size: 1.1rem;
-  font-weight: bold;
-}
-
-.producto.disponibilidad {
-  font-size: 1rem;
-}
-
-.producto.estado {
-  font-size: 1rem;
-}
-
-.producto.id-Cafeteria {
-  font-size: 1rem;
-}
-
-.producto.tiempo-preparacion {
-  font-size: 1rem;
-}
-
 .producto button {
-  background-color: #333;   
-  color: white;
+  background: transparent;
+  color: rgb(0, 0, 0);
   padding: 0.5rem 1rem;
-  border-radius: 5px;
+  border-radius: 25px;
   text-decoration: none;
   margin-top: 1rem;
-  border: none;
+  border: 2px solid #ee6107;
   cursor: pointer;
   transition: transform 0.3s ease-in-out;
+  -webkit-border-radius: 25px;
+  -moz-border-radius: 25px;
+  -ms-border-radius: 25px;
+  -o-border-radius: 25px;
+}
+
+.tiempo-preparacion{
+  font-size: 1.5rem;
 }
 
 .producto button:hover {
-  transform: translateY(-3px);
-  background-color: #555;
+  transition: 0.2s;
+  background-color: #ee6107;
+  -webkit-transition: 0.2s;
+  -moz-transition: 0.2s;
+  -ms-transition: 0.2s;
+  -o-transition: 0.2s;
+  color: white;
+  font-weight: bold;
 }
 
-.img-container img {
+.img_container{
+  width: 75%;
+  height: 60%;
+}
+
+.img_container img{
   width: 100%;
-  height: auto;
-  border-radius: 5px 5px 0 0;
+  height: 100%;
+  border: 10px solid white;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+.img_cont_pro{
+  width: 40%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+.cant_cont{
+  height: 15%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1%;
+  font-size: 1.3rem;
+}
+.cant_cont input{
+  width: 20%;
+  border: none;
+  border-radius: 15px;
+  -webkit-border-radius: 15px;
+  -moz-border-radius: 15px;
+  -ms-border-radius: 15px;
+  -o-border-radius: 15px;
+  font-size: 1rem;
+  text-align: center;
+  font-size: 1.1rem;
+}
+.cant_cont svg{
+  fill: rgb(72, 72, 72);
+  height: 100%;
+  width: 4%;
+  cursor: pointer;
 }
