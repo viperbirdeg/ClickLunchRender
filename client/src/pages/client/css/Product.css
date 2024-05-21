@@ -97,3 +97,14 @@
   width: 4%;
   cursor: pointer;
 }
+
+@media screen and (max-width:1138px){
+  .text{
+    margin-top: 10%;
+  }
+}
+@media screen and (max-width:434px){
+  .text{
+    font-size: 1.67em;
+  }
+}

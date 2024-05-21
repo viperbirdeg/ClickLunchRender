@@ -74,3 +74,9 @@
 .cafeteria-link{
   background: transparent;
 }
+
+@media screen and (max-width:475px){
+  .nombre_caf{
+    font-size: 1.3rem;
+  }
+}
