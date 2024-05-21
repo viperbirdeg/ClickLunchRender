@@ -23,43 +23,56 @@
   font-size: 1.2rem;
 }
 
-.cart-producto .nombre {
-  font-size: 1.1rem;
+.nombre {
+  font-size: 3rem;
+  font-weight: bold;
 }
 
 .cart-producto .descripcion {
   font-size: 1rem;
 }
 
-.cart-producto .costo {
-  font-size: 1.1rem;
-  font-weight: bold;
+.text_desc_pro{
+  width: 60%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
 }
 
-.cart-producto .disponibilidad {
-  font-size: 1rem;
+.descripcion {
+  background: #ffb276;
+  width: 90%;
+  padding: 2%;
+  height: 30%;
+  border-radius: 15px;
+  -webkit-border-radius: 15px;
+  -moz-border-radius: 15px;
+  -ms-border-radius: 15px;
+  -o-border-radius: 15px;
+  overflow-y: scroll;
 }
 
-.cart-producto .estado {
-  font-size: 1rem;
+.descripcion::-webkit-scrollbar {
+  width: 5px;
 }
 
-.cart-producto .id-Cafeteria {
-  font-size: 1rem;
+.descripcion::-webkit-scrollbar-thumb {
+  background: #ffffff; 
+  border-radius: 6px;
 }
 
-.cart-producto .tiempo-preparacion {
-  font-size: 1rem;
+.costo{
+  font-size: 1.5rem;
 }
 
 .cart-producto button {
-  background-color: #333;
   color: white;
   padding: 0.5rem 1rem;
   border-radius: 5px;
   text-decoration: none;
   margin-top: 1rem;
-  border: none;
+  border: 1px solid #ee6107;
   cursor: pointer;
   transition: transform 0.3s ease-in-out;
 }
