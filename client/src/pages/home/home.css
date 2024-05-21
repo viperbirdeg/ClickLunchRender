@@ -293,6 +293,7 @@
   .home-navbar{
     height: 10vh;
     position: fixed;
+    z-index: 1000;
   }
   .footer-container{
     height: 8vh;
