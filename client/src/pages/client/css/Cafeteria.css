@@ -1,10 +1,9 @@
 .cafeteria {
-  width: 300px;
-  background-color: white;
+  width: 30%;
   border-radius: 5px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   margin: 1rem;
-  padding: 1rem;
+  padding: 1%;
   text-align: center;
 }
 
@@ -15,14 +14,69 @@
 
 .cafeteria a {
   display: block;
-  background-color: #333;
-  color: white;
+  background-color: #33333300;
+  color: rgb(0, 0, 0);
   padding: 0.5rem 1rem;
-  border-radius: 5px;
+  border-radius: 25px;
   text-decoration: none;
   margin-top: 1rem;
+  border: 2px solid #ee6107;
+  -webkit-border-radius: 25px;
+  -moz-border-radius: 25px;
+  -ms-border-radius: 25px;
+  -o-border-radius: 25px;
 }
 
 .cafeteria a:hover {
-  background-color: #555;
+  transition: .3s;
+  background: #b54601;
+  color: white;
+  -webkit-transition: .3s;
+  -moz-transition: .3s;
+  -ms-transition: .3s;
+  -o-transition: .3s;
+}
+
+.caf_cont{
+  display: flex;
+  width: 100%;
+  height: 80%;
+  gap:2%;
+  justify-content: end;
+}
+
+.svg_neg{
+  width: 30%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  fill:#ff893f;
+  position: absolute;
+}
+
+.data_caf{
+  width: 70%;
+  height: 100%;
+}
+
+.nombre_caf{
+  font-size: 1.4rem;
+  font-weight: bold;
+}
+
+.cont_caf{
+  font-size: 0.8rem;
+}
+
+.cafeteria-link{
+  background: transparent;
+}
+
+@media screen and (max-width:475px){
+  .nombre_caf{
+    font-size: 1.3rem;
+  }
 }

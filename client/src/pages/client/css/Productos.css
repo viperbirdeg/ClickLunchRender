@@ -3,19 +3,41 @@
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
-  background-color: #f5f5f5;
   padding: 2rem;
+  padding-top: 0;
   box-sizing: border-box;
+  height: auto;
 }
 
 .card-producto {
   width: 300px;
   background-color: white;
-  border-radius: 5px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   margin: 1rem;
+  margin-top: 10%;
   padding: 1rem;
   text-align: center;
+  border: 3px solid #ffb276;
+}
+
+.card-producto:hover{
+  transition: 0.3s;
+  -webkit-transition: 0.3s;
+  -moz-transition: 0.3s;
+  -ms-transition: 0.3s;
+  -o-transition: 0.3s;
+  background: #ffb276;
+}
+
+.card-producto a:hover{
+  transition: 0.3s;
+  -webkit-transition: 0.3s;
+  -moz-transition: 0.3s;
+  -ms-transition: 0.3s;
+  -o-transition: 0.3s;
+  background: #ee6107;
+  color: white;
+  font-weight: bold;
 }
 
 .card-producto div {
@@ -25,20 +47,73 @@
 
 .card-producto a {
   display: block;
-  background-color: #333;
-  color: white;
+  background-color: #FFDBC0;
   padding: 0.5rem 1rem;
   border-radius: 5px;
   text-decoration: none;
   margin-top: 1rem;
-}
-
-.card-producto a:hover {
-  background-color: #555;
+  color: black;
+  border: 2px solid #ffb276;
 }
 
 .text{
   margin:0;
   flex-direction: row;
   flex-wrap: wrap;
+  margin-top: 2%;
+}
+
+@media screen and (max-width:1138px){
+  .productos{
+    padding: 0;
+    margin-top: 10%;
+  }
+  .card-producto{
+    /*height: 70vh;*/
+    margin-top: 10%;
+  }
+  .card-producto img{
+    width: 60%;
+    height: 60%;
+    left: 20%;
+    top: -25%;
+  }
+}
+
+@media screen and (min-width:1139px){
+  .productos{
+    margin-top: 5%;
+    margin-bottom: 5%;
+  }
+}
+
+@media screen and (max-width:880px){
+  .card-producto{
+    margin-top: 15%;
+  }
+}
+
+@media screen and (max-width:600px){
+  .card-producto{
+    margin-top: 20%;
+  }
+}
+
+@media screen and (max-width:430px){
+  .card-producto{
+    margin-top: 25%;
+  }
+}
+
+@media screen and (max-height: 740px){
+  .card-producto{
+    height: 70vh;
+    margin-top: 30%;
+  }
+  .card-producto img{
+    width: 60%;
+    height: 60%;
+    left: 20%;
+    top: -25%;
+  }
 }

@@ -6,16 +6,46 @@
   background-color: #f5f5f5;
   padding: 2rem;
   box-sizing: border-box;
+  padding-top: 1%;
 }
 
 .cafeteria {
-  width: 300px;
-  background-color: white;
+  display: flex;
+  flex-direction: column;
+  width: 30%;
+  height: 40%;
   border-radius: 5px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   margin: 1rem;
-  padding: 1rem;
+  padding: 1%;
   text-align: center;
+  position: relative;
+  border: 2px solid #ee6107;
+}
+
+.cafeteria:hover{
+  background: #ff893f;
+  transition: 0.3s;
+  -webkit-transition: 0.3s;
+  -moz-transition: 0.3s;
+  -ms-transition: 0.3s;
+  -o-transition: 0.3s;
+  color: white;
+}
+
+.cafeteria:hover svg{
+  transition: 0.3s;
+  fill:#ee6107;
+  -webkit-transition: 0.3s;
+  -moz-transition: 0.3s;
+  -ms-transition: 0.3s;
+  -o-transition: 0.3s;
+  background: white;
+}
+
+.cafeteria:hover a{
+  border: 2px solid #ffffff;
+  color: white;
 }
 
 .cafeteria h2 {
@@ -28,23 +58,18 @@
   margin-top: 0.5rem;
 }
 
-.cafeteria a {
-  display: block;
-  background-color: #333;
-  color: white;
-  padding: 0.5rem 1rem;
-  border-radius: 5px;
-  text-decoration: none;
-  margin-top: 1rem;
-}
-
-.cafeteria a:hover {
-  background-color: #555;
-}
-
 .text {
   display: flex;
   align-content: center;
   justify-content: center;
   justify-items: center;
+}
+
+@media screen and (max-width:1138px){
+  .cafeteria{
+    width: 100%;
+  }
+  .home-client{
+    padding: 0;
+  }
 }
