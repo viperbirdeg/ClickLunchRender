@@ -64,3 +64,12 @@
   justify-content: center;
   justify-items: center;
 }
+
+@media screen and (max-width:1138px){
+  .cafeteria{
+    width: 100%;
+  }
+  .home-client{
+    padding: 0;
+  }
+}
