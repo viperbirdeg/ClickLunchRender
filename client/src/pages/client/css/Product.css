@@ -101,7 +101,18 @@
 @media screen and (max-width:1138px){
   .text{
     margin-top: 10%;
-    
+  }
+  .producto{
+    flex-direction: column;
+    width: 90%;
+    height: auto;
+  }
+  .img_cont_pro {
+    width: 100%;
+    margin-bottom: 5%;
+  }
+  .text_desc_pro{
+    width: 100%;
   }
 }
 @media screen and (max-width:434px){
