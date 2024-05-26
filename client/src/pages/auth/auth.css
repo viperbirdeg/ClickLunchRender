@@ -12,14 +12,16 @@
   align-items: center;
   height: 100vh;
   width: 100vw;
-  overflow-x:hidden;
-  background-color: #ffffff;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('../../imagenes/fondo2.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  overflow-x: hidden;
 }
 
 /** Related to Login component*/
 
 .login-container{
-
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -27,7 +29,6 @@
   height: 100%;
   width: 100%;
   overflow-x:hidden;
-  background-color: #ffffff;
 }
 
 .IDK{
@@ -37,13 +38,13 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background-color: #ffffff;
   gap: 5%;
 }
 
 .login-text, .register-text{
   font-size: 3rem;
   border-bottom: 2px solid #f99a56;
+  color: white;
 }
 
 .login-logo-img{
@@ -130,10 +131,10 @@
   padding-right: 10%;
   border: none;
   cursor: pointer;
-  background: #EF6106;
-  color: white;
+  background: #ef5f0600;
+  border: 3px solid #f99a56;
+  color: #ffffff;
   font-size: 1.2rem;
-  border: 3px solid #EF6106;
 }
 
 .login-button-submit:hover, .register-button-submit:hover{
@@ -142,9 +143,9 @@
   -moz-transition: 0.3s;
   -ms-transition: 0.3s;
   -o-transition: 0.3s;
-  background: white;
-  border: 3px solid #f99a56;
-  color: #EF6106;
+  background: #EF6106;
+  border: 3px solid #EF6106;
+  color: #ffffff;
   font-weight: bold;
 }
 
@@ -161,6 +162,7 @@
   text-align: center;
   justify-content: center;
   align-items: center;
+  color: white;
 }
 
 .register-link_txt{
