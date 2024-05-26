@@ -105,7 +105,7 @@
   }
 }
 
-@media screen and (max-height: 740px){
+@media screen and (max-height: 710px){
   .card-producto{
     height: 70vh;
     margin-top: 30%;
