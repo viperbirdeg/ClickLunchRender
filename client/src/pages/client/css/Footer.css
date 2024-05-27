@@ -10,7 +10,9 @@ footer {
   left: 0;
   position: relative;
   height: 8vh;
+  z-index: 10;
 }
+
 
 footer ul {
   list-style: none;
