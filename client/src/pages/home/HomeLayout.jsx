@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import { Outlet, useNavigate, useLocation } from "react-router-dom";
+import React, { useState } from "react";
+import { Outlet, useNavigate } from "react-router-dom";
 
 //*Importing self components
 import NavBar from "./components/NavBar";
@@ -11,8 +11,6 @@ import LoadingSpinner from './components/LoadingSpinne';
 
 const HomeLayout = () => {
   const navigation = useNavigate();
-  const location = useLocation();
-  const [data, setData] = React.useState([]);
   const [loading, setLoading] = useState(true);
 
   React.useEffect(() => {

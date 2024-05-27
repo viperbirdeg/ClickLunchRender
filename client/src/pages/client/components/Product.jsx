@@ -11,7 +11,7 @@ const Producto = () => {
   const [error, setError] = React.useState(null);
   const [value, setValue] = useState(1);
   const decrementValue = () => {
-    if (value == 1) {
+    if (value === 1) {
       setValue(1);
     } else {
       setValue(value - 1);
