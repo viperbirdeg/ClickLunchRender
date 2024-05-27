@@ -1,51 +1,110 @@
+@import url("https://fonts.googleapis.com/css2?family=Danfo&display=swap");
 .home-client {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
-  background-color: #f5f5f5;
   padding: 2rem;
+  padding-left: 0;
+  padding-right: 0;
   box-sizing: border-box;
   padding-top: 1%;
+  margin-bottom: 1%;
 }
 
 .cafeteria {
   display: flex;
   flex-direction: column;
   width: 30%;
-  height: 40%;
-  border-radius: 5px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  height: 35vh;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.6);
   margin: 1rem;
-  padding: 1%;
+  padding: 0.5%;
   text-align: center;
+  align-items: center;
   position: relative;
-  border: 2px solid #ee6107;
-}
-
-.cafeteria:hover{
-  background: #ff893f;
-  transition: 0.3s;
-  -webkit-transition: 0.3s;
-  -moz-transition: 0.3s;
-  -ms-transition: 0.3s;
-  -o-transition: 0.3s;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+    url("../../../imagenes/fondotarj3.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  overflow-x: hidden;
   color: white;
+  transition: 0.2s;
+  -webkit-transition: 0.2s;
+  -moz-transition: 0.2s;
+  -ms-transition: 0.2s;
+  -o-transition: 0.2s;
 }
 
-.cafeteria:hover svg{
+.caf_id {
+  display: none;
+}
+
+.cont_pro {
+  display: none;
+}
+
+.cafeteria:hover {
+  transition: 0.2s;
+  -webkit-transition: 0.2s;
+  -moz-transition: 0.2s;
+  -ms-transition: 0.2s;
+  -o-transition: 0.2s;
+  background-image: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0)),
+    url("../../../imagenes/fondotarjhov2.jpg");
+  padding: 1%;
+  box-shadow: 6px 6px 5px rgba(0, 0, 0, 0.4);
+}
+
+.cafeteria:hover .data_caf_img {
+  transition: 0.2s;
+  -webkit-transition: 0.2s;
+  -moz-transition: 0.2s;
+  -ms-transition: 0.2s;
+  -o-transition: 0.2s;
+  display: none;
+}
+
+.cafeteria:hover .data_caf {
   transition: 0.3s;
-  fill:#ee6107;
   -webkit-transition: 0.3s;
   -moz-transition: 0.3s;
   -ms-transition: 0.3s;
   -o-transition: 0.3s;
-  background: white;
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: space-between;
+  align-items: end;
 }
 
-.cafeteria:hover a{
+.cafeteria:hover .cont_pro {
+  display: flex;
+}
+
+.cafeteria:hover a {
   border: 2px solid #ffffff;
+  background: #b54601;
   color: white;
+}
+
+.cafeteria a:hover{
+  transition: 0.2s;
+  border: 2px solid #ee6107;
+  background: #ee6107;
+  color: white;
+} 
+
+.cafeteria:hover .data_caf section {
+  display: flex;
+  flex-direction: column;
+  width: 40%;
+}
+
+.data_caf section span{
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .cafeteria h2 {
@@ -65,11 +124,75 @@
   justify-items: center;
 }
 
-@media screen and (max-width:1138px){
-  .cafeteria{
+.presentation_cafe {
+  position: relative;
+  height: 100vh;
+  width: 100%;
+  background-image: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0)),
+    url("../../../imagenes/Fondoise.jpg"); /* Reemplaza con las rutas de tus imágenes */
+  background-size: cover;
+  background-position: left, left, right;
+  background-repeat: no-repeat, no-repeat, no-repeat;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  color: white;
+  gap: 5%;
+  padding: 5%;
+}
+.expl_caf {
+  width: 18.5%;
+  padding: 1%;
+  display: flex;
+  justify-content: space-between;
+  background: none;
+  border: 3px solid #ff893f;
+  border-radius: 20px;
+  -webkit-border-radius: 20px;
+  -moz-border-radius: 20px;
+  -ms-border-radius: 20px;
+  -o-border-radius: 20px;
+}
+.expl_caf:hover {
+  transition: 0.2s;
+  -webkit-transition: 0.2s;
+  -moz-transition: 0.2s;
+  -ms-transition: 0.2s;
+  -o-transition: 0.2s;
+  background: #ff893f;
+  font-weight: bold;
+  transform: scale(1.05);
+  -webkit-transform: scale(1.05);
+  -moz-transform: scale(1.05);
+  -ms-transform: scale(1.05);
+  -o-transform: scale(1.05);
+}
+.expl_caf:active {
+  transition: 0.1s;
+  -webkit-transition: 0.1s;
+  -moz-transition: 0.1s;
+  -ms-transition: 0.1s;
+  -o-transition: 0.1s;
+  transform: scale(0.95);
+  -webkit-transform: scale(0.95);
+  -moz-transform: scale(0.95);
+  -ms-transform: scale(0.95);
+  -o-transform: scale(0.95);
+}
+.tt_is {
+  font-family: "Danfo", serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+  font-variation-settings: "ELSH" 0;
+  font-size: 5rem;
+}
+
+@media screen and (max-width: 1138px) {
+  .cafeteria {
     width: 100%;
   }
-  .home-client{
+  .home-client {
     padding: 0;
   }
 }
