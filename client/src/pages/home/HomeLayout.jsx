@@ -39,13 +39,6 @@ const HomeLayout = () => {
           setLoading(false);
         });
     }
-    const handleNavigationStart = () => setLoading(true);
-    const handleNavigationEnd = () => setLoading(false);
-    handleNavigationStart();
-    navigation.listen(handleNavigationEnd);
-    return () => {
-      navigation.unlisten(handleNavigationEnd);
-    };
   }, [navigation]);
 
 
