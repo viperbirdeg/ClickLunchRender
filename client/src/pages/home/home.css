@@ -262,6 +262,7 @@
   transform: translateX(110%);
   transition: transform 0.3s ease;
   z-index: 200;
+  background-color: #333;
 }
 
 .slide-menu.open {
@@ -281,7 +282,7 @@
   height: 3%;
   right: -45%;
   top: 10px;
-  fill: rgba(0, 0, 0, 0.65);
+  fill: #fff;
 }
 
 .overlay {
@@ -299,15 +300,25 @@
   .nav_options{
     display: none;
   }
+  .home-text-desc{
+    width: 100%;
+  }
+  .home-title{
+    font-size: 2.5rem;
+  }
   .home-layout-container{
-    height: auto;
+    height: 100vh;
+  }
+  .home-text{
+    justify-content: unset;
+    margin-top: 11vh;
   }
   .home-container {
     flex-direction: column;
   }
   .home-logo{
-    width: 150px;
-    height: 150px;
+    width: 10vh;
+    height: 10vh;
   }
   .home-navbar{
     height: 10vh;
@@ -321,10 +332,12 @@
     display: block;
     height: 35%;
     margin-right: 7%;
+    fill: #fff;
   }
   .icon_navbar{
     width: 100%;
     margin: 0;
+    fill: #fff;
   }
   li {
     height: 10%;
