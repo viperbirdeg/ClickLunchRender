@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useState } from "react";
 import { useParams } from "react-router-dom";
 import { baseUrl, getCart } from "../../../other/extras";
+import fond_pro from "../../../imagenes/fondotarj.jpg";
 
 import "../css/Product.css";
 
@@ -45,44 +46,52 @@ const Producto = () => {
   };
 
   return (
-    <div className="producto">
-      {error && <p>{error.message}</p>}
-      <section className="img_cont_pro">
-        <div className="img_container">
-          <img
-            src={
-              data.url ||
-              "https://t3.ftcdn.net/jpg/04/60/01/36/360_F_460013622_6xF8uN6ubMvLx0tAJECBHfKPoNOR5cRa.jpg"
-            }
-            alt="Loading..."
-          />
-        </div>
-        <section className="cant_cont">
-          <span>Cantidad: </span>
-          <input type="number" name="" id="" value={value} onChange={(e) => setValue(Number(e.target.value))} />
-          <svg onClick={decrementValue} xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-dash-circle-fill" viewBox="0 0 16 16">
-            <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0M4.5 7.5a.5.5 0 0 0 0 1h7a.5.5 0 0 0 0-1z" />
-          </svg>
-          <svg onClick={incrementValue} xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-circle-fill" viewBox="0 0 16 16">
-            <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0M8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3z" />
-          </svg>
+    <div className="producto_cont">
+      <div className="nv_line"></div>
+      <div className="producto">
+        {error && <p>{error.message}</p>}
+        <section className="img_cont_pro">
+          <div className="img_container">
+            <img
+              src={
+                data.url ||
+                "https://t3.ftcdn.net/jpg/04/60/01/36/360_F_460013622_6xF8uN6ubMvLx0tAJECBHfKPoNOR5cRa.jpg"
+              }
+              alt="Loading..."
+            />
+          </div>
         </section>
-        <button onClick={handleChange}>Añadir al Carrito</button>
-      </section>
-      <section className="text_desc_pro">
-        <div className="id">id : {data.id}</div>
-        <div className="nombre">{data.nombre}</div>
-        <div className="descripcion">{data.descripcion}</div>
-        <div className="costo">Precio: ${data.costo}</div>
-        <div className="disponibilidad">
-          Unidades Disponibles: {data.disponibilidad}
-        </div>
-        <div className="estado">{data.estado}</div>
-        <div className="id-Cafeteria">ID - Cafeteria : {data.id_cafeteria}</div>
-        <div className="tiempo-preparacion">
-          Tiempo de preparacion : {data.tiempo_preparacion} min
-        </div>
-      </section>
+        <section className="text_desc_pro">
+          <img className="fond_pro" src={fond_pro} alt="Imagen no encontrada" />
+          <div className="nombre">{data.nombre}</div>
+          <div className="nombre_cafeteria">Nombre de la Cafeteria</div>
+          <hr />
+          <div className="descripcion">{data.descripcion}</div>
+          <hr />
+          <div className="tiempo-preparacion">Tiempo de preparacion : {data.tiempo_preparacion} min</div>
+          <div className="disponibilidad">Unidades Disponibles: {data.disponibilidad}</div>
+          <hr />
+          <div className="estado">{data.estado}</div>
+          <div className="opc_product">
+            <section className="opc_product_btns">
+              <section className="cant_cont">
+                <span>Cantidad: </span>
+                <input type="number" name="" id="" value={value} onChange={(e) => setValue(Number(e.target.value))} />
+                <svg onClick={decrementValue} xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-dash-circle-fill" viewBox="0 0 16 16">
+                  <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0M4.5 7.5a.5.5 0 0 0 0 1h7a.5.5 0 0 0 0-1z" />
+                </svg>
+                <svg onClick={incrementValue} xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-circle-fill" viewBox="0 0 16 16">
+                  <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0M8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3z" />
+                </svg>
+              </section>
+              <button onClick={handleChange}><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cart-fill" viewBox="0 0 16 16">
+                <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5M5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4m7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4m-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2m7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2" />
+              </svg> Añadir al Carrito</button>
+            </section>
+            <div className="costo">${data.costo}</div>
+          </div>
+        </section>
+      </div>
     </div>
   );
 };

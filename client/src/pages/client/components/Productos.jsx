@@ -34,7 +34,8 @@ const Productos = () => {
 
   return (
     <div className="text">
-      <h1>Productos</h1>
+      <div className="nv_line"></div>
+      <h1>Lista de Productos de "Negocio"</h1>
       <div className="productos">
         {error == null ? ( // undefined == null
           data.map((item) => (
