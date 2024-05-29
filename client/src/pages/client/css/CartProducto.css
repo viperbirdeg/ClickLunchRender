@@ -15,38 +15,38 @@
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
 }
 
-.des_pro_cart .nombre{
+.des_pro_cart .nombre {
   width: 20%;
   font-size: 1.3rem;
 }
 
-.des_pro_cart div:nth-child(2){
+.des_pro_cart div:nth-child(2) {
   width: 40%;
   font-size: 0.8rem;
 }
 
-.des_pro_cart .costo{
+.des_pro_cart .costo {
   width: 15%;
 }
 
-.des_pro_cart .disponibilidad{
+.des_pro_cart .disponibilidad {
   width: 10%;
 }
 
-.des_pro_cart button{
+.des_pro_cart button {
   width: 5%;
 }
 
-.des_pro_cart .tiempo-preparacion{
+.des_pro_cart .tiempo-preparacion {
   width: 10%;
 }
 
-.des_pro_cart .id{
+.des_pro_cart .id {
   width: 1%;
   display: none;
 }
 
-.des_pro_cart .id-Cafeteria{
+.des_pro_cart .id-Cafeteria {
   display: none;
 }
 
@@ -70,38 +70,60 @@
   font-size: 1rem;
 }
 
-.text_desc_pro{
-  width: 60%;
+.text_desc_pro {
+  position: relative;
+  width: 50%;
   height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
+  padding: 2.5%;
+  box-shadow: -5px -2px 5px rgba(0, 0, 0, 0.4);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  color: white;
+  overflow: hidden;
+}
+
+.text_desc_pro div, .text_desc_pro hr{
+  position: relative;
+  z-index: 2;
 }
 
 .descripcion {
-  background: #ffb276;
-  width: 90%;
+  background: #00000080;
+  width: 100%;
   padding: 2%;
   height: 30%;
-  border-radius: 15px;
-  -webkit-border-radius: 15px;
-  -moz-border-radius: 15px;
-  -ms-border-radius: 15px;
-  -o-border-radius: 15px;
+  border-radius: 10px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -o-border-radius: 10px;
   overflow-y: scroll;
 }
 
+.producto hr {
+  border: 1.5px solid rgb(198, 198, 198);
+  border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -o-border-radius: 5px;
+}
 .descripcion::-webkit-scrollbar {
   width: 5px;
 }
 
 .descripcion::-webkit-scrollbar-thumb {
-  background: #ffffff; 
+  background: #ffffff;
   border-radius: 6px;
 }
 
-.costo{
-  font-size: 1.5rem;
+.costo {
+  font-size: 1.7rem;
+  font-weight: bold;
 }
 
 .cart-producto button {
@@ -117,7 +139,7 @@
   background-color: #555;
 }
 
-.reliz_pedido{
+.reliz_pedido {
   background: white;
   border: 2px solid #ee6107;
   color: black;
@@ -128,7 +150,7 @@
   -o-border-radius: 25px;
 }
 
-.reliz_pedido:hover{
+.reliz_pedido:hover {
   transition: 0.3s;
   -webkit-transition: 0.3s;
   -moz-transition: 0.3s;
@@ -136,4 +158,14 @@
   -o-transition: 0.3s;
   color: white;
   font-weight: bold;
+}
+
+.fond_pro {
+  position: absolute;
+  height: 101%;
+  width: 101%;
+  top: -0.5%;
+  left: -0.5%;
+  filter: blur(2px) brightness(70%);
+  -webkit-filter: blur(2px) brightness(70%);
 }
