@@ -24,6 +24,7 @@ import AddSaldo from "../pages/cafe/components/AddSaldo.jsx";
 import Profile from './../pages/client/components/Profile';
 import SelfProducts from "../pages/cafe/components/SelfProducts.jsx";
 import EditProduct from "../pages/cafe/components/EditProduct.jsx";
+import CafeOrderProduct from "../pages/cafe/components/CafeOrderProduct.jsx";
 
 //?Client components
 
@@ -52,6 +53,7 @@ const Router = () => {
       <Route path="/cafe" element={<CafeLayout/>}>
         <Route index path="" element={<HomeCafe/>} />
         <Route path="orders" element={<Orders/>}/>
+        <Route path="order/:id" element={<CafeOrderProduct/>}/>
         <Route path="products" element={<SelfProducts/>}/>
         <Route path="editProduct/:id" element={<EditProduct/>}/>
         <Route path="addProduct" element={<NewProduct/>}/>

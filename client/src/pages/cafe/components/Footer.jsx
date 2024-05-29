@@ -4,7 +4,7 @@ import "../css/Footer.css";
 const Footer = () => {
   return (
     <footer className="footer">
-      <p>© 2023 BLACKBOXAI. All rights reserved.</p>
+      <p>© Hi-Stern. All rights reserved. ❤️</p>
       <ul className="footer-links">
         <li>
           <a href="/cafe">Privacy Policy</a>
