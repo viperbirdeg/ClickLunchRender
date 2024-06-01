@@ -28,16 +28,17 @@
 
 .logo {
   transition: 0.2s;
-  width: 100px;
-  height: 100px;
+  width: 125px;
+  height: 125px;
   object-fit: cover;
   position: absolute;
-  top: 5%;
+  top: 0%;
   left: 5%;
   -webkit-transition: 0.2s;
   -moz-transition: 0.2s;
   -ms-transition: 0.2s;
   -o-transition: 0.2s;
+  background: white;
 }
 
 .navbar-links {

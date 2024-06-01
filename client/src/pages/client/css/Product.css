@@ -1,27 +1,22 @@
 .producto {
   display: flex;
   align-items: center;
-  padding: 2rem;
-  background: white;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  justify-content: end;
   transition: transform 0.3s ease-in-out;
   position: relative;
   -webkit-transition: transform 0.3s ease-in-out;
   -moz-transition: transform 0.3s ease-in-out;
   -ms-transition: transform 0.3s ease-in-out;
   -o-transition: transform 0.3s ease-in-out;
-  height: 83vh;
-  width: 80%;
-  gap: 2%;
-}
-
-.producto div {
-  margin-bottom: 1rem;
+  height: 77vh;
+  width: 73%;
+  margin-top: 1vh;
 }
 
 .producto button {
-  background: transparent;
-  color: rgb(0, 0, 0);
+  transition: 0.2s;
+  background: #ee6107;
+  color: rgb(255, 255, 255);
   padding: 0.5rem 1rem;
   border-radius: 25px;
   text-decoration: none;
@@ -41,37 +36,42 @@
 
 .producto button:hover {
   transition: 0.2s;
-  background-color: #ee6107;
+  background-color: #893a0a;
   -webkit-transition: 0.2s;
   -moz-transition: 0.2s;
   -ms-transition: 0.2s;
   -o-transition: 0.2s;
   color: white;
   font-weight: bold;
+  transform: scale(1.1);
+  -webkit-transform: scale(1.1);
+  -moz-transform: scale(1.1);
+  -ms-transform: scale(1.1);
+  -o-transform: scale(1.1);
+  border: 2px solid #893a0a;
 }
 
 .img_container{
-  width: 75%;
-  height: 60%;
+  width: 100%;
+  height: 100%;
 }
 
 .img_container img{
   width: 100%;
   height: 100%;
-  border: 10px solid white;
-  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+  box-shadow: 4px 4px 5px rgba(0, 0, 0, 0.5);
 }
 
 .img_cont_pro{
-  width: 40%;
-  height: 100%;
+  width: 50%;
+  height: 94%;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url("../../../imagenes/fondotarj2.jpg");
 }
 .cant_cont{
-  height: 15%;
   width: 100%;
   display: flex;
   justify-content: center;
@@ -92,10 +92,34 @@
   font-size: 1.1rem;
 }
 .cant_cont svg{
-  fill: rgb(72, 72, 72);
+  fill: rgb(255, 255, 255);
   height: 100%;
-  width: 4%;
+  width: auto;
   cursor: pointer;
+  margin-left: 3%;
+}
+
+.producto_cont{
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.1);
+}
+
+.opc_product{
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.opc_product_btns{
+  display: flex;
+  flex-direction: column;
+  width: 50%;
 }
 
 @media screen and (max-width:1138px){

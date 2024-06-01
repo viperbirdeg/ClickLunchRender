@@ -35,7 +35,7 @@ const NavBar = () => {
 
   const handleScroll = () => {
     const scrollY = window.scrollY;
-    const threshold = document.documentElement.scrollHeight * 0.1; // 10% de la altura total del documento
+    const threshold = window.innerHeight * 0.05;
 
     if (scrollY > threshold && !isScrolled) {
       setIsScrolled(true);
@@ -54,7 +54,7 @@ const NavBar = () => {
   return (
     <nav className={`navbar ${isScrolled ? 'navbar-scrolled' : ''}`}>
       <div className="navbar-logo">
-        <img src={logo} alt="Logo" className="logo" />
+        <img src={logo} alt="Logo" className="logo"/>
       </div>
       <NavLink to='' className="navbar-link" end>
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-house-door-fill" viewBox="0 0 16 16">
