@@ -15,7 +15,7 @@ const alimentoRouter = require("./api/v1/routes/alimento.js");
 const cafeteriaRouter = require("./api/v1/routes/cafeteria.js");
 const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
-require('dotenv').config();
+require("dotenv").config();
 
 //?Middlewares
 //* Mostar las solicitudes y respuestas
@@ -23,11 +23,15 @@ app.use(morgan("dev"));
 //* Utilizar formato .JSON
 app.use(express.json());
 //* Utilizar cors for fetchs
-const whitelist = ['http://localhost:3000', 'https://clicklunchrender.onrender.com']
-app.use(cors({
-  origin: whitelist,
-  //credentials: true
-}));
+const whitelist = [
+  "http://localhost:3000",
+  "https://clicklunchrender.onrender.com",
+];
+app.use(
+  cors({
+    origin: whitelist
+  })
+);
 //*Utiliar body parser
 app.use(bodyParser.json());
 //* Enviar cliente estatico
@@ -63,8 +67,6 @@ const storage = new Multer.memoryStorage();
 const upload = Multer({
   storage,
 });
-
-
 
 //?Ruta de "apoyo" {Eliminar para produccion final}
 
