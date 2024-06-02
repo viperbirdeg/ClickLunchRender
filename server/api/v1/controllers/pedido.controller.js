@@ -5,7 +5,7 @@ const getDatosPedido = async (req, res) => {
   const client = await pool.connect();
 
   try {
-    const id = req.body.idPedido;
+    const id = req.body.data.idPedido;
 
     const dataPedido = await client.query(
       'SELECT * FROM clicklunch."Pedido_vw" WHERE id = $1',
