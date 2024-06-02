@@ -35,23 +35,16 @@ const OrderProduct = ({ id }) => {
   }, [id]);
 
   return (
-    <div className="cart-producto">
+    <div className="cart-producto" id="cart-producto">
       {isLoading && <p>Loading...</p>}
       {error && <p>{error.message}</p>}
       {data && (
-        <div>
-          <div className="id">id : {data.id}</div>
-          <div className="nombre">Nombre : {data.nombre}</div>
-          <div className="descripcion">Descripcion : {data.descripcion}</div>
-          <div className="costo">Costo : ${data.costo}</div>
-          <div className="disponibilidad">
-            Disponibilidad Aproximada : {data.disponibilidad}
-          </div>
-          <div className="estado">{data.estado}</div>
-          <div className="id-Cafeteria">ID-Cafeteria : {data.id_cafeteria}</div>
-          <div className="tiempo-preparacion">
-            Tiempo de preparacion : {data.tiempo_preparacion} min
-          </div>
+        <div className="des_pro_cart" id="des_pro_cart">
+          <div className="nombre"><img src={data.url} alt="" /></div>
+          <div className="descripcion"><span>{data.nombre}</span><section>{data.descripcion}</section></div>
+          <div className="tiempo-preparacion">{data.tiempo_preparacion} min</div>
+          <div className="disponibilidad">{data.disponibilidad}</div>
+          <div className="costo">${data.costo}</div>
         </div>
       )}
     </div>
