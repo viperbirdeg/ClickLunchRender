@@ -122,6 +122,11 @@
   width: 50%;
 }
 
+#nombre{
+  font-size: 3rem;
+  font-weight: bold;
+}
+
 @media screen and (max-width:1138px){
   .text{
     margin-top: 10%;
