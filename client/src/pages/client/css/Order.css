@@ -1,22 +1,30 @@
 .order {
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  padding: 1rem;
   margin-bottom: 1rem;
   width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 1%;
 }
 
 .order-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 1rem;
 }
 
 .order-details {
+  display: flex;
+  flex-direction: column;
   list-style: none;
   padding: 0;
   margin: 0;
+  gap: 5px;
+  align-items: end;
+}
+
+.order-details span{
+  font-size: 1.2rem;
+  font-weight: bold;
 }
 
 .order-details li {
@@ -27,6 +35,8 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  flex-direction: column;
+  position: relative;
 }
 
 .order-actions button {
@@ -35,4 +45,177 @@
 
 .order-product {
   margin-bottom: 1rem;
+}
+.order_pr_info{
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  margin-bottom: 1%;
+  align-items: center;
+}
+.order_pr_info section{
+  display: flex;
+  flex-direction: column;
+  align-items: end;
+  gap: 5px;;
+}
+.order_vm{
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 1%;
+}
+.order_svg{
+  height: 100%;
+}
+.order_svg  svg{
+  height: 100%;
+  width: auto;
+}
+.order_info{
+  width: 100%;
+}
+.estado_pr_info{
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+.dts_info_order{
+  font-size: 0.9rem;
+}
+.dts_info_order span{
+  font-size: 0.9rem;
+  display: flex;
+  gap: 5px;
+}
+.dts_info_order span span{
+  font-weight: bold;
+}
+.inf_gen_order{
+  width: 100%;
+  display: flex;
+  gap: 1%;
+  background: #ffffff;
+  padding: 1%;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+#cart-producto{
+  flex-direction: column;
+  height: 100%;
+  padding-top: 0;
+}
+#Text_cart{
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  padding-left: 0;
+  padding-right: 0;
+  margin-bottom: 1%;
+}
+#Text_cart span:first-child {
+  width: 20%;
+}
+
+#Text_cart span:nth-child(2) {
+  width: 40%;
+}
+
+.Text_cart span:nth-child(3) {
+  width: 10%;
+  font-size: 0.8rem;
+}
+#des_pro_cart{
+  background-color: #e5e9ea;
+  border: 1px solid #9d9d9d;
+  overflow: hidden;
+  border-radius: 3px;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  -ms-border-radius: 3px;
+  -o-border-radius: 3px;
+  height: 20vh;
+}
+.btn_ver, .btn_ver2{
+  display: flex;
+}
+.btn_nver{
+  display: none;
+}
+.btn_ver button{
+  background: white;
+  border-radius: 100%;
+  -webkit-border-radius: 100%;
+  -moz-border-radius: 100%;
+  -ms-border-radius: 100%;
+  -o-border-radius: 100%;
+  fill: black;
+  border: 1px solid black;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 5px;
+  transition: 0.2s;
+  -webkit-transition: 0.2s;
+  -moz-transition: 0.2s;
+  -ms-transition: 0.2s;
+  -o-transition: 0.2s;
+}
+.btn_ver button:hover{
+  transition: 0.2s;
+  -webkit-transition: 0.2s;
+  -moz-transition: 0.2s;
+  -ms-transition: 0.2s;
+  -o-transition: 0.2s;
+  background: black;
+  fill: white;
+  transform: scale(1.15);
+  -webkit-transform: scale(1.15);
+  -moz-transform: scale(1.15);
+  -ms-transform: scale(1.15);
+  -o-transform: scale(1.15);
+}
+.btn_ver2 button{
+  background: rgb(0, 0, 0);
+  border-radius: 100%;
+  -webkit-border-radius: 100%;
+  -moz-border-radius: 100%;
+  -ms-border-radius: 100%;
+  -o-border-radius: 100%;
+  fill: rgb(255, 255, 255);
+  border: 1px solid rgb(0, 0, 0);
+  width: 40px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0px;
+}
+.btn_ver2 button:hover{
+  transition: 0.2s;
+  -webkit-transition: 0.2s;
+  -moz-transition: 0.2s;
+  -ms-transition: 0.2s;
+  -o-transition: 0.2s;
+  background: rgb(255, 255, 255);
+  fill: rgb(0, 0, 0);
+  transform: scale(1.15);
+  -webkit-transform: scale(1.15);
+  -moz-transform: scale(1.15);
+  -ms-transform: scale(1.15);
+  -o-transform: scale(1.15);
+}
+.btn_ver svg, .btn_nver svg{
+  height: 100%;
+  width: 100%;
+}
+#txt_btn_msmn{
+  font-size: 0.8rem;
+  color: gray;
+  font-weight: 400;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
 }

@@ -63,7 +63,7 @@ const Producto = () => {
         </section>
         <section className="text_desc_pro">
           <img className="fond_pro" src={fond_pro} alt="Imagen no encontrada" />
-          <div className="nombre">{data.nombre}</div>
+          <div id="nombre">{data.nombre}</div>
           <div className="nombre_cafeteria">Nombre de la Cafeteria</div>
           <hr />
           <div className="descripcion">{data.descripcion}</div>
