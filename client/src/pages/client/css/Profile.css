@@ -1,21 +1,38 @@
+@import url("https://fonts.googleapis.com/css2?family=Danfo&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap');
 .profile-container {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   height: 100vh;
+  width: 100%;
   margin: 0;
   padding: 0;
-  background-color: #f9f9f9;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)),
+    url("../../../imagenes/fondotarj.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  overflow-x: hidden;
 }
 
 .profile-info {
   background-color: #fff;
   padding: 20px;
-  border-radius: 20px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  width: 80%;
-  max-width: 400px;
+  width: 75%;
+  border-radius: 3px;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  -ms-border-radius: 3px;
+  -o-border-radius: 3px;
+  height: 75%;
+  box-shadow: 2px 2px 20px rgba(0, 0, 0, 0.5);
+  position: relative;
+  display: flex;
+  padding-top: 0;
 }
 
 .profile-info h2 {
@@ -37,11 +54,6 @@
 
 .profile-info li:last-child {
   border-bottom: none;
-}
-
-.profile-info span {
-  font-weight: bold;
-  margin-right: 10px;
 }
 
 .profile-info li::before {
@@ -71,9 +83,13 @@
   background-color: red;
 }
 
-.ul-info-container {
+.info-container {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
+  width: 100%;
+  align-items: start;
+  height: 90%;
+  justify-content: space-around;
 }
 
 ul>li>span {
@@ -84,4 +100,128 @@ ul>li>span {
 ul.center>li>span {
   align-items: center;
   justify-content: start;
+}
+.tarj_prof{
+  position: absolute;
+  height: 100%;
+  width: 30%;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)),
+    url("../../../imagenes/fondotarj.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  overflow-x: hidden;
+  top: 0;
+  left: 0;
+}
+.delete-account-button{
+  position: relative;
+  z-index: 2;
+  width: 55%;
+  height: 10%;
+  position: absolute;
+  bottom: 10px;
+  right: 20px;
+  border-radius: 25px;
+  -webkit-border-radius: 25px;
+  -moz-border-radius: 25px;
+  -ms-border-radius: 25px;
+  -o-border-radius: 25px;
+  font-size: 1.2rem;
+  background: rgb(234 158 74);
+  border: 2px solid rgb(234 158 74);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+}
+.delete-account-button:hover{
+  transition: 0.2s;
+  -webkit-transition: 0.2s;
+  -moz-transition: 0.2s;
+  -ms-transition: 0.2s;
+  -o-transition: 0.2s;
+  background: none;
+  border: 2px solid #b54601;
+  color: black;
+}
+.tarj_txt_prof{
+  display: flex;
+  flex-direction: column;
+  width: 60%;
+  height: 100%;
+  align-items: start;
+  justify-content: space-between;
+}
+.id_user_perf{
+  position: absolute;
+  left: 0%;
+  top: 4%;
+  color: white;
+  font-size: 3rem;
+  padding: 0.5%;
+  border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -o-border-radius: 5px;
+  transform: rotate(-45deg);
+  -webkit-transform: rotate(-45deg);
+  -moz-transform: rotate(-45deg);
+  -ms-transform: rotate(-45deg);
+  -o-transform: rotate(-45deg);
+  background: rgba(0, 0, 0, 0.8);
+  font-family: "Josefin Sans", sans-serif;
+}
+.rol_user_perf{
+  padding: 1%;
+  background: gray;
+  color: white;
+  font-weight: bold;
+}
+.hol_user_perf{
+  background: #b54601;
+  padding: 1.5%;
+  font-size: 3rem;
+  font-family: "Danfo", serif;
+  color: white;
+  text-align: center;
+  border-radius: 10px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -o-border-radius: 10px;
+}
+.nom_user_perf span{
+  font-size: 1.3rem;
+}
+.info_user_perf{
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  font-size: 1.3rem;
+  gap: 10%;
+}
+.info_user_perf span{
+  display: flex;
+  align-items: center;
+  gap: 3%;
+  text-align: center;
+}
+.mon_icon{
+  height: 100%;
+  width: auto;
+  fill: #1d6c0c;
+}
+.corr_icon{
+  height: 100%;
+  width: auto;
+  fill: #b54601;
+}
+.nom_rol_user_perf{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 10px;
+  align-items: start;
 }
