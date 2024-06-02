@@ -1,10 +1,12 @@
 import React from "react";
 import { baseUrl } from "../../../other/extras";
 import axios from "axios";
-import '../css/AddSaldo.css'
+import "../css/AddSaldo.css";
+import { desactivar, soloNumeros } from "../../../other/validation";
 
 const AddSaldo = () => {
   const [usuario, setUsuario] = React.useState();
+  const [isDisabled, setIsDisabled] = React.useState(false);
 
   const [credentials, setCredentials] = React.useState({
     saldo: null,
@@ -26,6 +28,7 @@ const AddSaldo = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    setIsDisabled(true);
     api
       .put(`/updateSaldo`, {
         data: {
@@ -34,7 +37,7 @@ const AddSaldo = () => {
         },
       })
       .then((res) => {
-        alert('Saldo actualizado correctamente');
+        alert("Saldo actualizado correctamente");
         window.location.reload();
       })
       .catch((error) => {
@@ -43,6 +46,7 @@ const AddSaldo = () => {
   };
 
   const handleChange = (e) => {
+    soloNumeros(e);
     setCredentials({
       ...credentials,
       [e.target.name]: e.target.value,
@@ -86,7 +90,7 @@ const AddSaldo = () => {
         <div className="add-saldo-form-container">
           <form onSubmit={handleSubmit} className="add-saldo-form">
             <div className="user-info">
-              <div>Identifier : {usuario.id}</div>
+              <div>Identificador : {usuario.id}</div>
               <div>Nombre de usuario : {usuario.nombre}</div>
               <div>Saldo actual : {usuario.saldo}</div>
             </div>
@@ -99,21 +103,23 @@ const AddSaldo = () => {
 
             <label htmlFor="amount">Saldo a agregar</label>
             <input
-              type="number"
+              type="text"
               name="saldo"
               id="amount"
               onChange={handleChange}
             />
-            <button type="submit">Add Saldo</button>
+            <button type="submit" disabled={isDisabled}>
+              Add Saldo
+            </button>
           </form>
-          <button onClick={handleReturn}>Return</button>
+          <button onClick={handleReturn}>Regresar</button>
         </div>
       )}
       {!usuario && (
         <form onSubmit={searchUser} className="search-user-form">
-          <label>Id usuario</label>
+          <label>ID usuario</label>
           <input
-            type="number"
+            type="text"
             name="idUser"
             id="idUser"
             onChange={handleChange}

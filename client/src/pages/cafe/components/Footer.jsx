@@ -4,16 +4,16 @@ import "../css/Footer.css";
 const Footer = () => {
   return (
     <footer className="footer">
-      <p>© Hi-Stern. All rights reserved. ❤️</p>
+      <p>© Hi-Stern.Todos los derechos reservados. ❤️</p>
       <ul className="footer-links">
         <li>
-          <a href="/cafe">Privacy Policy</a>
+          <a href="/cafe">Politicas de privacidad</a>
         </li>
         <li>
-          <a href="/cafe">Terms of Service</a>
+          <a href="/cafe">Terminos de servicio</a>
         </li>
         <li>
-          <a href="/cafe">Contact Us</a>
+          <a href="/cafe">Contactos</a>
         </li>
       </ul>
     </footer>

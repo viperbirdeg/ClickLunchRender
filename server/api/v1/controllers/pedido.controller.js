@@ -97,7 +97,7 @@ const addNewPedido = async (req, res) => {
       [idUsuario]
     );
 
-    console.log('saldo:' , saldoResult.rows[0].saldo);
+    console.log("saldo:", saldoResult.rows[0].saldo);
 
     var preciototal = 0;
     for (let i = 0; i < idsAlimentos.length; i++) {
@@ -106,8 +106,8 @@ const addNewPedido = async (req, res) => {
         [idsAlimentos[i].id]
       );
       preciototal += alimentosResult.rows[0].costo;
-      console.log('costo' ,alimentosResult.rows[0].costo);
-      console.log('preciototal', preciototal)
+      console.log("costo", alimentosResult.rows[0].costo);
+      console.log("preciototal", preciototal);
     }
 
     if (saldoResult.rows[0].saldo < preciototal) {
@@ -116,8 +116,9 @@ const addNewPedido = async (req, res) => {
       });
     }
 
-    const newSaldo = parseInt(saldoResult.rows[0].saldo) - parseInt(preciototal);
-    
+    const newSaldo =
+      parseInt(saldoResult.rows[0].saldo) - parseInt(preciototal);
+
     const updateResult = await client.query(
       `UPDATE clicklunch."Usuario" SET saldo = $1 WHERE id = $2`,
       [newSaldo, idUsuario]
@@ -199,7 +200,64 @@ const getPedidosCliente = async (req, res) => {
   }
 };
 
-const postRutaAdicional = () => {};
+const postRutaAdicional = async (req, res) => {
+  const client = await pool.connect();
+
+  try {
+    const data = req.body.data;
+    const { idPedido, estado } = data;
+
+    const result = await client.query(
+      `UPDATE clicklunch."Pedido" SET id_estado = $1 WHERE id = $2`,
+      [estado, idPedido]
+    );
+
+    if (result.rowCount > 0) {
+      if (estado === 2) {
+        const dataPedido = await client.query(
+          'SELECT * FROM clicklunch."Alimentos_Pedido_vw" WHERE id_pedido = $1',
+          [idPedido]
+        );
+
+        dataPedido.rows.forEach(async (element) => {
+          const alimentosResult = await client.query(
+            'UPDATE clicklunch."Alimento" SET disponibilidad = (disponibilidad - 1) WHERE id = $1',
+            [element.id_alimento]
+          );
+        });
+      } else if (estado === 3) {
+        console.log("Completado");
+      } else if (estado === 4) {
+        const dataResult = await client.query(
+          'SELECT id_cliente, costo_total FROM clicklunch."Pedido_vw" WHERE id = $1',
+          [idPedido]
+        );
+
+        const devolver = await client.query(
+          'UPDATE clicklunch."Usuario" SET saldo=saldo + $1 WHERE id = $2;',
+          [
+            parseInt(dataResult.rows[0].costo_total),
+            dataResult.rows[0].id_cliente,
+          ]
+        );
+      }
+      return res.status(200).json({
+        message: "Se actualizo el estado del pedido",
+      });
+    } else {
+      return res.status(404).json({
+        message: "No se encontraron datos",
+      });
+    }
+  } catch (error) {
+    return res.status(500).json({
+      message: "Ocurrio un error inesperado en el servidor",
+      error: error.message,
+    });
+  } finally {
+    client.release();
+  }
+};
 
 module.exports = {
   getDatosPedido,

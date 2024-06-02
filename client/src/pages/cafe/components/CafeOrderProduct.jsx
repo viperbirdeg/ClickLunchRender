@@ -11,16 +11,18 @@ const CafeOrderProduct = () => {
 
   React.useEffect(() => {
     axios
-      .get(`${baseUrl}/api/pedido/getDatosPedido`, {
-        params: {
-          id: props.id,
+      .post(`${baseUrl}/api/pedido/getDatosPedido`, {
+        data: {
+          idPedido: props.id,
         },
       })
       .then((response) => {
+        console.log(response)
         setData(response.data.message);
         setIsLoading(false);
       })
       .catch((error) => {
+        console.log(error);
         setError(error.message);
       });
   }, [props]);

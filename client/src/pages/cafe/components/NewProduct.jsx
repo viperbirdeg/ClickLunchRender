@@ -2,6 +2,7 @@ import React from "react";
 import { baseUrl } from "../../../other/extras";
 import axios from "axios";
 import '../css/NewProduct.css'
+import { soloLetrasNormales, soloNumeros } from "../../../other/validation";
 
 const NewProduct = () => {
   const [credentials, setCredentials] = React.useState({
@@ -15,12 +16,21 @@ const NewProduct = () => {
   const [imagina, setImagina] = React.useState(null);
   const [res, setRes] = React.useState(null);
 
-  const handleChange = (e) => {
+  const handleChangeNumerico = (e) => {
+    soloNumeros(e);
     setCredentials({
       ...credentials,
       [e.target.name]: e.target.value,
     });
   };
+
+  const handleChange = (e) => {
+    soloLetrasNormales(e);
+    setCredentials({
+     ...credentials,
+      [e.target.name]: e.target.value,
+    });
+  }
 
   React.useEffect(() => {
     if (imagina) {
@@ -78,7 +88,7 @@ const NewProduct = () => {
   };
   return (
     <div>
-      Agregar aliment
+      Agregar alimento
       <form onSubmit={handleSubmit}>
         <div className="input-form-container">
           <input
@@ -115,28 +125,28 @@ const NewProduct = () => {
         <div className="input-form-contaienr">
           Tiempo de preparacion en minutos :{" "}
           <input
-            type="number"
+            type="text"
             name="tiempopreparacion"
             placeholder="Tiempo Preparacion"
-            onChange={handleChange}
+            onChange={handleChangeNumerico}
           />
         </div>
         <div className="input-form-contaienr">
           Precio en pesos mexicanos :{" "}
           <input
-            type="number"
+            type="text"
             name="costo"
             placeholder="Precio"
-            onChange={handleChange}
+            onChange={handleChangeNumerico}
           />
         </div>
         <div className="input-form-contaienr">
           Disponibilidad aproximada :{" "}
           <input
-            type="number"
+            type="text"
             name="disponibilidad"
             placeholder="Disponibilidad"
-            onChange={handleChange}
+            onChange={handleChangeNumerico}
           />
         </div>
         <div className="input-form-contaienr">

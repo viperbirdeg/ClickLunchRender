@@ -63,7 +63,7 @@ const Orders = () => {
                       <li>estado : {item.estado}</li>
                       <li>costo : {item.costo_total}</li>
                       <NavLink to={`/cafe/order/${item.id}`}>
-                        Atender orden
+                        Continuar atendiendo
                       </NavLink>
                       <hr />
                     </ul>
@@ -83,7 +83,7 @@ const Orders = () => {
                       <li>estado : {item.estado}</li>
                       <li>costo : {item.costo_total}</li>
                       <NavLink to={`/cafe/order/${item.id}`}>
-                        Atender orden
+                        Detalles
                       </NavLink>
                       <hr />
                     </ul>
@@ -103,7 +103,7 @@ const Orders = () => {
                       <li>estado : {item.estado}</li>
                       <li>costo : {item.costo_total}</li>
                       <NavLink to={`/cafe/order/${item.id}`}>
-                        Atender orden
+                        Detalles
                       </NavLink>
                       <hr />
                     </ul>

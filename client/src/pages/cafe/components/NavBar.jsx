@@ -47,7 +47,7 @@ const NavBar = () => {
         </li>
       </ul>
       <button onClick={handleClick} className="navbar-logout">
-        LogOut
+        Cerrar Sesion
       </button>
     </nav>
   );

@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React from 'react'
 import { baseUrl } from '../../../other/extras';
+import CafeOrderProduct from './CafeOrderProduct';
 
 const CafeOrder = ({id, fecha_pedido, hora, estado, costo_total, id_cliente}) => {
 

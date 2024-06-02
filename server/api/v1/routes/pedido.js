@@ -2,13 +2,13 @@ const { getDatosPedido, getElementosPedido, addNewPedido, postRutaAdicional, get
 
 const router = require('express').Router(); 
 //!Las acciones referidas al pedido se encuentran en produccion!
-router.get('/getDatosPedido', getDatosPedido);
+router.post('/getDatosPedido', getDatosPedido);
 
 router.post('/getElementosPedido', getElementosPedido);
 
 router.post('/addNewPedido', addNewPedido);
 
-router.post('/postRutaAdicional', postRutaAdicional);
+router.post('/alterarEstadoPedido', postRutaAdicional);
 
 router.post('/getPedidosCliente', getPedidosCliente);
 
