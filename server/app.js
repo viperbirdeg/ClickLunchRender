@@ -29,7 +29,7 @@ const whitelist = [
   "https://clicklunchrender.onrender.com"
 ];
 app.use(cors({
-  origin: whitelist;
+  origin: whitelist
 }));
 
 //*Utiliar body parser
