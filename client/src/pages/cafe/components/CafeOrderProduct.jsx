@@ -11,9 +11,55 @@ const CafeOrderProduct = () => {
   const [isLoading, setIsLoading] = React.useState(true);
   const [elemenstData, setELementsData] = React.useState(null);
   const [envio, setEnvio] = React.useState(1);
+  const [enabled, setEnabled] = React.useState(true);
 
-  const Boton = () => {
-    return <div></div>;
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const text = e.target.value;
+
+    setEnabled(false);
+
+    axios
+      .post(`${baseUrl}/api/pedido/alterarEstadoPedido`, {
+        data: {
+          idPedido: props.id,
+          estado: text,
+        },
+      })
+      .then((value) => {
+        console.log(value);
+        window.location.reload();
+      }).catch((error)=>{
+        console.log(error)
+      });
+  };
+
+  const Boton = ({ type }) => {
+    if (type === 1) {
+      return (
+        <div>
+          <button onClick={handleSubmit} value={3} enabled={enabled}>
+            Cancelar
+          </button>
+          <button onClick={handleSubmit} value={2} enabled={enabled}>
+            Iniciar
+          </button>
+        </div>
+      );
+    } else if (type === 2) {
+      return (
+        <div>
+          <button onClick={handleSubmit} value={3} enabled={enabled}>
+            Cancelar
+          </button>
+          <button onClick={handleSubmit} value={4} enabled={enabled}>
+            Marcar Finalizado
+          </button>
+        </div>
+      );
+    } else if (type === 3) {
+      return <></>;
+    }
   };
 
   React.useEffect(() => {
@@ -36,7 +82,7 @@ const CafeOrderProduct = () => {
             setEnvio(3);
             break;
           case "Finalizado":
-            setEnvio(4);
+            setEnvio(3);
             break;
           default:
             break;
@@ -88,7 +134,7 @@ const CafeOrderProduct = () => {
         <div>No hay elementos</div>
       )}
       {error && <h2>error: {error}</h2>}
-      {envio}
+      <Boton type={envio} />
     </div>
   );
 };

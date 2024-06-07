@@ -42,8 +42,8 @@ const TarjetaAlimentoPedido = ({ id }) => {
           <div className="tiempo-preparacion">
             {data.tiempo_preparacion} min
           </div>
-          <div className="disponibilidad">{data.disponibilidad}</div>
-          <div className="costo">${data.costo}</div>
+          <div className="disponibilidad">Disponibilidad prevista: {data.disponibilidad}</div>
+          <div className="costo">Costo : ${data.costo}</div>
         </div>
       )}
       {}
