@@ -344,3 +344,31 @@
   background: rgb(0, 173, 0);
   color: white;
 }
+
+@media screen and (max-width:1138px){
+  .pedidos{
+    flex-direction: column;
+  }
+  .list_order_pedidos .pedido{
+    width: 100%;
+    align-items: unset;
+  }
+  .cont_pedido{
+    display: flex;
+    flex-direction: row;
+    height: 30vh;
+    overflow-x: auto;
+    width: auto;
+    
+  }
+  .pedido{
+    height: 25vh;
+  }
+  .ped_esp {
+    min-width: 25vh;
+    max-width: 25vh;
+    height: 25vh;
+    left: 20%;
+    margin-right: 2%;
+  }
+}

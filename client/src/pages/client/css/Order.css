@@ -219,3 +219,15 @@
   align-items: center;
   gap: 10px;
 }
+
+@media screen and (max-width:1138px){
+  .order_svg{
+    display: none;
+  }
+  #Text_cart{
+    display: none;
+  }
+  #des_pro_cart{
+    height: auto;
+  }
+}
