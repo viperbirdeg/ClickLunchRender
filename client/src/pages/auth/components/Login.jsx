@@ -31,19 +31,33 @@ const Login = () => {
     e.preventDefault();
     setLoading(true);
     if (!credentials.email || !credentials.password) {
-      setLoading(false); 
+      setLoading(false);
       return alert("Todos los campos son obligatorios");
     }
     if (!esCorreoElectronico(credentials.email)) {
-      setLoading(false); 
+      setLoading(false);
       return alert("El correo electronico es invalido");
     }
     if (!esContrasenaValida(credentials.password)) {
-      setLoading(false); 
+      setLoading(false);
       return alert("La contraseña es invalida");
     }
     if (/*captcha || */ true) {
       try {
+        axios
+          .post(`${baseUrl}/api/usuario/searchVerifyList`, {
+            data: {
+              email: credentials.email,
+            },
+          })
+          .then((res) => {
+            if (res.status === 200) {
+              navigation(`/auth/verify/${credentials.email}`);
+            }
+          })
+          .catch((value) => {
+            console.log(value);
+          });
         axios
           .post(`${baseUrl}/api/usuario/login`, {
             data: {
@@ -72,8 +86,8 @@ const Login = () => {
           })
           .catch((error) => {
             setLoading(false);
-            console.log(error)
-            return setError( error.response.data.message || error.message );
+            console.log(error);
+            return setError(error.response.data.message || error.message);
           });
       } catch (error) {
         setLoading(false);
@@ -95,7 +109,12 @@ const Login = () => {
         <form className="login-form" onSubmit={handleSubmit}>
           {error && <div className="login-error">{error}</div>}
           <div className="login-form-input-container">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-envelope" viewBox="0 0 16 16">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="currentColor"
+              class="bi bi-envelope"
+              viewBox="0 0 16 16"
+            >
               <path d={emailIcon} />
             </svg>
             <input
@@ -108,8 +127,13 @@ const Login = () => {
             />
           </div>
           <div className="login-form-input-container">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-lock" viewBox="0 0 16 16">
-              <path d= {passwordIcon} />
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="currentColor"
+              class="bi bi-lock"
+              viewBox="0 0 16 16"
+            >
+              <path d={passwordIcon} />
             </svg>
             <input
               type="password"
@@ -124,7 +148,9 @@ const Login = () => {
         </form>
         <span className="register-link">
           ¿No tienes cuenta?
-          <NavLink to="/auth/register" className="register-link_txt">Registrate</NavLink>
+          <NavLink to="/auth/register" className="register-link_txt">
+            Registrate
+          </NavLink>
         </span>
         {/*
         <div className="">

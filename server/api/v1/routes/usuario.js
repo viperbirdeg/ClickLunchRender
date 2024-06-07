@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { postNewUser, postLogin, postLogout, updateOneUser, getAllUsers, getOneUser, authOneUser, deleteOneUsuario, getUserPerId } = require('../controllers/usuario.controller');
+const { postNewUser, postLogin, postLogout, updateOneUser, getAllUsers, getOneUser, authOneUser, deleteOneUsuario, getUserPerId, searchForVerifyList, verifyUser } = require('../controllers/usuario.controller');
 
 //Registrar usuario
 router.post('/register', postNewUser);
@@ -26,6 +26,11 @@ router.get('/authUser', authOneUser);
 router.delete('/deleteUsuario', deleteOneUsuario);
 
 router.post('/userPerID', getUserPerId);
+
+//Exporte de ruta
+router.post('/searchVerifyList', searchForVerifyList);
+
+router.post('/verify', verifyUser);
 
 //Exporte de ruta
 module.exports = router;

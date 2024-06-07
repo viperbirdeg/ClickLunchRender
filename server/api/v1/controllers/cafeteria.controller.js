@@ -109,7 +109,7 @@ const getOneCafeteria = async (req, res) => {
    * }
    */
   //Obtener identificador
-  const id = req.body.id;
+  const id = req.body.data.id;
 
   //Buscar los datos
   const cafeteriaDatos = await datosCafeteria(id);
@@ -240,7 +240,7 @@ const updateSaldo = async (req, res) => {
   const { authorization } = req.headers;
   const idUser = req.body.data.idUser;
   const saldoextra = req.body.data.saldo;
-  
+
   //Validacion cafeteria:
   const data = await authToken(authorization);
 
@@ -249,16 +249,14 @@ const updateSaldo = async (req, res) => {
   }
 
   try {
-    
     const userData = await datosUsuario(idUser);
     if (!userData.status === 200) {
       return res.sendStatus(userData.status).json(userData.message);
     }
-    
 
-    const saldoNuevo = (parseInt(userData.message.saldo)) + (parseInt(saldoextra));
+    const saldoNuevo = parseInt(userData.message.saldo) + parseInt(saldoextra);
     console.log(saldoNuevo);
-    
+
     const updateResult = await client.query(
       `UPDATE clicklunch."Usuario" SET saldo = $1 WHERE id = $2`,
       [saldoNuevo, idUser]

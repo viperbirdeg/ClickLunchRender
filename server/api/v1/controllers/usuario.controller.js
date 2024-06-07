@@ -56,8 +56,13 @@ const postNewUser = async (req, res) => {
 
     //Devolver datos
     if (userResult.rowCount > 0) {
-      const response = await datosUsuario(userResult.rows[0].id);
-      return res.status(response.estado).json({ message: response });
+      const response = await client.query(
+        `SELECT * FROM clicklunch."Verify" WHERE id = $1`,
+        [userResult.rows[0].id]
+      );
+      if (response.rowCount > 0) {
+        return res.status(200).json({ message: "Requiere verificacion" });
+      }
     }
     res.status(404).json({
       message: "Hubo problemas encontrando el usuario",
@@ -375,6 +380,64 @@ const authToken = async (token) => {
   }
 };
 
+const searchForVerifyList = async (req, res) => {
+  const client = await pool.connect();
+  try {
+    const email = req.body.data.email;
+    const verifyResult = await client.query(
+      `SELECT * FROM clicklunch."Verify" WHERE email = $1`,
+      [email]
+    );
+    if (verifyResult.rowCount > 0) {
+      return res.status(200).json({ message: verifyResult.rows[0] });
+    }
+    return res
+      .status(404)
+      .json({ message: "No se ha encontrado el usuario en verify" });
+  } catch (error) {
+    return res.status(500).json({
+      message: "Ocurrio un error inesperado en el servidor",
+      error: error,
+    });
+  } finally {
+    client.release();
+  }
+};
+
+const verifyUser = async (req, res) => {
+  const client = await pool.connect();
+
+  const verifyCode = req.body.data.verifyCode;
+  const email = req.body.data.email;
+
+  try {
+    const verifyResult = await client.query(
+      `SELECT * FROM clicklunch."Verify" WHERE email = $1`,
+      [email]
+    );
+    if (verifyResult.rows[0].verify === verifyCode) {
+      const accept = await client.query(
+        `
+        UPDATE clicklunch."Usuario" SET isactive = true WHERE email = $1
+      `,
+        [email]
+      );
+      return res.sendStatus(200);
+    } else {
+      return res
+        .status(401)
+        .json({ message: "Codigo de verificacion incorrecto" });
+    }
+  } catch (error) {
+    return res.status(500).json({
+      message: "Ocurrio un error inesperado en el servidor",
+      error: error,
+    });
+  } finally {
+    client.release();
+  }
+};
+
 //Exportaciones
 module.exports = {
   postNewUser,
@@ -388,4 +451,6 @@ module.exports = {
   authToken,
   datosUsuario,
   getUserPerId,
+  searchForVerifyList,
+  verifyUser,
 };
