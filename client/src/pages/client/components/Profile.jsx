@@ -65,7 +65,7 @@ const Profile = () => {
     <div className="profile-container">
       <div className="profile-info">
         <section className="tarj_prof"></section>
-        <img src={perfil} alt="" />
+        <img className="img_prof" src={perfil} alt="" />
         <div className="tarj_txt_prof">
           {!edit && (
             <div className="info-container">
