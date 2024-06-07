@@ -33,7 +33,7 @@ const SelfProducts = () => {
 
   return (
     <div className="items-container">
-      <h1>Productos</h1>
+      <h1>Tus Productos</h1>
       <div className="productos">
         {!error ? (
           data.map((item) => (
