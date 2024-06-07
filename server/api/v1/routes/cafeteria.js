@@ -5,7 +5,7 @@ router.post('/addNewCafeteria', addNewCafeteria);
 
 router.get('/getAllCafeterias', getAllCafeterias);
 
-router.get('/getOneCafeteria', getOneCafeteria);
+router.post('/getOneCafeteria', getOneCafeteria);
 
 router.delete('/deleteOneCafeteria', deleteOneCafeteria);
 
