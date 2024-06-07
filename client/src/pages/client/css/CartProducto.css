@@ -239,4 +239,10 @@
   .text_desc_pro{
     width: 90%;
   }
+  section.img_cont_pro{
+    height: 50vh;
+  }
+  .input-form-contaienr{
+    margin-top: 2%;
+  }
 }

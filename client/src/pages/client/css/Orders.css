@@ -419,7 +419,10 @@
     min-width: 25vh;
     max-width: 25vh;
     height: 25vh;
-    left: 20%;
     margin-right: 2%;
+    left: 26%;
+  }
+  .btn_ap{
+    width: 100%;
   }
 }
