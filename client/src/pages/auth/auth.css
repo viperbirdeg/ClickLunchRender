@@ -109,6 +109,10 @@
   fill: #EF6106;
 }
 
+.whiteletter{
+  color: white;
+}
+
 .login-form-input-email, .login-form-input-password, .register-form-input-user, .register-form-input-email, .register-form-input-password{
   background: none;
   border: none;
