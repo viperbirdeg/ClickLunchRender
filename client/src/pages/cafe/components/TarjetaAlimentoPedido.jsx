@@ -27,7 +27,7 @@ const TarjetaAlimentoPedido = ({ id }) => {
   }, [id]);
 
   return (
-    <div className="cart-producto" id="cart-producto">
+    <div className="cart-producto" id="seg_ord_pro">
       {isLoading && <p>Loading...</p>}
       {error && <p>{error.message}</p>}
       {data && (
@@ -42,8 +42,8 @@ const TarjetaAlimentoPedido = ({ id }) => {
           <div className="tiempo-preparacion">
             {data.tiempo_preparacion} min
           </div>
-          <div className="disponibilidad">Disponibilidad prevista: {data.disponibilidad}</div>
-          <div className="costo">Costo : ${data.costo}</div>
+          <div className="disponibilidad">Unidades: {data.disponibilidad}</div>
+          <div className="costo">Costo: ${data.costo}</div>
         </div>
       )}
       {}
