@@ -170,4 +170,7 @@
   .nombre_caf{
     font-size: 1.3rem;
   }
+  .nombre_caf{
+    white-space: unset;
+  }
 }

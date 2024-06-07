@@ -38,8 +38,8 @@
 
 .logo {
   transition: 0.2s;
-  width: 125px;
-  height: 125px;
+  width: 13vh;
+  height: 13vh;
   object-fit: cover;
   position: absolute;
   top: 0%;
@@ -86,4 +86,10 @@
 
 .navbar-logout:hover {
   background-color: #c00;
+}
+
+@media screen and (max-width:1138px){
+  .logo{
+    background: none;
+  }
 }

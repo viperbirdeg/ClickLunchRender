@@ -225,3 +225,18 @@
   top: -0.5%;
   left: -0.5%;
 }
+
+@media screen and (max-width:1138px){
+  .producto{
+    flex-direction: column;
+    height: auto;
+    width: 90%;
+    margin-bottom: 10vh;
+  }
+  .img_cont_pro{
+    width: 90%;
+  }
+  .text_desc_pro{
+    width: 90%;
+  }
+}

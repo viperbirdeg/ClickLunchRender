@@ -263,6 +263,7 @@
   transition: transform 0.3s ease;
   z-index: 200;
   background-color: #333;
+  height: 100%;
 }
 
 .slide-menu.open {

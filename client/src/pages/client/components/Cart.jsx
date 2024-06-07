@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import CartProducto from "./CartProducto";
 
 import "../css/Cart.css"; // Import the CSS file
@@ -11,11 +11,29 @@ const Cart = () => {
   const [data, setData] = React.useState([]);
   const [error, setError] = React.useState();
   const [total, setTotal] = React.useState(0);
+  const [pequena, setPequena] = useState(false);
   const navigation = useNavigate();
+
 
   const handleToggle = () => {
     setIsActive(!isActive);
   };
+
+  useEffect(() => {
+    function handleResize() {
+      const isSmall = window.innerWidth <= 960;
+      if (isSmall && isActive) {
+        setPequena(true);
+      }else{
+        setPequena(false);
+      }
+    }
+      window.addEventListener('resize', handleResize);
+  
+    handleResize();
+
+    return () => window.removeEventListener('resize', handleResize);
+  }, [isActive]);
 
   React.useEffect(() => {
     const storedCart = window.localStorage.getItem("cart");
@@ -101,9 +119,13 @@ const Cart = () => {
                 <span></span>
               </section>
               <ul className="Productos" id="Productos">
-                {data.map((item, key) => (
-                  <CartProducto key={key} id={item.id} />
-                ))}
+                {!pequena && (
+                  <>
+                    {data.map((item, key) => (
+                      <CartProducto key={key} id={item.id} />
+                    ))}
+                  </>
+                )}
               </ul>
             </section>
           ) : (

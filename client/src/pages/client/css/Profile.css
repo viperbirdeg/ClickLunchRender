@@ -33,6 +33,7 @@
   position: relative;
   display: flex;
   padding-top: 0;
+  margin-top: 2%;
 }
 
 .profile-info h2 {
@@ -105,8 +106,8 @@ ul.center>li>span {
   position: absolute;
   height: 100%;
   width: 30%;
-  background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)),
-    url("../../../imagenes/fondotarj.jpg");
+  /*background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)),
+    url("../../../imagenes/fondotarj.jpg");*/
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -224,4 +225,43 @@ ul.center>li>span {
   width: 100%;
   gap: 10px;
   align-items: start;
+}
+
+@media screen and (max-width:1400px){
+  .profile-info{
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 90%;
+    height: 75%;
+  }
+  .img_prof{
+    width: 25vh;
+    height: auto;
+  }
+  .tarj_txt_prof{
+    width: 100%;
+  }
+  .delete-account-button{
+    width: 90%;
+    margin-top: 5%;
+  }
+  .info_user_perf{
+    flex-direction: column;
+  }
+  .hol_user_perf{
+    font-size: 2.5rem;
+  }
+  .info_user_perf{
+    font-size: 1.1rem;
+  }
+  .info_user_perf span{
+    height: 20%;
+  }
+  .corr_icon{
+    height: 4.3vh;
+  }
+  .mon_icon{
+    height: 4.3vh;
+  }
 }
