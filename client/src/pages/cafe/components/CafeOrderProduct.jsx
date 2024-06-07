@@ -2,6 +2,7 @@ import axios from "axios";
 import React from "react";
 import { useParams } from "react-router-dom";
 import { baseUrl } from "../../../other/extras";
+import TarjetaAlimentoPedido from "./TarjetaAlimentoPedido";
 
 const CafeOrderProduct = () => {
   const props = useParams();
@@ -9,6 +10,11 @@ const CafeOrderProduct = () => {
   const [error, setError] = React.useState(null);
   const [isLoading, setIsLoading] = React.useState(true);
   const [elemenstData, setELementsData] = React.useState(null);
+  const [envio, setEnvio] = React.useState(1);
+
+  const Boton = () => {
+    return <div></div>;
+  };
 
   React.useEffect(() => {
     axios
@@ -18,12 +24,26 @@ const CafeOrderProduct = () => {
         },
       })
       .then((response) => {
-        console.log(response);
         setData(response.data.message[0]);
+        switch (response.data.message[0].estado) {
+          case "En espera":
+            setEnvio(1);
+            break;
+          case "Procesando":
+            setEnvio(2);
+            break;
+          case "Cancelado":
+            setEnvio(3);
+            break;
+          case "Finalizado":
+            setEnvio(4);
+            break;
+          default:
+            break;
+        }
         setIsLoading(false);
       })
       .catch((error) => {
-        console.log(error);
         setError(error.message);
       });
     axios
@@ -36,27 +56,39 @@ const CafeOrderProduct = () => {
         (response) => {
           setELementsData(response.data.message);
         },
-        (error) => {
-          console.log(error);
-        }
+        (error) => {}
       )
-      .catch((error) => {
-        console.log(error);
-      });
+      .catch((error) => {});
   }, [props]);
 
   return (
     <div>
       {isLoading ? <h1>Informacion cargando</h1> : <div></div>}
       <h1>CafeOrderProduct</h1>
-      <h2>id: {props.id}</h2>
-      <ul>
-        <li></li>
-      </ul>
-      <h3>data: {JSON.stringify(data)}</h3>
-      <h3>Elements data : {JSON.stringify(elemenstData)}</h3>
+      {data ? (
+        <ul>
+          <li>ID pedido : {data.id}</li>
+          <li>ID cliente : {data.id_cliente}</li>
+          <li>FECHA DEL PEDIDO : {data.fecha_pedido.split("T")[0]}</li>
+          <li>HORA : {data.hora}</li>
+          <li>COSTO TOTAL : {data.costo_total}</li>
+          <li>ESTADO : {data.estado}</li>
+        </ul>
+      ) : (
+        <h1>NO</h1>
+      )}
+
+      {elemenstData ? (
+        <div>
+          {elemenstData.map((item, index) => {
+            return <TarjetaAlimentoPedido key={index} id={item.id_alimento} />;
+          })}
+        </div>
+      ) : (
+        <div>No hay elementos</div>
+      )}
       {error && <h2>error: {error}</h2>}
-      <h2>isLoading: {isLoading}</h2>
+      {envio}
     </div>
   );
 };

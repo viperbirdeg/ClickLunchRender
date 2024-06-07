@@ -97,7 +97,7 @@ const AddSaldo = () => {
 
             {credentials.saldo && (
               <div className="credentials">
-                Saldo a agregar : {credentials.saldo}
+                Saldo a agregar : {credentials.saldo}w
               </div>
             )}
 
