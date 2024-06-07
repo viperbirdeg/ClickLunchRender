@@ -25,6 +25,7 @@ import Profile from './../pages/client/components/Profile';
 import SelfProducts from "../pages/cafe/components/SelfProducts.jsx";
 import EditProduct from "../pages/cafe/components/EditProduct.jsx";
 import CafeOrderProduct from "../pages/cafe/components/CafeOrderProduct.jsx";
+import Verify from "../pages/auth/components/Verify.jsx";
 
 //?Client components
 
@@ -41,6 +42,7 @@ const Router = () => {
       <Route path="/auth" element={<AuthLayout />}>
         <Route index path="" element={<Login />}/>
         <Route path="register" element={<Register />} />
+        <Route path="verify/:email" element={<Verify/>} />
       </Route>
       <Route path="/client" element={<ClientLayout/>} >
         <Route index path="" element={<HomeClient/>}/>

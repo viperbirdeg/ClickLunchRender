@@ -70,6 +70,7 @@ const Register = () => {
           })
           .catch((error) => {
             setLoading(false);
+            console.log(error)
             return setError(error.response.data.message);
           });
       } catch (error) {
@@ -113,7 +114,7 @@ const Register = () => {
       <div className="register-form-container">
         <span className="register-text">Registro</span>
         <form className="register-form" onSubmit={handleSubmit}>
-          {error && <div className="login-error">{error}</div>}
+          {error && <div className="login-error">{JSON.stringify(error)}</div>}
           <div className="register-form-input-container">
             <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-person" viewBox="0 0 16 16">
               <path d={userIcon} />

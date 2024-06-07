@@ -28,15 +28,6 @@ const Order = ({
       })
       .then(
         (response) => {
-          axios
-            .get(`${baseUrl}/api/cafeteria/getOneCafeteria`, {
-              data: {
-                idCafeteria: id_cafeteria,
-              },
-            })
-            .then((res) => {
-              setNombreCaf(res.data.message.nombre);
-            });
           setData(response.data.message);
         },
         (error) => {

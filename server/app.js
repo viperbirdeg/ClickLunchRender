@@ -6,6 +6,7 @@ const path = require("path");
 const cors = require("cors");
 const Multer = require("multer");
 const cloudinary = require("cloudinary").v2;
+const emailjs = require("emailjs-com");
 
 //?Routers
 const app = express();
@@ -26,11 +27,13 @@ app.use(express.json());
 
 const whitelist = [
   "http://localhost:3000",
-  "https://clicklunchrender.onrender.com"
+  "https://clicklunchrender.onrender.com",
 ];
-app.use(cors({
-  origin: '*'
-}));
+app.use(
+  cors({
+    origin: "*",
+  })
+);
 
 //*Utiliar body parser
 app.use(bodyParser.json());
