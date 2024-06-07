@@ -64,3 +64,9 @@
   font-size: 1.3rem;
   font-weight: bold;
 }
+
+@media screen and (max-width:1138px){
+  .seg_order{
+    margin-bottom: 10vh;
+  }
+}

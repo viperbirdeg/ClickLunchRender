@@ -204,3 +204,9 @@ button {
 .nme_user_adds{
   font-size: 1.5rem;
 }
+
+@media screen and (max-width:1138px){
+  .search-user-form{
+    width: 90%;
+  }
+}

@@ -271,7 +271,7 @@
 
 .cart_tot {
   position: absolute;
-  right: -80%;
+  right: -100%;
   text-align: center;
 }
 
@@ -348,17 +348,69 @@
   font-size: 2rem;
 }
 
-@media screen and (max-width: 1138px) {
-  .Carrito_cont {
-    overflow-x: scroll;
+@media screen and (max-width: 960px) {
+  .Text_cart{
+    display: none;
   }
-
-  .Text_cart {
-    min-width: 1300px; 
+  .cart-producto{
+    height: auto;
+    flex-direction: row-reverse;
   }
-
-  .Productos {
-    /*display: inline-block;*/
-    min-width: 1300px;
+  .cart-producto div{
+    flex-direction: column;
+    height: auto;
+  }
+  .Productos{
+    height: 80%;
+  }
+  .des_pro_cart div:nth-child(2){
+    width: 100%;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+  }
+  .des_pro_cart .tiempo-preparacion{
+    width: 100%;
+  }
+  .des_pro_cart .disponibilidad{
+    width: 100%;
+  }
+  .des_pro_cart .costo{
+    width: 100%;
+  }
+  .cart_text svg {
+    width: 2.5vh;
+  }
+  .div_cart_tt{
+    width: 80%;
+  }
+  .cart_tot{
+    right: -100%;
+    z-index: 10;
+  }
+  .elim_carr {
+    width: 15%;
+  }
+  .elim_carr svg{
+    height: auto;
+    width: 4vh;
+  }
+  .cart_text{
+    position: unset;
+  }
+  .cont_cart{
+    width: 100%;
+  }
+  .descripcion span{
+    text-align: center;
+  }
+  .descripcion span, .descripcion section{
+    text-align: center;
+  }
+  .btn_main_ttcart{
+    z-index: 10;
+  }
+  .txt_cart_tot{
+    z-index: 10;
   }
 }

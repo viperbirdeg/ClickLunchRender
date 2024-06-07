@@ -36,7 +36,7 @@ const Orders = () => {
       <h1 className="orders-header">Pedidos</h1>
       <div className="orders-list">
         {data ? (
-          <div className="list_order_pedidos">
+          <div className="list_order_pedidos pedidos">
             <div className="pedido">
               <h2>Pedido(s) en espera</h2>
               <div className="cont_pedido">

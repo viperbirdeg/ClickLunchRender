@@ -192,7 +192,11 @@
   .cafeteria {
     width: 100%;
   }
-  .home-client {
-    padding: 0;
+  .tt_is{
+    font-size: 2.5rem;
+    width: 100%;
+  }
+  .expl_caf{
+    width: 70%;
   }
 }
