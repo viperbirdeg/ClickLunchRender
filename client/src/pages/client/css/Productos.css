@@ -23,6 +23,7 @@
   justify-content: space-between;
   height: 60vh;
   overflow: hidden;
+  font-family: "Poppins", sans-serif;
 }
 .card-producto div {
   margin: 0;
@@ -79,6 +80,10 @@
   justify-content: space-between;
   align-items: center;
   z-index: 5;
+}
+
+#btn_edit_pro{
+  justify-content: end;
 }
 
 .img_pro_card{
@@ -250,6 +255,12 @@
   border-bottom-right-radius: 10px;
   position: relative;
   z-index: 2;
+}
+
+.items-container h1{
+  width: 100%;
+  font-family: "Poppins", sans-serif;
+  text-align: center;
 }
 
 @media screen and (max-width:1138px){
