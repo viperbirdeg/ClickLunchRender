@@ -225,9 +225,9 @@ const postRutaAdicional = async (req, res) => {
             [element.id_alimento]
           );
         });
-      } else if (estado === 3) {
-        console.log("Completado");
       } else if (estado === 4) {
+        console.log("Completado");
+      } else if (estado === 3) {
         const dataResult = await client.query(
           'SELECT id_cliente, costo_total FROM clicklunch."Pedido_vw" WHERE id = $1',
           [idPedido]
