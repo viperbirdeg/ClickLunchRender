@@ -35,8 +35,8 @@ const Router = () => {
   return (
     <Routes>
       <Route path="/" element={<HomeLayout />}>
-        <Route index path="" element={<Inicio />} />
-        <Route path="aboutUs" element={<AboutUs />} />
+        <Route path="" element={<Inicio />} />
+        <Route index path="aboutUs" element={<AboutUs />} />
         <Route path="contact" element={<Contacts />} />
       </Route>
       <Route path="/auth" element={<AuthLayout />}>
