@@ -4,7 +4,8 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 100vh;
+  height: 78vh;
+  font-family: "Poppins", sans-serif;
 }
 
 .add-saldo-form-container {
@@ -27,17 +28,117 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: space-evenly;
+  width: 30%;
+  height: 90%;
+  border-radius: 15px;
+  -webkit-border-radius: 15px;
+  -moz-border-radius: 15px;
+  -ms-border-radius: 15px;
+  -o-border-radius: 15px;
+  background-image: url("../../../imagenes/morales.png");
+  padding: 1%;
+  color: white;
+}
+
+.search-user-form label{
+  width: 80%;
+  text-align: center;
+  font-size: 1.6rem;
+}
+
+.search-user-form section{
+  text-align: center;
+  font-size: 1.5rem;
+  display: flex;
+  align-items: center;
   justify-content: center;
-  width: 20%;
+  gap: 5px;
+}
+
+.search-user-form input{
+  width: 60%;
+  font-size: 1.5rem;
+  color: rgba(255,255,255,0.7);
+  background: rgba(255,255,255,0.3);
+  border: none;
+  border-bottom: 1px solid white;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  outline: none;
+  transition: 0.2s;
+  -webkit-transition: 0.2s;
+  -moz-transition: 0.2s;
+  -ms-transition: 0.2s;
+  -o-transition: 0.2s;
+}
+
+.search-user-form input:focus{
+  transition: 0.2s;
+  -webkit-transition: 0.2s;
+  -moz-transition: 0.2s;
+  -ms-transition: 0.2s;
+  -o-transition: 0.2s;
+  font-weight: bold;
+  color: white;
+  border-bottom: 2px solid white;
+  background: rgba(255,255,255,0.15);
+}
+
+.search-user-form button{
+  padding: 2.5%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 7px;
+  border: 2px solid #ee6107;
+  background: none;
+  font-size: 1.3rem;
+  transition: 0.2s;
+  -webkit-transition: 0.2s;
+  -moz-transition: 0.2s;
+  -ms-transition: 0.2s;
+  -o-transition: 0.2s;
+  border-radius: 25px;
+  -webkit-border-radius: 25px;
+  -moz-border-radius: 25px;
+  -ms-border-radius: 25px;
+  -o-border-radius: 25px;
+}
+
+
+.search-user-form button:hover{
+  transition: 0.2s;
+  -webkit-transition: 0.2s;
+  -moz-transition: 0.2s;
+  -ms-transition: 0.2s;
+  -o-transition: 0.2s;
+  background: #ee6107;
+  font-weight: bold;
 }
 
 .user-info {
   display: flex;
-  flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
   width: 100%;
   margin-bottom: 10px;
+  height: 30%;
+}
+
+#search-user-form{
+  height: 100%;
+  width: 100%;
+}
+
+.user-info section{
+  display: flex;
+  height: 60%;
+}
+
+.user-info img{
+  height: 100%;
+  width: auto;
 }
 
 .credentials {
@@ -87,4 +188,19 @@ button {
   border-radius: 5px;
   margin-bottom: 10px;
   text-align: center;
+}
+.inpt_agr_saldo{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+}
+.btns_agr_saldo{
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+.nme_user_adds{
+  font-size: 1.5rem;
 }
