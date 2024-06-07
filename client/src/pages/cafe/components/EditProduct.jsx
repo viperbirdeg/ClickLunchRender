@@ -58,7 +58,7 @@ const EditProduct = () => {
             Tiempo de preparacion : {data.tiempo_preparacion} min
           </div>
           <div className="id-Cafeteria">ID-Cafeteria : {data.id_cafeteria}</div>
-          <button onClick={handleChange}>Editar alimento</button>
+          {/**<button onClick={handleChange}>Editar alimento</button> */}
         </div>
       ) : (
         <p>

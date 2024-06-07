@@ -79,6 +79,7 @@ const NewProduct = () => {
             })
             .then((response) => {
               alert("Alimento correctamente agregado");
+              window.location.reload();
             })
             .catch((error) => {
               alert("Ocurrio un error inesperado en el servidor");
