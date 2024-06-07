@@ -1,6 +1,6 @@
 footer {
-  background-color: #333;
-  color: white;
+  background-color: #f2c09b !important;
+  color: rgb(0, 0, 0) !important;
   padding: 1rem;
   display: flex;
   justify-content: space-between;
@@ -11,6 +11,7 @@ footer {
   position: relative;
   height: 8vh;
   z-index: 10;
+  font-family: "Poppins", sans-serif;
 }
 
 
@@ -20,6 +21,7 @@ footer ul {
   padding: 0;
   display: flex;
   flex-wrap: wrap;
+  color: black;
 }
 
 footer li {
@@ -29,7 +31,7 @@ footer li {
 }
 
 footer a {
-  color: white;
+  color: rgb(0, 0, 0);
   text-decoration: none;
 }
 
