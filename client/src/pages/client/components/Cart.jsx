@@ -23,7 +23,9 @@ const Cart = () => {
     if (storedCart) {
       setData(JSON.parse(storedCart));
     }
-    setTotal(window.localStorage.getItem("totalCart"));
+    setTimeout(() => {
+      setTotal(window.localStorage.getItem("totalCart"));
+    }, 3500);
   }, []);
 
   const handleSubmit = (e) => {
@@ -44,7 +46,7 @@ const Cart = () => {
         .post(`${baseUrl}/api/pedido/addNewPedido`, {
           data: {
             idUsuario: window.localStorage.getItem("id"),
-            idCafe: parseInt((window.localStorage.getItem("cafOrderId"))[1]),
+            idCafe: parseInt(window.localStorage.getItem("cafOrderId")[1]),
             cart: JSON.stringify(cart),
             fecha: fecha,
             hora: hora,
