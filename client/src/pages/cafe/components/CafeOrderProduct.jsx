@@ -29,7 +29,7 @@ const CafeOrderProduct = () => {
       .then((value) => {
         console.log(value);
         window.location.reload();
-      }).catch((error)=>{
+      }).catch((error) => {
         console.log(error)
       });
   };
@@ -102,30 +102,37 @@ const CafeOrderProduct = () => {
         (response) => {
           setELementsData(response.data.message);
         },
-        (error) => {}
+        (error) => { }
       )
-      .catch((error) => {});
+      .catch((error) => { });
   }, [props]);
 
   return (
-    <div>
+    <div className="seg_order">
       {isLoading ? <h1>Informacion cargando</h1> : <div></div>}
-      <h1>CafeOrderProduct</h1>
+      <h1>Seguimiento de la Orden</h1>
       {data ? (
-        <ul>
-          <li>ID pedido : {data.id}</li>
-          <li>ID cliente : {data.id_cliente}</li>
-          <li>FECHA DEL PEDIDO : {data.fecha_pedido.split("T")[0]}</li>
-          <li>HORA : {data.hora}</li>
-          <li>COSTO TOTAL : {data.costo_total}</li>
-          <li>ESTADO : {data.estado}</li>
-        </ul>
+        <div className="inf_seg">
+          <div className="ids_seg">
+            <section>N° Pedido: #{data.id}</section>
+            <section>N° Cliente: #{data.id_cliente}</section>
+          </div>
+          <div className="dts_seg">
+            <section>
+              <section>ESTADO : {data.estado}</section>
+              <section>Pedido Efectuado el: {data.fecha_pedido.split("T")[0]} a las {data.hora}</section>
+            </section>
+            <section>
+              <section className="total_seg">TOTAL: ${data.costo_total}</section>
+            </section>
+          </div>
+        </div>
       ) : (
         <h1>NO</h1>
       )}
 
       {elemenstData ? (
-        <div>
+        <div id="seg_cont_pro">
           {elemenstData.map((item, index) => {
             return <TarjetaAlimentoPedido key={index} id={item.id_alimento} />;
           })}
