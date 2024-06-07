@@ -31,6 +31,7 @@ const CafeLayout = () => {
     <div className="cafe-layout-container">
       <NavBar />
       <div className="cafe-layout-content">
+      <div class="nv_line"></div>
         <Outlet />
       </div>
       <Footer 

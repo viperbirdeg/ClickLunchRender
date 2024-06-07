@@ -19,6 +19,16 @@
   align-items: center;
   color: #fff;
   padding: 10px;
+  color: #fff;
+  padding: 10px;
+  padding-bottom: 0px;
+  padding-top: 2.8%;
+  padding-right: 0;
+  text-align: center;
+  width: 100%;
+  display: flex;
+  justify-content: end;
+  gap: 2%;
 }
 
 .navbar-logo {

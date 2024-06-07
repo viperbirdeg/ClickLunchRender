@@ -224,6 +224,4 @@
   width: 101%;
   top: -0.5%;
   left: -0.5%;
-  filter: blur(2px) brightness(70%);
-  -webkit-filter: blur(2px) brightness(70%);
 }
