@@ -31,8 +31,13 @@
 
 .text{
   margin:0;
-  flex-direction: row;
+  flex-direction: column;
   flex-wrap: wrap;
+  width: 100%;
+}
+
+.text h1{
+  text-align: center;
 }
 
 .info_capr{
