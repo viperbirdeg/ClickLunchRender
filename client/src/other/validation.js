@@ -35,7 +35,7 @@ export const soloNumeros = (e) => {
 export const soloLetrasNormales = (e) => {
   e.preventDefault();
   let value = e.target.value;
-  e.target.value = value.replace(/[^a-zA-Z\s]/g, "");
+  e.target.value = value.replace(/[^a-zA-Z\s,0-9]/g, "");
 };
 
 export const desactivar = (e) => {

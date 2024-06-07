@@ -40,8 +40,14 @@ const Producto = () => {
   const handleChange = (e) => {
     e.preventDefault();
     const cart = getCart();
-    cart.push({ id: data.id });
-    alert("Producto agregado");
+    for(let i = 0; i < value; i++){
+      cart.push({ id: data.id });
+    }
+    if(value === 1){
+      alert("Producto agregado");
+    }else{
+      alert("Productos agregado");
+    }
     return window.localStorage.setItem("cart", JSON.stringify(cart));
   };
 
