@@ -84,6 +84,7 @@ const Cart = () => {
   return (
     <div className="cart">
       <div class="nv_line"></div>
+      {data.length > 0 ? (
       <div className="cont_cart_gen">
         <div className="div_cart_tt">
           <section
@@ -132,7 +133,7 @@ const Cart = () => {
             <hr /> Tú Carrito de Compras
           </span>
           {error && <div className="">{error}</div>}
-          {data.length > 0 ? (
+          
             <section className="Carrito_cont">
               <section className="Text_cart">
                 <span>Producto</span>
