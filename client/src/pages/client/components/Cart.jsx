@@ -14,7 +14,6 @@ const Cart = () => {
   const [pequena, setPequena] = useState(false);
   const navigation = useNavigate();
 
-
   const handleToggle = () => {
     setIsActive(!isActive);
   };
@@ -24,15 +23,15 @@ const Cart = () => {
       const isSmall = window.innerWidth <= 960;
       if (isSmall && isActive) {
         setPequena(true);
-      }else{
+      } else {
         setPequena(false);
       }
     }
-      window.addEventListener('resize', handleResize);
-  
+    window.addEventListener("resize", handleResize);
+
     handleResize();
 
-    return () => window.removeEventListener('resize', handleResize);
+    return () => window.removeEventListener("resize", handleResize);
   }, [isActive]);
 
   React.useEffect(() => {
@@ -84,7 +83,7 @@ const Cart = () => {
   return (
     <div className="cart">
       <div class="nv_line"></div>
-      {data.length > 0 ? (
+
       <div className="cont_cart_gen">
         <div className="div_cart_tt">
           <section
@@ -133,7 +132,7 @@ const Cart = () => {
             <hr /> Tú Carrito de Compras
           </span>
           {error && <div className="">{error}</div>}
-          
+          {data.length > 0 ? (
             <section className="Carrito_cont">
               <section className="Text_cart">
                 <span>Producto</span>
