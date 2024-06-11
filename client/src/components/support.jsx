@@ -3,53 +3,36 @@ import { baseUrl } from "../other/extras";
 import axios from "axios";
 
 const Support = () => {
-  const [numeroControl, setNumeroControl] = React.useState("");
   const [fechaOrigen, setFechaOrigen] = React.useState("");
   const [tipoTicket, setTipoTicket] = React.useState("soporte");
-  const [prioridad, setPrioridad] = React.useState("1");
-  const [usuarioReporto, setUsuarioReporto] = React.useState("");
-  const [usuarioProcesando, setUsuarioProcesando] = React.useState("");
-  const [fechaActualizacion, setFechaActualizacion] = React.useState("");
+  const [usuarioReporto, setUsuarioReporto] = React.useState();
   const [descripcion, setDescripcion] = React.useState("");
-  const [estatus, setEstatus] = React.useState("");
 
   React.useEffect(() => {
-    // Generar número de control proceduralmente
-    setNumeroControl("TCKT-" + Math.floor(Math.random() * 1000000));
-
-    // Generar fecha de origen automáticamente
-    const today = new Date();
-    const formattedDate =
-      today.getFullYear() +
-      "-" +
-      ("0" + (today.getMonth() + 1)).slice(-2) +
-      "-" +
-      ("0" + today.getDate()).slice(-2);
-    setFechaOrigen(formattedDate);
+    setUsuarioReporto(window.localStorage.getItem("id"));
   }, []);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const ticketData = {
-      numeroControl,
-      tipoTicket,
-      prioridad,
-      fechaOrigen,
-      usuarioReporto,
-      usuarioProcesando,
-      fechaActualizacion,
-      descripcion,
-      estatus,
-    };
+    const now = new Date();
 
-    axios.post(`${baseUrl}/api/support/postTicket`,{
-      data : ticketData
-    }).then((res)=>{
-      const response = res.data.message
-      alert(response);
-      window.location.reload();
-    }).catch();
-    console.log("Ticket Data:", ticketData);
+    const fecha = now.toISOString().split("T")[0];
+
+    axios
+      .post(`${baseUrl}/api/support/postTicket`, {
+        data: {
+          ticket_type: tipoTicket,
+          id_user: usuarioReporto,
+          description: descripcion,
+          origin_date: fecha,
+        },
+      })
+      .then((res) => {
+        const response = res.data.message;
+        alert(response);
+        window.location.reload();
+      })
+      .catch();
     // Aquí puedes manejar el envío de datos, por ejemplo, hacer una petición a un servidor
   };
 
@@ -64,13 +47,13 @@ const Support = () => {
             value={tipoTicket}
             onChange={(e) => setTipoTicket(e.target.value)}
           >
-            <option value="Error">Soporte</option>
-            <option value="Sugerencia">Incidencia</option>
-            <option value="Ayuda">Mejora</option>
+            <option value="2">Error</option>
+            <option value="1">Sugerencia</option>
+            <option value="3">Apoyo</option>
           </select>
         </div>
         <div>
-          <label htmlFor="descripcion">Descripción:</label>
+          <label htmlFor="descripcion">Descripción del problema:</label>
           <textarea
             id="descripcion"
             value={descripcion}
