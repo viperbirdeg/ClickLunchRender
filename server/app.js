@@ -14,6 +14,7 @@ const pedidoRouter = require("./api/v1/routes/pedido.js");
 const usuarioRouter = require("./api/v1/routes/usuario.js");
 const alimentoRouter = require("./api/v1/routes/alimento.js");
 const cafeteriaRouter = require("./api/v1/routes/cafeteria.js");
+const supportRouter = require("./api/v1/routes/support.js");
 const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
 require("dotenv").config();
@@ -91,6 +92,7 @@ app.post("/upload", upload.single("my_file"), async (req, res) => {
 app.use("/api/usuario", usuarioRouter);
 app.use("/api/pedido", pedidoRouter);
 app.use("/api/cafeteria", cafeteriaRouter);
+app.use("/api/support", supportRouter);
 app.use("/api/alimento", alimentoRouter);
 
 //?Ruta inicial

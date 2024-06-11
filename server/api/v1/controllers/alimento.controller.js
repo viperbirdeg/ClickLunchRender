@@ -122,7 +122,7 @@ const deleteOneAlimento = async (req, res) => {
      * ?  id = integer
      * ?}
      */
-    const id = req.body.id;
+    const id = req.body.data.id;
     //*Busqueda en la bd
     const vistaResult = await client.query(
       `UPDATE FROM clicklunch."Alimento" SET estado = false WHERE "id" = ($1)`,
@@ -140,7 +140,7 @@ const deleteOneAlimento = async (req, res) => {
     //!Manejo de errores
     return res.status(500).json({
       message: "Ocurrio un error inesperado en el servidor",
-      error: error,
+      error: error.message,
     });
   } finally {
     //todo: Liberar la bd
