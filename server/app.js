@@ -1,7 +1,6 @@
 //?dependencias
 const express = require("express");
 const morgan = require("morgan");
-const session = require("express-session");
 const path = require("path");
 const cors = require("cors");
 const Multer = require("multer");
@@ -43,17 +42,6 @@ app.use(express.static(path.resolve(__dirname, "../client/build")));
 //*Usar cookieParser
 app.use(cookieParser());
 //* Usar sesiones
-app.use(
-  session({
-    secret: "amasemetiootropejelagarto",
-    resave: false,
-    saveUninitialized: false,
-    cookie: {
-      secure: false, //Pedir SSL
-      httpOnly: true,
-    },
-  })
-);
 //*Cloudinary
 cloudinary.config({
   cloud_name: process.env.CLOUD_NAME,

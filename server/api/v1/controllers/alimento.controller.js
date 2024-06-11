@@ -122,10 +122,11 @@ const deleteOneAlimento = async (req, res) => {
      * ?  id = integer
      * ?}
      */
-    const id = req.body.data.id;
+    console.log(req.body.id)
+    const id = req.body.id;
     //*Busqueda en la bd
     const vistaResult = await client.query(
-      `UPDATE FROM clicklunch."Alimento" SET estado = false WHERE "id" = ($1)`,
+      `UPDATE clicklunch."Alimento" SET isactive = false WHERE "id" = ($1)`,
       [id]
     );
     if (vistaResult.rowCount > 0) {
