@@ -70,9 +70,9 @@ const Verify = () => {
   };
 
   return (
-    <div>
+    <div className="code_verify">
       <h1>Verificacion para {props.email}</h1>
-      <section className="whiteletter">
+      <section>
         Ingrese el codigo de verificacion enviado al correo registrado
       </section>
       <input
