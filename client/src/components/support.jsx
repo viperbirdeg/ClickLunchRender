@@ -37,7 +37,7 @@ const Support = () => {
   };
 
   return (
-    <div>
+    <div className="form_support">
       <h1>Formulario de Ticket</h1>
       <form onSubmit={handleSubmit}>
         <div>
@@ -58,8 +58,6 @@ const Support = () => {
             id="descripcion"
             value={descripcion}
             onChange={(e) => setDescripcion(e.target.value)}
-            rows="4"
-            cols="50"
           ></textarea>
         </div>
         <button type="submit">Enviar</button>
