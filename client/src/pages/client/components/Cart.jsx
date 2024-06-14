@@ -63,7 +63,7 @@ const Cart = () => {
         .post(`${baseUrl}/api/pedido/addNewPedido`, {
           data: {
             idUsuario: window.localStorage.getItem("id"),
-            idCafe: parseInt(window.localStorage.getItem("cafOrderId")[1]),
+            idCafe: parseInt(window.localStorage.getItem("idCafe")),
             cart: JSON.stringify(cart),
             fecha: fecha,
             hora: hora,
