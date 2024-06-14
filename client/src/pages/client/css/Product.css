@@ -91,6 +91,8 @@
   font-size: 1rem;
   text-align: center;
   font-size: 1.1rem;
+  background: white;
+  color: rgb(0, 0, 0);
 }
 .cant_cont svg{
   fill: rgb(255, 255, 255);
