@@ -56,7 +56,6 @@ const Login = () => {
             }
           })
           .catch((value) => {
-            console.log(value);
           });
         axios
           .post(`${baseUrl}/api/usuario/login`, {
@@ -86,7 +85,6 @@ const Login = () => {
           })
           .catch((error) => {
             setLoading(false);
-            console.log(error);
             return setError(error.response.data.message || error.message);
           });
       } catch (error) {

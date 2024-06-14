@@ -142,9 +142,6 @@ const NavBar = () => {
           </svg>
           Carrito
         </NavLink>
-        <NavLink to="/client/support" className="navbar-link" end="true">
-          Soporte
-        </NavLink>
         <button onClick={handleClick} className="navbar-link" end="true">
           <svg
             xmlns="http://www.w3.org/2000/svg"

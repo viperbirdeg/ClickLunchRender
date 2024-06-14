@@ -15,7 +15,6 @@ const TarjetaAlimentoPedido = ({ id }) => {
         },
       })
       .then((response) => {
-        console.log(response.data.message);
         setData(response.data.message);
       })
       .catch((error) => {

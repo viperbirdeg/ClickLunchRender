@@ -31,11 +31,9 @@ const Order = ({
           setData(response.data.message);
         },
         (error) => {
-          console.log(error);
         }
       )
       .catch((error) => {
-        console.log(error);
       });
     setIsActive(!isActive);
   };

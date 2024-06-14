@@ -27,12 +27,10 @@ const Verify = () => {
           "service_w2djd3a", // Tu ID de servicio de EmailJS
           "template_nr8lxsb", // Tu ID de plantilla de EmailJS
           formData,
-          'oiTcnJRVXipwzH8FL',
+          "oiTcnJRVXipwzH8FL",
           (error, result) => {
             if (error) {
-              console.error("Error al enviar correo electrónico:", error);
             } else {
-              console.log("Correo electrónico enviado correctamente");
               setEmailSent(true);
             }
           }
@@ -62,7 +60,7 @@ const Verify = () => {
         },
       })
       .then((res) => {
-          navigation("/auth");
+        navigation("/auth");
       })
       .catch((error) => {
         setError(error.response.data.message);

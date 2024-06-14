@@ -20,14 +20,12 @@ const SelfProducts = () => {
           setData(response.data.message);
         } else if (response.status === 204) {
           setError("No se han registrado alimentos");
-          console.log(response);
         } else {
           setError(response.data.message);
         }
       })
       .catch((error) => {
         setError(error.message);
-        console.log(error)
       });
   }, [id]);
 

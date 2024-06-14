@@ -9,21 +9,17 @@ import axios from "axios";
 const CafeCardProducto = ({ id, nombre, costo, disponibilidad, url }) => {
   const handleDelete = (e) => {
     e.preventDefault();
-    console.log(id)
     axios
       .delete(`${baseUrl}/api/alimento/deleteAlimento`, {
-        "data" : {
-          id : id,
-          "text" : "text"
+        data: {
+          id: id,
+          text: "text",
         },
       })
       .then((res) => {
-        console.log(res);
         window.location.reload();
       })
-      .catch((error) => {
-        console.log(error);
-      });
+      .catch((error) => {});
   };
   return (
     <div className="card-producto">

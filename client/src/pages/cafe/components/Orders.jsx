@@ -24,11 +24,8 @@ const Orders = () => {
       })
       .then((res) => {
         setData(res.data.message);
-        console.log(res.data.message);
       })
-      .catch((error) => {
-        console.log(error);
-      });
+      .catch((error) => {});
   }, []);
 
   return (
@@ -48,11 +45,29 @@ const Orders = () => {
                         <img src={note} className="img_note" />
                         <div className="info_pe">
                           <section className="id_pedido">#{item.id}</section>
-                          <section className="fech_pedido">Efectuado el: {item.fecha_pedido.split("T")[0]} a las {item.hora}</section>
-                          <section className="est_pedido">{item.estado}</section>
-                          <section className="cost_pedido">${item.costo_total}</section>
-                          <NavLink className="btn_ap" to={`/cafe/order/${item.id}`}>
-                            Atender orden <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right-circle-fill" viewBox="0 0 16 16">
+                          <section className="fech_pedido">
+                            Efectuado el: {item.fecha_pedido.split("T")[0]} a
+                            las {item.hora}
+                          </section>
+                          <section className="est_pedido">
+                            {item.estado}
+                          </section>
+                          <section className="cost_pedido">
+                            ${item.costo_total}
+                          </section>
+                          <NavLink
+                            className="btn_ap"
+                            to={`/cafe/order/${item.id}`}
+                          >
+                            Atender orden{" "}
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              width="16"
+                              height="16"
+                              fill="currentColor"
+                              class="bi bi-arrow-right-circle-fill"
+                              viewBox="0 0 16 16"
+                            >
                               <path d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0M4.5 7.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5z" />
                             </svg>
                           </NavLink>
@@ -76,11 +91,29 @@ const Orders = () => {
                         <img src={f4} className="img_f4 f" />
                         <div className="info_pp">
                           <section className="id_pedido">#{item.id}</section>
-                          <section className="fech_pedido">Efectuado el: {item.fecha_pedido.split("T")[0]} a las {item.hora}</section>
-                          <section className="est_pedido">{item.estado}</section>
-                          <section className="cost_pedido">${item.costo_total}</section>
-                          <NavLink className="btn_ap" to={`/cafe/order/${item.id}`}>
-                            Continuar con la Orden <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right-circle-fill" viewBox="0 0 16 16">
+                          <section className="fech_pedido">
+                            Efectuado el: {item.fecha_pedido.split("T")[0]} a
+                            las {item.hora}
+                          </section>
+                          <section className="est_pedido">
+                            {item.estado}
+                          </section>
+                          <section className="cost_pedido">
+                            ${item.costo_total}
+                          </section>
+                          <NavLink
+                            className="btn_ap"
+                            to={`/cafe/order/${item.id}`}
+                          >
+                            Continuar con la Orden{" "}
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              width="16"
+                              height="16"
+                              fill="currentColor"
+                              class="bi bi-arrow-right-circle-fill"
+                              viewBox="0 0 16 16"
+                            >
                               <path d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0M4.5 7.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5z" />
                             </svg>
                           </NavLink>
@@ -99,11 +132,29 @@ const Orders = () => {
                       <div className="ped_esp">
                         <div className="info_pc">
                           <section className="id_pedido">#{item.id}</section>
-                          <section className="fech_pedido">Efectuado el: {item.fecha_pedido.split("T")[0]} a las {item.hora}</section>
-                          <section className="est_pedido">{item.estado}</section>
-                          <section className="cost_pedido">${item.costo_total}</section>
-                          <NavLink className="btn_ap" to={`/cafe/order/${item.id}`}>
-                            Detalles <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right-circle-fill" viewBox="0 0 16 16">
+                          <section className="fech_pedido">
+                            Efectuado el: {item.fecha_pedido.split("T")[0]} a
+                            las {item.hora}
+                          </section>
+                          <section className="est_pedido">
+                            {item.estado}
+                          </section>
+                          <section className="cost_pedido">
+                            ${item.costo_total}
+                          </section>
+                          <NavLink
+                            className="btn_ap"
+                            to={`/cafe/order/${item.id}`}
+                          >
+                            Detalles{" "}
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              width="16"
+                              height="16"
+                              fill="currentColor"
+                              class="bi bi-arrow-right-circle-fill"
+                              viewBox="0 0 16 16"
+                            >
                               <path d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0M4.5 7.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5z" />
                             </svg>
                           </NavLink>
@@ -122,11 +173,29 @@ const Orders = () => {
                       <div className="ped_esp">
                         <div className="info_pf">
                           <section className="id_pedido">#{item.id}</section>
-                          <section className="fech_pedido">Efectuado el: {item.fecha_pedido.split("T")[0]} a las {item.hora}</section>
-                          <section className="est_pedido">{item.estado}</section>
-                          <section className="cost_pedido">${item.costo_total}</section>
-                          <NavLink className="btn_ap" to={`/cafe/order/${item.id}`}>
-                            Detalles <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right-circle-fill" viewBox="0 0 16 16">
+                          <section className="fech_pedido">
+                            Efectuado el: {item.fecha_pedido.split("T")[0]} a
+                            las {item.hora}
+                          </section>
+                          <section className="est_pedido">
+                            {item.estado}
+                          </section>
+                          <section className="cost_pedido">
+                            ${item.costo_total}
+                          </section>
+                          <NavLink
+                            className="btn_ap"
+                            to={`/cafe/order/${item.id}`}
+                          >
+                            Detalles{" "}
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              width="16"
+                              height="16"
+                              fill="currentColor"
+                              class="bi bi-arrow-right-circle-fill"
+                              viewBox="0 0 16 16"
+                            >
                               <path d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0M4.5 7.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5z" />
                             </svg>
                           </NavLink>

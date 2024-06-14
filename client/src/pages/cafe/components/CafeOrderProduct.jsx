@@ -27,11 +27,9 @@ const CafeOrderProduct = () => {
         },
       })
       .then((value) => {
-        console.log(value);
         window.location.reload();
-      }).catch((error) => {
-        console.log(error)
-      });
+      })
+      .catch((error) => {});
   };
 
   const Boton = ({ type }) => {
@@ -102,9 +100,9 @@ const CafeOrderProduct = () => {
         (response) => {
           setELementsData(response.data.message);
         },
-        (error) => { }
+        (error) => {}
       )
-      .catch((error) => { });
+      .catch((error) => {});
   }, [props]);
 
   return (
@@ -120,10 +118,15 @@ const CafeOrderProduct = () => {
           <div className="dts_seg">
             <section>
               <section>ESTADO : {data.estado}</section>
-              <section>Pedido Efectuado el: {data.fecha_pedido.split("T")[0]} a las {data.hora}</section>
+              <section>
+                Pedido Efectuado el: {data.fecha_pedido.split("T")[0]} a las{" "}
+                {data.hora}
+              </section>
             </section>
             <section>
-              <section className="total_seg">TOTAL: ${data.costo_total}</section>
+              <section className="total_seg">
+                TOTAL: ${data.costo_total}
+              </section>
             </section>
           </div>
         </div>

@@ -34,7 +34,6 @@ const Profile = () => {
         }
       })
       .catch((error) => {
-        console.log(error)
       });
     alert("Eliminando");
   };
@@ -52,12 +51,9 @@ const Profile = () => {
         },
       })
       .then((res) => {
-        console.log(res);
-        setData(res.data.message);
-        console.log(res.data.message);
+        setData(res.data.message);;
       })
       .catch((error) => {
-        console.log(error);
       });
   }, []);
 
