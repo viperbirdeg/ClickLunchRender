@@ -32,7 +32,15 @@ const CafeCardProducto = ({ id, nombre, costo, disponibilidad, url }) => {
         <section>
           <div className="name_procard">{nombre} </div>
           <div>Disponibilidad: {disponibilidad}</div>
-          <button onClick={handleDelete}>
+          
+        </section>
+        <div className="pre_procard">
+          <span>${costo}</span>
+        </div>
+      </section>
+      <img className="img_pro_card" src={url} alt="Imagen no disponible" />
+      <section className="btns_capr btns_capr2">
+        <button onClick={handleDelete} className="card-producto-link">
             <svg
               width="24"
               height="24"
@@ -43,14 +51,9 @@ const CafeCardProducto = ({ id, nombre, costo, disponibilidad, url }) => {
             >
               <path d="M6 18L18 6M6 6L18 18" />
             </svg>
-            Eliminar
+            Eliminar Producto
           </button>
-        </section>
-        <div className="pre_procard">
-          <span>${costo}</span>
-        </div>
       </section>
-      <img className="img_pro_card" src={url} alt="Imagen no disponible" />
     </div>
   );
 };

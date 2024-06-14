@@ -557,6 +557,7 @@
   background: none;
   font-size: 1.5rem;
   transition: 0.3s;
+  color: #000000;
 }
 
 .code_verify button:hover {
@@ -569,6 +570,12 @@
   background: #ee6107;
   color: white;
   box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.7);
+}
+.btns_capr2{
+  justify-content: end!important;
+}
+.btns_capr2 button{
+  background: none!important;
 }
 @media screen and (max-width: 1138px) {
   .nav_options {
