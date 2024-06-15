@@ -31,7 +31,7 @@ const whitelist = [
 ];
 app.use(
   cors({
-    origin: "*",
+    origin: whitelist,
   })
 );
 
